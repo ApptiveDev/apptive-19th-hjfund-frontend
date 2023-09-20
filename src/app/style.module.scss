@@ -1,0 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=Allura&family=Outfit:wght@100;200;300;400;500;600;700&display=swap');
+
+.banner {
+  height: 650px;
+
+  /* background image */
+  background-image: image-set(
+    url("/images/banner-bg.jpg") 1x,
+    url("/images/banner-bg@2x.jpg") 2x,
+    url("/images/banner-bg@3x.jpg") 3x
+  );
+  background-size: cover;
+  background-position: center;
+
+  display: flex;
+  justify-content: center;
+
+  & .contents {
+    width: 100%;
+    max-width: 1200px;
+    padding: 30px;
+
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    column-gap: 30px;
+  }
+
+  & .comments {
+    font-family: Allura, cursive;
+    color: white;
+    margin: auto 0;
+
+    & > h1 {
+      font-size: 100px;
+      line-height: 83.057%;
+      margin-bottom: 20px;
+    }
+    
+    & > p {
+      font-size: 50px;
+      text-align: right;
+    }
+  }
+
+  & .recent {
+    color: white;
+    margin: auto 0;
+
+    & .title {
+      display: flex;
+      align-items: flex-end;
+      column-gap: 6px;
+      margin-bottom: 12px;
+
+      & > p:nth-child(1) {
+        font-size: 30px;
+        font-weight: 700;
+      }
+
+      & > p:nth-child(2) {
+        font-size: 15px;
+        font-weight: 500;
+        margin-bottom: 3px;
+      }
+    }
+
+    & .dummy {
+      height: 480px;
+      width: 100%;
+      background-color: white;
+      border-radius: 14px;
+    }
+  }
+}
