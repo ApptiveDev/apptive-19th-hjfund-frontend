@@ -271,6 +271,10 @@
         justify-content: center;
         font-weight: 600;
       }
+
+      & > span:nth-child(3) {
+        justify-content: flex-end;
+      }
     }
   }
 }
