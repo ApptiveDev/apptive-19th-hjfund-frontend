@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Allura&family=Outfit:wght@100;200;300;400;500;600;700&display=swap');
-
 .page {
   min-width: var(--window-min-width);
 }
@@ -25,7 +23,7 @@
 
     display: grid;
     grid-template-columns: 1fr 478px;
-    column-gap: 30px;
+    column-gap: var(--column-gap);
     align-items: center;
   }
 
@@ -110,7 +108,7 @@
   & > .cards {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    column-gap: 30px;
+    column-gap: var(--column-gap);
     margin-bottom: 54px;
   }
 }
@@ -131,7 +129,7 @@
 
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    column-gap: 30px;
+    column-gap: var(--column-gap);
   }
 
   & > .body > .column {
