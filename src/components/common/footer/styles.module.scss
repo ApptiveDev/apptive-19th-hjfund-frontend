@@ -1,8 +1,9 @@
 .footer {
   height: 500px;
   width: 100%;
+  min-width: var(--window-min-width);
   color: white;
-  background-color: var(--main-color, #00977E);
+  background-color: var(--main-color);
   text-align: center;
 }
 
@@ -16,7 +17,7 @@
   padding: 0 30px;
   display: grid;
   width: 100%;
-  max-width: 1200px;
+  max-width: var(--content-width);;
 
   grid-template-columns: repeat(4, 1fr);
   column-gap: 30px;

@@ -1,13 +1,15 @@
 .header {
   height: 90px;
+  min-width: var(--window-min-width);
   padding: 0 70px;
   display: flex;
+  color: #454545;
 }
 
 .title {
   font-size: 40px;
   font-weight: 800;
-  color: var(--logo-color1, #09977E);
+  color: var(--main-color);
   margin: auto 0;
 }
 
@@ -86,7 +88,7 @@
     font-weight: 700;
 
     & > ul {
-      background-color: var(--logo-color1, #09977E);
+      background-color: var(--main-color);
 
       & > li > a {
         color: white;
@@ -121,8 +123,8 @@
     align-items: center;
 
     & > button {
-      width: 18px;
-      height: 18px;
+      display: flex;
+      border: 0;
       background-color: transparent;
       outline: none;
     }
