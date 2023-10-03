@@ -1,12 +1,7 @@
-import {
-  CommentMainCard,
-  HeartMainCard,
-  HeartMainTitle,
-} from "@/components/svg";
-import Link from "next/link";
+import { HeartMainTitle } from "@/components/svg";
 
 import styles from "./styles.module.scss";
-import { Cardlist } from "@/components/pages/main";
+import { Card, Cardlist } from "@/components/pages/main";
 
 export default function Home() {
   return (
@@ -32,27 +27,14 @@ export default function Home() {
         </div>
         <div className={styles.cards}>
           {Array.from({ length: 3 }).map((_, i) => (
-            <Link href="/post/1" key={"card-" + i} className={styles.card}>
-              <div className={styles.image}>
-                <img alt="thumbnail" src="/examples/tesla_main_card.webp" />
-              </div>
-              <div className={styles.info}>
-                <p className={styles.title}>테슬라 리서치 리포트 II</p>
-                <div>
-                  <p>작성자명</p>
-                  <div className={styles.reactions}>
-                    <div>
-                      <CommentMainCard color="white" />
-                      <span>20</span>
-                    </div>
-                    <div>
-                      <HeartMainCard color="white" />
-                      <span>22</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </Link>
+            <Card
+              key={"card-" + i}
+              thumbnail="/examples/tesla_main_card.webp"
+              title="테슬라 리서치 리포트 II"
+              author="작성자명"
+              comments={20}
+              hearts={22}
+            />
           ))}
         </div>
       </section>

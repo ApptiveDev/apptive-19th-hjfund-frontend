@@ -6,7 +6,9 @@ const Header = () => {
   return (
     <header className={styles.header}>
       <div className={styles.left}>
-        <h1 className={styles.title}>웹사이트이름</h1>
+        <Link href="/" className={styles.title}>
+          <h1>{process.env.WEBSITE_NAME}</h1>
+        </Link>
         <nav className={styles.nav}>
           <div className={styles.dropdown}>
             <div>콘텐츠</div>

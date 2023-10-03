@@ -1,9 +1,9 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { ArrowMainCardlist, CommentMainCard, HeartMainCard } from "@/components/svg";
-import Link from "next/link";
 
+import { ArrowMainCardlist } from "@/components/svg";
+import { Card } from "..";
 import styles from "./styles.module.scss";
 
 export default function CardList() {
@@ -36,27 +36,16 @@ export default function CardList() {
         <div className={styles.roll_container}>
           <div className={styles.roll} style={{ transform: `translateX(${-380 * index}px)` }}>
             {Array.from({ length: DUMMY_LENGTH }).map((_, i) => (
-              <Link key={"card-" + i} href="/any" className={styles.card}>
-              <div className={styles.image}>
-                <img alt="thumbnail" src="/examples/tesla_main_card.webp" />
-              </div>
-              <div className={styles.info}>
-                <p className={styles.title}>테슬라 리서치 리포트 II</p>
-                <div>
-                  <p>작성자명</p>
-                  <div className={styles.reactions}>
-                    <div>
-                      <CommentMainCard color="#969696" />
-                      <span>20</span>
-                    </div>
-                    <div>
-                      <HeartMainCard color="#969696" />
-                      <span>22</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </Link>
+              <Card 
+                key={"card-" + i}
+                className={styles.card}
+                thumbnail="/examples/tesla_main_card.webp"
+                title="테슬라 리서치 리포트 II"
+                author="작성자명"
+                comments={20}
+                hearts={22}
+                iconColor="#969696"
+              />
             ))}
           </div>
         </div>
