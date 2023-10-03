@@ -27,7 +27,7 @@ const Footer = () => {
           <Link href="/any">이용약관 </Link>
         </div>
       </div>
-      <p className={styles.title}>웹사이트이름</p>
+      <p className={styles.title}>{process.env.WEBSITE_NAME}</p>
     </footer>
   )
 }
