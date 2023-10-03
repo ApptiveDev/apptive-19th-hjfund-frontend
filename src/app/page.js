@@ -4,6 +4,7 @@ import {
   HeartMainTitle,
 } from "@/components/svg";
 import styles from "./styles.module.scss";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -35,7 +36,7 @@ export default function Home() {
         </div>
         <div className={styles.cards}>
           {Array.from({ length: 3 }).map((_, i) => (
-            <a key={"card-" + i} className={styles.card}>
+            <Link href="/post/1" key={"card-" + i} className={styles.card}>
               <div className={styles.image}>
                 <img alt="thumbnail" src="/examples/tesla_main_card.webp" />
               </div>
@@ -55,7 +56,7 @@ export default function Home() {
                   </div>
                 </div>
               </div>
-            </a>
+            </Link>
           ))}
         </div>
       </section>
@@ -86,7 +87,7 @@ export default function Home() {
             </div>
             <ul>
               <li className={styles.increasing}>
-                <span>S&P 500</span>
+                <span style={{ fontSize: 18 }}>S&P 500</span>
                 <span>2550</span>
                 <span>▲ 2.47 (-0.43%)</span>
               </li>
