@@ -3,8 +3,10 @@ import {
   HeartMainCard,
   HeartMainTitle,
 } from "@/components/svg";
-import styles from "./styles.module.scss";
 import Link from "next/link";
+
+import styles from "./styles.module.scss";
+import { Cardlist } from "@/components/pages/main";
 
 export default function Home() {
   return (
@@ -19,13 +21,7 @@ export default function Home() {
             </h1>
             <p>- Warren Buffett -</p>
           </div>
-          {/* <div className={styles.recent}>
-            <div className={styles.title}>
-              <p>최근 리포트</p>
-              <p>Recent Reports</p>
-            </div>
-            <div className={styles.dummy} />
-          </div> */}
+          <Cardlist />
         </div>
       </section>
       <section className={styles.bests}>
