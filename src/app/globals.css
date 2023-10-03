@@ -1,11 +1,17 @@
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/variable/pretendardvariable-dynamic-subset.css");
 
 :root {
-  --main-color: #00977E;
+  --main-color: #2E467B;
+  --text-color: #454545;
   font-family: "Pretendard Variable", Arial, Helvetica, sans-serif;
+
+  --window-min-width: 1360px;
+  --content-width: 1200px;
+
+  color: var(--text-color);
 }
 
-* {
+*, *:before, *:after {
   box-sizing: border-box;
   padding: 0;
   margin: 0;

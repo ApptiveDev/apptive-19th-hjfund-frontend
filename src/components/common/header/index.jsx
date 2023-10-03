@@ -1,5 +1,6 @@
 import Link from "next/link";
 import styles from "./styles.module.scss";
+import { BellHeader, UserHeader, SearchHeader } from "@/components/svg";
 
 const Header = () => {
   return (
@@ -24,12 +25,12 @@ const Header = () => {
         <div className={styles.search}>
           <input type="text" placeholder="검색" />
           <div>
-            <button className="prototype-icon" />
+            <button><SearchHeader color="var(--text-color)" /></button>
           </div>
         </div>
         <div className={styles.tools}>
           <div className={styles.dropdown}>
-              <div className="prototype-icon" />
+              <UserHeader color="var(--text-color)" />
               <ul>
                 <li><Link href="/login">로그인</Link></li>
                 <li><Link href="/my">마이페이지</Link></li>
@@ -37,7 +38,7 @@ const Header = () => {
             </ul>
           </div>
           <div className={[styles.dropdown, styles.notifications].join(" ")}>
-            <div><div className="prototype-icon" /></div>
+            <div><BellHeader color="var(--text-color)" /></div>
           </div>
         </div>
       </div>
