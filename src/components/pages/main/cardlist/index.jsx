@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ArrowMainCardlist, CommentMainCard, HeartMainCard } from "@/components/svg";
 import Link from "next/link";
 
@@ -8,8 +8,20 @@ import styles from "./styles.module.scss";
 
 export default function CardList() {
   const DUMMY_LENGTH = 3;
-
+  const TIMER_DELAY = 5000;
+  
+  const timerRef = useRef(null);
   const [index, setIndex] = useState(0);
+
+  const move = (isPrev) => {
+    setIndex((prev) => (prev + (isPrev ? DUMMY_LENGTH - 1 : 1)) % DUMMY_LENGTH);
+  }
+
+  useEffect(() => {
+    if (timerRef.current) clearTimeout(timerRef.current);
+
+    timerRef.current = setTimeout(() => move(), TIMER_DELAY);
+  }, [index])
 
   return (
     <div className={styles.container}>
@@ -18,7 +30,7 @@ export default function CardList() {
         <span>Recent Reports</span>
       </div>
       <div className={styles.list}>
-        <button onClick={() => setIndex((prev) => (prev + DUMMY_LENGTH - 1) % DUMMY_LENGTH)}>
+        <button onClick={() => move(true)}>
           <ArrowMainCardlist color="white" />
         </button>
         <div className={styles.roll_container}>
@@ -48,7 +60,7 @@ export default function CardList() {
             ))}
           </div>
         </div>
-        <button onClick={() => setIndex((prev) => (prev + 1) % DUMMY_LENGTH)}>
+        <button onClick={() => move()}>
           <ArrowMainCardlist style={{
             transform: "rotate(180deg)"
           }} color="white" />

@@ -49,7 +49,8 @@
 
 .roll {
   white-space: nowrap;
-  transition: transform 0.3s cubic-bezier(.17,.67,.43,1);
+  transition: transform 0.5s cubic-bezier(.17,.67,.43,1);
+  will-change: transform;
 }
 
 .card {
@@ -77,7 +78,7 @@
 
   &:hover {
     & > .info {
-      background-color: rgba(0, 0, 0, 0.2);
+      background-color: rgba(0, 0, 0, 0.1);
     }
 
     & > .image > img {
