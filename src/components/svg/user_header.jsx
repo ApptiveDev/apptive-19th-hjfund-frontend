@@ -1,4 +1,4 @@
-export default function UserHeader({ color }) {
+export default function UserHeader({ color, ...props }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -6,6 +6,7 @@ export default function UserHeader({ color }) {
       height="40"
       fill="none"
       viewBox="0 0 40 40"
+      {...props}
     >
       <path
         fill={color ?? "#000"}

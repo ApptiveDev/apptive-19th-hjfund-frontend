@@ -1,4 +1,4 @@
-export default function HeaderMainTitle({ color }) {
+export default function HeaderMainTitle({ color, ...props }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -6,6 +6,7 @@ export default function HeaderMainTitle({ color }) {
       height="30"
       fill="none"
       viewBox="0 0 30 30"
+      {...props}
     >
       <g clipPath="url(#clip0_611_277)">
         <path
