@@ -1,4 +1,6 @@
 .banner {
+  --request-width: 1000px;
+
   height: 650px;
 
   background-size: cover;
@@ -8,7 +10,9 @@
   justify-content: center;
 
   & .contents {
-    width: 70%;
+    width: 100%;
+    max-width: var(--request-width);
+    
     display: flex;
     grid-template-columns: 1fr 478px;
     column-gap: var(--column-gap);
@@ -68,7 +72,8 @@
       font-size: 85px;
       font-style: normal;
       font-weight: 800;
-      line-height: normal;
+      line-height: 1;
+      align-self: flex-start;
       letter-spacing: 0.9px;
     }
 
