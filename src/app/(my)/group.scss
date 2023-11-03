@@ -9,6 +9,9 @@
   background-color: var(--main-color);
   color: white;
   transition: opacity 0.15s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   &:hover {
     opacity: 0.9;
