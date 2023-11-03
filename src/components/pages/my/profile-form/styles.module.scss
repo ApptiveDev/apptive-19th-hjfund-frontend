@@ -15,6 +15,12 @@
       margin-bottom: 6px;
       margin-left: 12px;
     }
+
+    & > textarea {
+      height: 200px;
+      padding: 16px 18px;
+      resize: none;
+    }
   }
 
   .buttons {

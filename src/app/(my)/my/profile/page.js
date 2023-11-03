@@ -1,7 +1,12 @@
+"use client";
+
+import { useState } from "react";
 import styles from "./styles.module.scss";
 import { ProfileForm } from "@/components/pages/my";
 
 export default function Profile() {
+  const [isCreator, setIsCreator] = useState(true);
+
   return (
     <main className={styles.main}>
       <div className={styles.pic}>
@@ -16,7 +21,7 @@ export default function Profile() {
         </div>
         <p>회원님은 네이버로 로그인하셨습니다</p>
       </div>
-      <ProfileForm />
+      <ProfileForm isCreator={isCreator} />
     </main>
   );
 }

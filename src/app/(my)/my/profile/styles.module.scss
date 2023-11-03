@@ -17,6 +17,10 @@
     display: flex;
     column-gap: 14px;
     margin-bottom: 30px;
+
+    & > button {
+      width: 120px;
+    }
   }
 
   & > p {
