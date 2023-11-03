@@ -1,0 +1,39 @@
+.nav {
+  height: 90px;
+  border-bottom: 1px solid #B8B8B8;
+
+  & > div {
+    width: var(--content-width);
+    margin: 0 auto;
+    display: flex;
+    height: 100%;
+
+    & > a {
+      display: flex;
+      flex: 1;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      font-size: 30px;
+
+      &:after {
+        height: 12px;
+        position: absolute;
+        content: "";
+        bottom: 0;
+        left: 0;
+        width: 100%;
+      }
+      
+      &.active{
+        color: var(--main-color);
+        font-weight: 700;
+        
+        &:after {
+          background-color: var(--main-color);
+        }
+      }
+    }
+  }
+}
+

@@ -6,16 +6,16 @@ import headerStyles from "@/components/common/header/styles.module.scss";
 
 export default function Header() {
   return (
-    <header className={styles.header}>
-      <div className={styles.left}>
-        <Link href="/" className={styles.title}>
+    <header className={[headerStyles.header, styles.header].join(" ")}>
+      <div className={headerStyles.left}>
+        <Link href="/" className={[headerStyles.title, styles.title].join(" ")}>
           <h1>{process.env.WEBSITE_NAME}</h1>
         </Link>
       </div>
-      <div className={styles.right}>
-        <div className={styles.tools}>
+      <div className={headerStyles.right}>
+        <div className={headerStyles.tools}>
           <div className={headerStyles.dropdown}>
-            <UserHeader color="var(--text-color)" />
+            <UserHeader color="white" />
             <ul>
               <li>
                 <Link href="/login">로그인</Link>
@@ -30,7 +30,7 @@ export default function Header() {
           </div>
           <div className={headerStyles.dropdown}>
             <div>
-              <BellHeader color="var(--text-color)" />
+              <BellHeader color="white" />
             </div>
           </div>
         </div>
