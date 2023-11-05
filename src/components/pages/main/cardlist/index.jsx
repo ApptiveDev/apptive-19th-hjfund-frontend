@@ -9,22 +9,34 @@ import styles from "./styles.module.scss";
 export default function CardList() {
   const DUMMY_LENGTH = 3;
   const TIMER_DELAY = 5000;
-  
+
   const timerRef = useRef(null);
   const [index, setIndex] = useState(0);
 
+  const cancelTimer = () => {
+    if (timerRef.current) clearTimeout(timerRef.current);
+  };
+
+  const startTimer = () => {
+    if (timerRef.current) clearTimeout(timerRef.current);
+    timerRef.current = setTimeout(() => move(), TIMER_DELAY);
+  };
+
   const move = (isPrev) => {
     setIndex((prev) => (prev + (isPrev ? DUMMY_LENGTH - 1 : 1)) % DUMMY_LENGTH);
-  }
+  };
 
   useEffect(() => {
-    if (timerRef.current) clearTimeout(timerRef.current);
-
-    timerRef.current = setTimeout(() => move(), TIMER_DELAY);
-  }, [index])
+    startTimer();
+    return cancelTimer;
+  }, [index]);
 
   return (
-    <div className={styles.container}>
+    <div
+      className={styles.container}
+      onPointerEnter={() => cancelTimer()}
+      onPointerLeave={() => startTimer()}
+    >
       <div className={styles.title}>
         <span>최근 리포트</span>
         <span>Recent Reports</span>
@@ -34,9 +46,12 @@ export default function CardList() {
           <ArrowMainCardlist color="white" />
         </button>
         <div className={styles.roll_container}>
-          <div className={styles.roll} style={{ transform: `translateX(${-380 * index}px)` }}>
+          <div
+            className={styles.roll}
+            style={{ transform: `translateX(${-380 * index}px)` }}
+          >
             {Array.from({ length: DUMMY_LENGTH }).map((_, i) => (
-              <Card 
+              <Card
                 key={"card-" + i}
                 className={styles.card}
                 thumbnail="/examples/tesla_main_card.webp"
@@ -50,11 +65,14 @@ export default function CardList() {
           </div>
         </div>
         <button onClick={() => move()}>
-          <ArrowMainCardlist style={{
-            transform: "rotate(180deg)"
-          }} color="white" />
+          <ArrowMainCardlist
+            style={{
+              transform: "rotate(180deg)",
+            }}
+            color="white"
+          />
         </button>
       </div>
     </div>
-  )
+  );
 }
