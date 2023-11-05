@@ -10,11 +10,16 @@ export default function Header() {
       <div className={headerStyles.left}>
         <Link href="/" className={[headerStyles.title, styles.title].join(" ")}>
           <h1>{process.env.WEBSITE_NAME}</h1>
+          <img
+            src="/images/logo/stocktree.png"
+            srcSet="/images/logo/stocktree@2x.png 2x, /images/logo/stocktree@3x.png 3x"
+            alt="stocktree logo"
+          />
         </Link>
       </div>
       <div className={headerStyles.right}>
         <div className={headerStyles.tools}>
-          <div className={headerStyles.dropdown}>
+          <div className={[headerStyles.dropdown, styles.dropdown].join(" ")}>
             <UserHeader color="white" />
             <ul>
               <li>

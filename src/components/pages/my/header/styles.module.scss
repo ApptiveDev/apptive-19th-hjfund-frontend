@@ -5,3 +5,20 @@
 .title > h1 {
   color: white !important;
 }
+
+.title > img {
+  filter: brightness(0) invert(1);
+}
+
+.dropdown > ul {
+  background-color: var(--main-color) !important;
+}
+
+.dropdown > ul > li {
+  background-color: transparent;
+  color: white;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+}
