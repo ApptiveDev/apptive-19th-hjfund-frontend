@@ -1,0 +1,38 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+
+  width: 680px;
+  margin: 0 auto;
+
+  .row {
+    display: flex;
+    flex-direction: column;
+
+    & > label {
+      font-size: 20px;
+      margin-bottom: 6px;
+      margin-left: 12px;
+    }
+
+    & > textarea {
+      height: 200px;
+      padding: 16px 18px;
+      resize: none;
+    }
+  }
+
+  .buttons {
+    margin-top: 40px;
+    display: flex;
+    justify-content: flex-end;
+    column-gap: 14px;
+
+    & > button {
+      width: 130px;
+    }
+  }
+
+  margin-bottom: 130px;
+}

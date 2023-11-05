@@ -4,6 +4,7 @@
 :root {
   --main-color: #2E467B;
   --text-color: #454545;
+  --border-color: #B8B8B8;
   font-family: "Pretendard Variable", Arial, Helvetica, sans-serif;
 
   --window-min-width: 1360px;
@@ -11,6 +12,11 @@
   --column-gap: 30px;
 
   color: var(--text-color);
+}
+
+input, button, textarea, select, a {
+  font-family: "Pretendard Variable", Arial, Helvetica, sans-serif;
+  font-weight: 400;
 }
 
 *, *:before, *:after {
