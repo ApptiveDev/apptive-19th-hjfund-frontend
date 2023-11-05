@@ -1,13 +1,6 @@
+import { Checkbox } from "@/components/common";
 import styles from "../login/styles.module.scss";
 import registerStyles from "./styles.module.scss";
-
-const SocialButton = ({ className, url, imgSrc, imgSrcSet }) => (
-  <a href={url ?? "/"} target="_blank" rel="noreferrer">
-    <button type="button" className={className}>
-      <img alt="google logo" src={imgSrc} srcSet={imgSrcSet} />
-    </button>
-  </a>
-);
 
 export default function Login() {
   return (
@@ -38,14 +31,12 @@ export default function Login() {
           <input type="password" required placeholder="비밀번호 확인" />
         </div>
         <div className={registerStyles.checkboxes}>
-          <label>
-            <span>서비스 이용약관 동의 (필수)</span>
-            <input type="checkbox" id="agree1" required />
-          </label>
-          <label>
-            <span>개인정보 수집 및 이용 동의 (필수)</span>
-            <input type="checkbox" id="agree2" required />
-          </label>
+          <Checkbox id="agree1" right small required>
+            서비스 이용약관 동의 (필수)
+          </Checkbox>
+          <Checkbox id="agree1" right small required>
+            개인정보 수집 및 이용 동의 (필수)
+          </Checkbox>
         </div>
         <button className={registerStyles.button} type="submit">
           회원가입

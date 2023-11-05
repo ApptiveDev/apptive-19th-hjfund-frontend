@@ -1,3 +1,4 @@
+import { Checkbox } from "@/components/common";
 import styles from "./styles.module.scss";
 
 export default function Remove() {
@@ -8,10 +9,9 @@ export default function Remove() {
         탈퇴하면 마이페이지, 스크랩, 개인정보 등이 삭제됩니다.
       </p>
       <p style={{ marginBottom: 130 }}>정말 탈퇴하시겠습니까?</p>
-      <label className={styles.agree}>
-        <span>예, 탈퇴하겠습니다.</span>
-        <input type="checkbox" />
-      </label>
+      <Checkbox className={styles.agree} right>
+        예, 탈퇴하겠습니다.
+      </Checkbox>
       <button className={[styles.button, "my-button"].join(" ")}>
         탈퇴하기
       </button>

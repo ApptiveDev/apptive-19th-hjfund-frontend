@@ -1,0 +1,45 @@
+.checkbox {
+  display: flex;
+  align-items: center;
+
+  & > input {
+    display: none;
+  }
+
+  & > span[role="checkbox"] {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1px solid var(--border-color);
+    background-color: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition: background-color 0.15s, border-color 0.15s;
+
+    & > svg > path {
+      fill: var(--border-color);
+      transition: fill 0.15s;
+    }
+  }
+
+  & > span[role="checkbox"].small {
+    width: 24px;
+    height: 24px;
+    
+    & > svg {
+      transform: scale(0.75);
+    }
+  }
+
+  & > input:checked + span[role="checkbox"] {
+    border-color: var(--main-color);
+    background-color: var(--main-color);
+
+    & > svg > path {
+      fill: white;
+    }
+  }
+}
