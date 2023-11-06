@@ -31,4 +31,8 @@
   &:focus {
     border-color: var(--logo-color-1);
   }
+
+  &::placeholder {
+    color: var(--border-color);
+  }
 }

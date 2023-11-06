@@ -65,11 +65,14 @@ export default function Note() {
               className="my-textfield"
               placeholder="제목을 입력해주세요"
             />
-            <input
-              type="date"
-              className="my-textfield"
-              placeholder="날짜를 캘린더에서 선택해주세요"
-            />
+            <div>
+              <div className="my-textfield" data-placeholder="false">
+                날짜를 캘린더에서 선택해주세요
+              </div>
+              <button className="my-button">
+                <CalendarMy color="white" />
+              </button>
+            </div>
             <textarea
               className="my-textfield"
               placeholder="본문 내용을 입력해주세요"
