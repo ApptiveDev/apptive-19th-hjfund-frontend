@@ -21,9 +21,9 @@ export default function Login() {
     <main className={styles.main}>
       <div className={styles.header}>
         <p className={styles.comment}>
-          Don't invest in what
+          Don&apos;t invest in what
           <br />
-          you don't understand
+          you don&apos;t understand
         </p>
         <p className={styles.hello}>
           환영합니다! <strong>{process.env.WEBSITE_NAME}</strong>입니다

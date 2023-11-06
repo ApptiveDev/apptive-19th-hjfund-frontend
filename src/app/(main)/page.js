@@ -10,9 +10,9 @@ export default function Home() {
         <div className={styles.contents}>
           <div className={styles.comments}>
             <h1>
-              Don't invest in what
+              Don&apos;t invest in what
               <br />
-              you don't understand
+              you don&apos;t understand
             </h1>
             <p>- Warren Buffett -</p>
           </div>
