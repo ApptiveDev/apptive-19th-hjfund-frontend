@@ -7,9 +7,14 @@
   text-align: center;
 }
 
-.title {
-  font-size: 40px;
-  font-weight: 800;
+.logo {
+  & > p {
+    display: none;
+  }
+
+  & > img {
+    filter:brightness(0) invert(1);
+  }
 }
 
 .grid {

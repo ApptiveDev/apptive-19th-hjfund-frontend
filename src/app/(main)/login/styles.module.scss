@@ -29,6 +29,11 @@
   font-size: 46px;
   font-weight: 500;
   margin-bottom: 20px;
+
+  & > strong {
+    color: var(--main-color);
+    font-weight: 800;
+  }
 }
 
 .form {

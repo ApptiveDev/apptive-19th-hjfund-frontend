@@ -19,7 +19,7 @@ export default function Login() {
           you don't understand
         </p>
         <p className={styles.hello}>
-          환영합니다! {process.env.WEBSITE_NAME}입니다
+          환영합니다! <strong>{process.env.WEBSITE_NAME}</strong>입니다
         </p>
         <p>로그인하시면 더 많은 정보를 보실 수 있습니다</p>
       </div>

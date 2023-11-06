@@ -10,4 +10,14 @@
     font-size: 20px;
     margin: 95px 0 38px 0;
   }
+
+  .logo {
+    & > p {
+      display: none;
+    }
+    
+    & > img {
+      filter:brightness(0) invert(1);
+    }
+  }
 }
