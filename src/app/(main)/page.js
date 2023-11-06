@@ -21,7 +21,7 @@ export default function Home() {
       </section>
       <section className={styles.bests}>
         <div className={styles.title}>
-          <HeartMainTitle color="var(--main-color)" />
+          <HeartMainTitle color="var(--logo-color-1)" />
           <span>인기 리포트</span>
           <span>Best Reports</span>
         </div>

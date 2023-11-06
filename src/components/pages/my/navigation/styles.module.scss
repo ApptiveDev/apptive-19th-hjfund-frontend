@@ -26,11 +26,11 @@
       }
       
       &.active{
-        color: var(--main-color);
+        color: var(--logo-color-1);
         font-weight: 700;
         
         &:after {
-          background-color: var(--main-color);
+          background-color: var(--logo-color-1);
         }
       }
     }

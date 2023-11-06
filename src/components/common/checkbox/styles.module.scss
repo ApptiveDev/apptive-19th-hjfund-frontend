@@ -35,8 +35,8 @@
   }
 
   & > input:checked + span[role="checkbox"] {
-    border-color: var(--main-color);
-    background-color: var(--main-color);
+    border-color: var(--logo-color-1);
+    background-color: var(--logo-color-1);
 
     & > svg > path {
       fill: white;
