@@ -1,13 +1,27 @@
 import Link from "next/link";
+import Image from "next/image";
 
 import { CommentMainCard, HeartMainCard } from "@/components/svg";
 import styles from "./styles.module.scss";
 
-export default function Card({ title, id, author, comments, hearts, thumbnail, iconColor, className, ...props }) {
+export default function Card({
+  title,
+  id,
+  author,
+  comments,
+  hearts,
+  thumbnail,
+  iconColor,
+  className,
+  ...props
+}) {
   return (
     <Link href="/any" className={[styles.card, className].join(" ")} {...props}>
       <div className={styles.image}>
-        <img alt="thumbnail" src={thumbnail ?? process.env.FALLBACK_THUMBNAIL_URL} />
+        <Image
+          alt="thumbnail"
+          src={thumbnail ?? process.env.FALLBACK_THUMBNAIL_URL}
+        />
       </div>
       <div className={styles.info}>
         <p className={styles.title}>{title}</p>
@@ -26,5 +40,5 @@ export default function Card({ title, id, author, comments, hearts, thumbnail, i
         </div>
       </div>
     </Link>
-  )
+  );
 }

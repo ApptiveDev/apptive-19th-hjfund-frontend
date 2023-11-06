@@ -1,6 +1,7 @@
 import Link from "next/link";
 import styles from "./styles.module.scss";
 import { BellHeader, UserHeader, SearchHeader } from "@/components/svg";
+import Image from "next/image";
 
 const Header = () => {
   return (
@@ -8,7 +9,7 @@ const Header = () => {
       <div className={styles.left}>
         <Link href="/" className={styles.title}>
           <h1>{process.env.WEBSITE_NAME}</h1>
-          <img
+          <Image
             src="/images/logo/stocktree.png"
             srcSet="/images/logo/stocktree@2x.png 2x, /images/logo/stocktree@3x.png 3x"
             alt="stocktree logo"

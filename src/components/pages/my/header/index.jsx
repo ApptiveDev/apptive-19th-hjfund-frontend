@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { BellHeader, UserHeader } from "@/components/svg";
+import Image from "next/image";
 
 import styles from "./styles.module.scss";
 import headerStyles from "@/components/common/header/styles.module.scss";
@@ -10,7 +11,7 @@ export default function Header() {
       <div className={headerStyles.left}>
         <Link href="/" className={[headerStyles.title, styles.title].join(" ")}>
           <h1>{process.env.WEBSITE_NAME}</h1>
-          <img
+          <Image
             src="/images/logo/stocktree.png"
             srcSet="/images/logo/stocktree@2x.png 2x, /images/logo/stocktree@3x.png 3x"
             alt="stocktree logo"

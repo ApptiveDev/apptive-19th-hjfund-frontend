@@ -1,10 +1,11 @@
 import Link from "next/link";
 import styles from "./styles.module.scss";
+import Image from "next/image";
 
 const SocialButton = ({ className, url, imgSrc, imgSrcSet }) => (
   <a href={url ?? "/"} target="_blank" rel="noreferrer">
     <button type="button" className={className}>
-      <img alt="google logo" src={imgSrc} srcSet={imgSrcSet} />
+      <Image alt="google logo" src={imgSrc} srcSet={imgSrcSet} />
     </button>
   </a>
 );
