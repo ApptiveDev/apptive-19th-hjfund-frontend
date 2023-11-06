@@ -2,10 +2,16 @@ import Link from "next/link";
 import styles from "./styles.module.scss";
 import Image from "next/image";
 
-const SocialButton = ({ className, url, imgSrc, imgSrcSet }) => (
+const SocialButton = ({ className, url, imgSrc, imgSrcSet, width, height }) => (
   <a href={url ?? "/"} target="_blank" rel="noreferrer">
     <button type="button" className={className}>
-      <Image alt="google logo" src={imgSrc} srcSet={imgSrcSet} />
+      <Image
+        alt="google logo"
+        src={imgSrc}
+        srcSet={imgSrcSet}
+        width={width}
+        height={height}
+      />
     </button>
   </a>
 );
@@ -46,18 +52,24 @@ export default function Login() {
           className={styles.google}
           imgSrc="/images/social/google.png"
           imgSrcSet="/images/social/google@2x.png 2x, /images/social/google@3x.png 3x"
+          width={50}
+          height={50}
         />
         <SocialButton
           url="/login/naver"
           className={styles.naver}
           imgSrc="/images/social/naver.png"
           imgSrcSet="/images/social/naver@2x.png 2x, /images/social/naver@3x.png 3x"
+          width={30}
+          height={34}
         />
         <SocialButton
           url="/login/kakao"
           className={styles.kakao}
           imgSrc="/images/social/kakao.png"
           imgSrcSet="/images/social/kakao@2x.png 2x, /images/social/kakao@3x.png 3x"
+          width={44}
+          height={40}
         />
       </div>
     </main>

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Image from "next/image";
+// import Image from "next/image";
 
 import { CommentMainCard, HeartMainCard } from "@/components/svg";
 import styles from "./styles.module.scss";
@@ -18,7 +18,7 @@ export default function Card({
   return (
     <Link href="/any" className={[styles.card, className].join(" ")} {...props}>
       <div className={styles.image}>
-        <Image
+        <img
           alt="thumbnail"
           src={thumbnail ?? process.env.FALLBACK_THUMBNAIL_URL}
         />

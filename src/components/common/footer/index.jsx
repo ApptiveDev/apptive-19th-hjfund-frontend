@@ -42,6 +42,8 @@ const Footer = () => {
           alt="logo"
           src="/images/logo/stocktree.png"
           srcSet="/images/logo/stocktree@2x.png 2x, /images/logo/stocktree@3x.png 3x"
+          width={213}
+          height={48}
         />
       </div>
     </footer>
