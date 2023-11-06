@@ -7,7 +7,7 @@ export default function Login() {
     <main className={styles.main}>
       <div className={styles.header}>
         <p className={styles.comment}>
-          Don't invest in what
+          Don&apost invest in what
           <br />
           you don't understand
         </p>

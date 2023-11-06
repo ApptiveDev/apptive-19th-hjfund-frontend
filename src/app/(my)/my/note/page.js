@@ -47,8 +47,8 @@ export default function Note() {
                   percent: "+5%",
                   amount: "100,000원",
                 },
-              ].map(({ title, percent, amount, minus }) => (
-                <li>
+              ].map(({ title, percent, amount, minus }, i) => (
+                <li key={i}>
                   <span>{title}</span>
                   <span className={minus ? styles.minus : ""}>{percent}</span>
                   <span>{amount}</span>
