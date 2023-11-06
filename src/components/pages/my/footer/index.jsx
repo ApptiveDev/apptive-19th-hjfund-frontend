@@ -1,6 +1,5 @@
 import styles from "./styles.module.scss";
 import Link from "next/link";
-import Image from "next/image";
 
 export default function Footer() {
   return (
@@ -8,7 +7,7 @@ export default function Footer() {
       <Link href="/terms">이용약관</Link>
       <div className={styles.logo}>
         <p>{process.env.WEBSITE_NAME}</p>
-        <Image
+        <img
           alt="logo"
           src="/images/logo/stocktree.png"
           srcSet="/images/logo/stocktree@2x.png 2x, /images/logo/stocktree@3x.png 3x"
