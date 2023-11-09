@@ -12,6 +12,8 @@ const Header = () => {
             src="/images/logo/stocktree.png"
             srcSet="/images/logo/stocktree@2x.png 2x, /images/logo/stocktree@3x.png 3x"
             alt="stocktree logo"
+            width={213}
+            height={48}
           />
         </Link>
         <nav className={styles.nav}>

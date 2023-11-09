@@ -47,8 +47,8 @@ export default function Note() {
                   percent: "+5%",
                   amount: "100,000원",
                 },
-              ].map(({ title, percent, amount, minus }) => (
-                <li>
+              ].map(({ title, percent, amount, minus }, i) => (
+                <li key={i}>
                   <span>{title}</span>
                   <span className={minus ? styles.minus : ""}>{percent}</span>
                   <span>{amount}</span>
@@ -65,11 +65,14 @@ export default function Note() {
               className="my-textfield"
               placeholder="제목을 입력해주세요"
             />
-            <input
-              type="date"
-              className="my-textfield"
-              placeholder="날짜를 캘린더에서 선택해주세요"
-            />
+            <div>
+              <div className="my-textfield" data-placeholder="false">
+                날짜를 캘린더에서 선택해주세요
+              </div>
+              <button className="my-button">
+                <CalendarMy color="white" />
+              </button>
+            </div>
             <textarea
               className="my-textfield"
               placeholder="본문 내용을 입력해주세요"

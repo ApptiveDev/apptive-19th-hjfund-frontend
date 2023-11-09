@@ -17,11 +17,11 @@
     align-items: center;
     justify-content: center;
 
-    transition: background-color 0.15s, border-color 0.15s;
+    transition: background-color 80ms, border-color 80ms;
 
     & > svg > path {
       fill: var(--border-color);
-      transition: fill 0.15s;
+      transition: fill 80ms;
     }
   }
 
@@ -35,8 +35,8 @@
   }
 
   & > input:checked + span[role="checkbox"] {
-    border-color: var(--main-color);
-    background-color: var(--main-color);
+    border-color: var(--logo-color-1);
+    background-color: var(--logo-color-1);
 
     & > svg > path {
       fill: white;

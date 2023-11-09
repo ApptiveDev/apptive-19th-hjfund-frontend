@@ -6,7 +6,7 @@
   padding: 0 24px;
   border: 0;
   outline: none;
-  background-color: var(--main-color);
+  background-color: var(--logo-color-1);
   color: white;
   transition: opacity 0.15s;
   display: flex;
@@ -29,6 +29,10 @@
   transition: border-color 0.15s;
 
   &:focus {
-    border-color: var(--main-color);
+    border-color: var(--logo-color-1);
+  }
+
+  &::placeholder {
+    color: var(--border-color);
   }
 }

@@ -4,10 +4,20 @@
   flex-direction: column;
   align-items: center;
   color: white;
-  background-color: var(--main-color);
+  background-color: var(--logo-color-1);
 
   & > a {
     font-size: 20px;
     margin: 95px 0 38px 0;
+  }
+
+  .logo {
+    & > p {
+      display: none;
+    }
+    
+    & > img {
+      filter:brightness(0) invert(1);
+    }
   }
 }

@@ -29,7 +29,7 @@ export default function CardList() {
   useEffect(() => {
     startTimer();
     return cancelTimer;
-  }, [index]);
+  }, [index]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div

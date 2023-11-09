@@ -5,6 +5,7 @@ const Checkbox = ({ small, children, className, right = false, ...props }) => {
     <label className={[styles.checkbox, className].join(" ")}>
       <input type="checkbox" {...props} />
       {right ? children : null}
+      {/* eslint-disable-next-line jsx-a11y/role-has-required-aria-props */}
       <span role="checkbox" className={small ? styles.small : ""}>
         <svg
           xmlns="http://www.w3.org/2000/svg"

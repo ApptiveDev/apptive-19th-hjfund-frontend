@@ -14,6 +14,8 @@ export default function Profile() {
           src="/images/my/profile.png"
           srcSet="/images/my/profile@2x.png 2x, /images/my/profile@3x.png 3x"
           alt="프로필 사진"
+          width={175}
+          height={175}
         />
         <div>
           <button className="my-button">변경</button>

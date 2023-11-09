@@ -2,7 +2,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Allura:wght@100;200;300;400;500;600;700&display=swap');
 
 :root {
-  --main-color: #2E7B5A;
+  --logo-color-1: #2E7B5A;
+  --logo-color-2: #533625;
+
   --text-color: #454545;
   --passive-text-color: #737373;
   --border-color: #B8B8B8;

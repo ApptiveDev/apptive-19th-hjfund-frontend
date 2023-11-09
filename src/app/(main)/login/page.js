@@ -1,10 +1,16 @@
 import Link from "next/link";
 import styles from "./styles.module.scss";
 
-const SocialButton = ({ className, url, imgSrc, imgSrcSet }) => (
+const SocialButton = ({ className, url, imgSrc, imgSrcSet, width, height }) => (
   <a href={url ?? "/"} target="_blank" rel="noreferrer">
     <button type="button" className={className}>
-      <img alt="google logo" src={imgSrc} srcSet={imgSrcSet} />
+      <img
+        alt="google logo"
+        src={imgSrc}
+        srcSet={imgSrcSet}
+        width={width}
+        height={height}
+      />
     </button>
   </a>
 );
@@ -14,12 +20,12 @@ export default function Login() {
     <main className={styles.main}>
       <div className={styles.header}>
         <p className={styles.comment}>
-          Don't invest in what
+          Don&apos;t invest in what
           <br />
-          you don't understand
+          you don&apos;t understand
         </p>
         <p className={styles.hello}>
-          환영합니다! {process.env.WEBSITE_NAME}입니다
+          환영합니다! <strong>{process.env.WEBSITE_NAME}</strong>입니다
         </p>
         <p>로그인하시면 더 많은 정보를 보실 수 있습니다</p>
       </div>
@@ -45,18 +51,24 @@ export default function Login() {
           className={styles.google}
           imgSrc="/images/social/google.png"
           imgSrcSet="/images/social/google@2x.png 2x, /images/social/google@3x.png 3x"
+          width={50}
+          height={50}
         />
         <SocialButton
           url="/login/naver"
           className={styles.naver}
           imgSrc="/images/social/naver.png"
           imgSrcSet="/images/social/naver@2x.png 2x, /images/social/naver@3x.png 3x"
+          width={30}
+          height={34}
         />
         <SocialButton
           url="/login/kakao"
           className={styles.kakao}
           imgSrc="/images/social/kakao.png"
           imgSrcSet="/images/social/kakao@2x.png 2x, /images/social/kakao@3x.png 3x"
+          width={44}
+          height={40}
         />
       </div>
     </main>

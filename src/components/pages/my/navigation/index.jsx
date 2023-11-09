@@ -15,7 +15,11 @@ export default function Navigation() {
           "/my/note": "투자노트",
           "/my/remove": "회원탈퇴",
         }).map(([url, label]) => (
-          <Link href={url} className={pathname == url ? styles.active : ""}>
+          <Link
+            key={url}
+            href={url}
+            className={pathname == url ? styles.active : ""}
+          >
             {label}
           </Link>
         ))}

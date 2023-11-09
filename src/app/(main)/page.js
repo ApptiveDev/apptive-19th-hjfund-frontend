@@ -10,9 +10,9 @@ export default function Home() {
         <div className={styles.contents}>
           <div className={styles.comments}>
             <h1>
-              Don't invest in what
+              Don&apos;t invest in what
               <br />
-              you don't understand
+              you don&apos;t understand
             </h1>
             <p>- Warren Buffett -</p>
           </div>
@@ -21,7 +21,7 @@ export default function Home() {
       </section>
       <section className={styles.bests}>
         <div className={styles.title}>
-          <HeartMainTitle color="var(--main-color)" />
+          <HeartMainTitle color="var(--logo-color-1)" />
           <span>인기 리포트</span>
           <span>Best Reports</span>
         </div>

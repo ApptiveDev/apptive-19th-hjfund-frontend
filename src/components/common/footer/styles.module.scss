@@ -3,13 +3,18 @@
   width: 100%;
   min-width: var(--window-min-width);
   color: white;
-  background-color: var(--main-color);
+  background-color: var(--logo-color-1);
   text-align: center;
 }
 
-.title {
-  font-size: 40px;
-  font-weight: 800;
+.logo {
+  & > p {
+    display: none;
+  }
+
+  & > img {
+    filter:brightness(0) invert(1);
+  }
 }
 
 .grid {

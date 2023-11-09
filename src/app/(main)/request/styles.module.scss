@@ -45,7 +45,7 @@
     & .selectedcategorybox {
       width: 205px;
       height: 65px;
-      background: var(--main-color);
+      background: var(--logo-color-1);
       text-align: center;
       display: flex;
       flex-direction: row;
@@ -129,6 +129,6 @@
     border: none;
     border-radius: 15px;
     color: white;
-    background: var(--main-color);
+    background: var(--logo-color-1);
   }
 }
