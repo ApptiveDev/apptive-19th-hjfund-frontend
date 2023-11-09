@@ -16,7 +16,11 @@ export default function Card({
   ...props
 }) {
   return (
-    <Link href="/any" className={[styles.card, className].join(" ")} {...props}>
+    <Link
+      href="/report/1"
+      className={[styles.card, className].join(" ")}
+      {...props}
+    >
       <div className={styles.image}>
         <img
           alt="thumbnail"
