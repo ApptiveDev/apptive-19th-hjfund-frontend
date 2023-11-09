@@ -19,7 +19,7 @@ const Header = () => {
             <div>콘텐츠</div>
             <ul>
               <li>
-                <Link href="/reports">리포트</Link>
+                <Link href="/report">리포트</Link>
               </li>
               <li>
                 <Link href="/knowledge">재무지식</Link>
