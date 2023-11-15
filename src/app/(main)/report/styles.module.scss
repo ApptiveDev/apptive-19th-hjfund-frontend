@@ -1,0 +1,138 @@
+.header {
+  padding-bottom: 32px;
+  padding-top: 100px;
+  display: grid;
+  & > section {
+    margin: 0 auto;
+    max-width: var(--content-width);
+  }
+}
+
+.headerTitle {
+  text-align: center;
+  font-size: 45px;
+  margin-bottom: 50px;
+  font-weight: 700;
+}
+
+.buttonLine {
+  display: flex;
+  width: 1200px;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.headerButton {
+  display: flex;
+  background-color: transparent;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 15px;
+  border-color: #b8b8b8;
+  justify-content: space-between;
+  padding: 11px;
+
+  width: 175px;
+  height: 52px;
+
+  & > .buttonText {
+    font-size: 23px;
+    font-weight: 400;
+    color: #737373;
+  }
+
+  & > .buttonIcon {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+.sector {
+  border-radius: 20px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #b8b8b8;
+
+  width: max-content;
+  height: 400px;
+
+  margin: 15px;
+
+  & .reportImg {
+    width: 380px;
+    height: 207px;
+    border-radius: 20px 20px 0px 0px;
+  }
+  & .reportTextbox {
+    width: 318px;
+    height: 165px;
+    margin: 10px 25px 0px 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+}
+
+.reportCompany {
+  font-size: 25px;
+  font-weight: 800;
+  color: #454545;
+}
+
+.reportTitle {
+  font-size: 17px;
+  font-weight: 700;
+  color: #6c6c6c;
+}
+
+.reportInfo {
+  color: #9a9a9a;
+  font-size: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  & .reportUser {
+    font-size: 20px;
+    font-weight: 700;
+  }
+  & .buttons {
+    display: flex;
+    flex-direction: row;
+
+    justify-content: space-between;
+  }
+  & .reportLike {
+    display: flex;
+    flex-direction: row;
+    font-size: 20px;
+    font-weight: 600;
+    align-items: center;
+    border-style: none;
+    background-color: transparent;
+    margin-right: 20px;
+    color: #9a9a9a;
+  }
+  & .reportComment {
+    display: flex;
+    flex-direction: row;
+    font-size: 20px;
+    font-weight: 600;
+    align-items: center;
+    border-style: none;
+    background-color: transparent;
+    color: #9a9a9a;
+  }
+}
+
+.article {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.body {
+  display: flex;
+  flex-direction: row;
+}
