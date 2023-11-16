@@ -45,24 +45,22 @@ export default function CardList() {
         <button onClick={() => move(true)}>
           <ArrowMainCardlist color="white" />
         </button>
-        <div className={styles.roll_container}>
-          <div
-            className={styles.roll}
-            style={{ transform: `translateX(${-380 * index}px)` }}
-          >
-            {Array.from({ length: DUMMY_LENGTH }).map((_, i) => (
-              <Card
-                key={"card-" + i}
-                className={styles.card}
-                thumbnail="/examples/tesla_main_card.webp"
-                title="테슬라 리서치 리포트 II"
-                author="작성자명"
-                comments={20}
-                hearts={22}
-                iconColor="#969696"
-              />
-            ))}
-          </div>
+        <div className={styles.roll}>
+          {Array.from({ length: DUMMY_LENGTH }).map((_, i) => (
+            <Card
+              key={"card-" + i}
+              className={styles.card}
+              style={{
+                opacity: index === i ? 1 : 0,
+              }}
+              thumbnail="/examples/tesla_main_card.webp"
+              title="테슬라 리서치 리포트 II"
+              author="작성자명"
+              comments={20}
+              hearts={22}
+              iconColor="#969696"
+            />
+          ))}
         </div>
         <button onClick={() => move()}>
           <ArrowMainCardlist
