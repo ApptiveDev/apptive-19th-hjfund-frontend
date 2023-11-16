@@ -26,7 +26,7 @@ export const Comment = ({
         <div>
           <time>{date}</time>
           <div>
-            <CommentLikeLinear color="var(--main-color)" />
+            <CommentLikeLinear color="var(--logo-color-1)" />
             <span style={{ marginLeft: "4px" }}>{likes}</span>
           </div>
         </div>
