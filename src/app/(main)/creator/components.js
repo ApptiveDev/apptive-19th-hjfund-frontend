@@ -1,16 +1,6 @@
 import styles from "./styles.module.scss";
 import { ReportLikeLinear, ReportCommentLinear } from "@/components/svg";
 
-export function Dropdown() {
-  return (
-    <p className={styles.dropdown}>
-      <li>정확도순</li>
-      <hr />
-      <li>최신순</li>
-    </p>
-  );
-}
-
 export const ReportPreview = ({
   picture,
   company,
