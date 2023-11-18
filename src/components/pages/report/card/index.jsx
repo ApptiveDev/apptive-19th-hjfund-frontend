@@ -1,3 +1,5 @@
+"use client";
+import React, { useState } from "react";
 import ArticleLike from "@/components/svg/article_like";
 import styles from "./styles.module.scss";
 import Link from "next/link";
@@ -10,28 +12,41 @@ export default function Card({
   comments,
   hearts,
   thumbnail,
-  iconColor,
-  ...props
 }) {
+  const [iconColor, setIconColor] = useState(false);
+  const [heart, setHeart] = useState(hearts);
+  const heartCount = () => {
+    if (!iconColor) {
+      setHeart(parseInt(heart, 10) + 1);
+    } else {
+      setHeart(parseInt(heart, 10) - 1);
+    }
+  };
+
   return (
-    <Link href="/any" className={styles.sector}>
+    <div className={styles.sector}>
       <img
         className={styles.reportImg}
         src={thumbnail ?? process.env.FALLBACK_THUMBNAIL_URL}
         alt="report_image"
       />
       <p className={styles.reportTextbox}>
-        <div className={styles.reportText}>
+        <Link href="/any" className={styles.reportText}>
           <p className={styles.reportCompany}>{company}</p>
           <p className={styles.reportTitle}>{title}</p>
-        </div>
+        </Link>
         <div className={styles.reportInfo}>
           <button className={styles.reportCreator}>{creator}</button>
           <p className={styles.buttons}>
-            <span>
-              <ArticleLike color={iconColor ?? "#E73325"} />
+            <span
+              onClick={() => {
+                setIconColor(!iconColor);
+                heartCount();
+              }}
+            >
+              <ArticleLike color={iconColor ? "#E73325" : "#737373"} />
               &nbsp;
-              {hearts}
+              {heart}
             </span>
             <span>
               <ArticleComment />
@@ -41,6 +56,6 @@ export default function Card({
           </p>
         </div>
       </p>
-    </Link>
+    </div>
   );
 }
