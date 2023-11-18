@@ -1,18 +1,25 @@
 import ArticleLike from "@/components/svg/article_like";
 import styles from "./styles.module.scss";
+import Link from "next/link";
 import ArticleComment from "@/components/svg/article_comment";
 
-export const ReportPreview = ({
-  picture,
-  company,
+export default function Card({
   title,
+  company,
   creator,
-  likes,
   comments,
-}) => {
+  hearts,
+  thumbnail,
+  iconColor,
+  ...props
+}) {
   return (
-    <article type="button" onClick="" className={styles.sector}>
-      <img className={styles.reportImg} src={picture} alt="report_image" />
+    <Link href="/any" className={styles.sector}>
+      <img
+        className={styles.reportImg}
+        src={thumbnail ?? process.env.FALLBACK_THUMBNAIL_URL}
+        alt="report_image"
+      />
       <p className={styles.reportTextbox}>
         <div className={styles.reportText}>
           <p className={styles.reportCompany}>{company}</p>
@@ -21,19 +28,19 @@ export const ReportPreview = ({
         <div className={styles.reportInfo}>
           <button className={styles.reportCreator}>{creator}</button>
           <p className={styles.buttons}>
-            <button onClick="" className={styles.reportLike}>
-              <ArticleLike color="#E73325" />
+            <span>
+              <ArticleLike color={iconColor ?? "#E73325"} />
               &nbsp;
-              {likes}
-            </button>
-            <button onClick="" className={styles.reportComment}>
+              {hearts}
+            </span>
+            <span>
               <ArticleComment />
               &nbsp;
               {comments}
-            </button>
+            </span>
           </p>
         </div>
       </p>
-    </article>
+    </Link>
   );
-};
+}
