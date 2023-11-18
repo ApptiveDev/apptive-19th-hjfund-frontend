@@ -1,3 +1,4 @@
+import Link from "next/link";
 import styles from "./styles.module.scss";
 import { SearchHeader } from "@/components/svg";
 
@@ -18,10 +19,6 @@ export default function Request() {
             </div>
             <div className={styles.categorybox}>
               <span className={styles.number}>3</span>
-              <span className={styles.text}>결제하기</span>
-            </div>
-            <div className={styles.categorybox}>
-              <span className={styles.number}>4</span>
               <span className={styles.text}>요청완료</span>
             </div>
           </div>
@@ -44,7 +41,9 @@ export default function Request() {
             }}
           >
             <span style={{ flex: "1" }} />
-            <button className={styles.nextbutton}>다음</button>
+            <Link href="/request/2">
+              <button className={styles.nextbutton}>다음</button>
+            </Link>
           </div>
         </section>
       </section>

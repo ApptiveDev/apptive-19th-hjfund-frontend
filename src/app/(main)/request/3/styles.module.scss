@@ -1,7 +1,7 @@
 .banner {
   --request-width: 996px;
 
-  height: 650px;
+  height: 830px;
 
   background-size: cover;
   background-position: center;
@@ -19,7 +19,7 @@
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    margin: 40px 0px 40px 0px;
+    margin: 40px 0px 140px 0px;
   }
 
   & .title {
@@ -88,50 +88,41 @@
       letter-spacing: 0.25px;
     }
   }
-
-  & .searchbox {
-    width: 100%;
-    height: 50px;
-    border-radius: 45px;
-    background: #fff;
-    box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.5);
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    padding: 20px;
-
-    & > input[type="search"] {
-      border: none;
-      text-decoration: none;
-      color: #9c9c9c;
-      font-family: Pretendard;
-      font-size: 20px;
-      font-style: normal;
-      line-height: normal;
-      letter-spacing: 0.25px;
-      flex: 1;
-      outline: none;
-    }
-
-    & > button {
-      display: flex;
-      border: 0;
-      background-color: transparent;
-      outline: none;
-    }
-  }
-
-  & .nextbutton {
-    width: 75px;
-    height: 45px;
-    font-size: 20px;
-    box-shadow: none;
-    border: none;
-    border-radius: 15px;
-    color: white;
-    background: var(--logo-color-1);
-    &:hover {
-      cursor: pointer;
-    }
+}
+.textSet {
+  display: flex;
+  height: 125px;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 109px 0px 140px 0px;
+}
+.lineOne {
+  font-family: Inter;
+  font-size: 46px;
+  font-weight: 500;
+  line-height: 56px;
+  letter-spacing: 0em;
+  text-align: center;
+}
+.lineTwo {
+  font-family: Inter;
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 27px;
+  letter-spacing: 0em;
+  text-align: center;
+}
+.nextbutton {
+  width: 120px;
+  height: 50px;
+  font-size: 25px;
+  font-weight: 400;
+  box-shadow: none;
+  border: none;
+  border-radius: 15px;
+  color: white;
+  background: var(--logo-color-1);
+  &:hover {
+    cursor: pointer;
   }
 }
