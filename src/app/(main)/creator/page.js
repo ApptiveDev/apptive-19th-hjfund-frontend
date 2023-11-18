@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./styles.module.scss";
 import { ReportPreview } from "./components";
+import CheckboxGreen from "@/components/svg/checkbox_gr";
 
 export default function page() {
   return (
@@ -18,10 +19,7 @@ export default function page() {
             <p className={styles.creator}>
               <p className={styles.creatorName}>
                 스톡트리&nbsp;
-                <img
-                  className={styles.greenCheck}
-                  src="/images/icon/green_check.png"
-                />
+                <CheckboxGreen />
               </p>
               <p className={styles.describe}>
                 안녕하세요 주린이를 위한 성공투자가이드, 스톡트리입니다.

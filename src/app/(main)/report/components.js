@@ -1,5 +1,6 @@
 import styles from "./styles.module.scss";
-import { ReportLikeLinear, ReportCommentLinear } from "@/components/svg";
+import ArticleComment from "@/components/svg/article_comment";
+import ArticleLike from "@/components/svg/article_like";
 
 export function Dropdown() {
   return (
@@ -31,12 +32,12 @@ export const ReportPreview = ({
           <button className={styles.reportCreator}>{creator}</button>
           <p className={styles.buttons}>
             <button onClick="" className={styles.reportLike}>
-              <ReportLikeLinear color="#6C6C6C" />
+              <ArticleLike color="#E73325" />
               &nbsp;
               {likes}
             </button>
             <button onClick="" className={styles.reportComment}>
-              <ReportCommentLinear color="#6C6C6C" />
+              <ArticleComment />
               &nbsp;
               {comments}
             </button>
