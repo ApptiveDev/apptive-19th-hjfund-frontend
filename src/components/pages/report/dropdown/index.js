@@ -1,14 +1,35 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styles from "./styles.module.scss";
 import DropdownClosed from "@/components/svg/dropdown_closed";
 import DropdownOpened from "@/components/svg/dropdown_opened";
 
-export default function Dropdown() {
+export default function Dropdown({ options, onSelect, defaultSelect }) {
   const [view, setView] = useState(false);
-  const [order, setOrder] = useState("정확도순");
+  const [order, setOrder] = useState(defaultSelect);
+  const dropdownRef = useRef(null);
+
+  const handleOutsideClick = (e) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+      setView(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("click", handleOutsideClick);
+
+    return () => {
+      document.removeEventListener("click", handleOutsideClick);
+    };
+  }, []);
+
+  const handleSelect = (option) => {
+    onSelect(option);
+    setView(false);
+  };
+
   return (
-    <div className={styles.headerButton}>
+    <div ref={dropdownRef} className={styles.headerButton}>
       <p>
         <p
           className={styles.buttonText}
@@ -22,23 +43,18 @@ export default function Dropdown() {
 
         {view && (
           <ul className={styles.dropdown}>
-            <li
-              onClick={() => {
-                setOrder("정확도순");
-                setView(!view);
-              }}
-            >
-              정확도순
-            </li>
-            <hr />
-            <li
-              onClick={() => {
-                setOrder("최신순");
-                setView(!view);
-              }}
-            >
-              최신순
-            </li>
+            {options.map((option) => (
+              <li
+                key={option}
+                onClick={() => {
+                  handleSelect(option);
+                  setOrder(option);
+                }}
+              >
+                {option}
+                <hr />
+              </li>
+            ))}
           </ul>
         )}
       </p>

@@ -3,8 +3,14 @@ import React, { useState } from "react";
 import styles from "./styles.module.scss";
 import { Dropdown, Card } from "@/components/pages/report";
 
+const options = ["정확도순", "최신순"];
+
 export default function page() {
-  const [view, setView] = useState(false);
+  const [selectedOption, setSelectedOption] = useState(options[0]);
+
+  const handleSelect = (option) => {
+    setSelectedOption(option);
+  };
   return (
     <main>
       <article className={styles.article}>
@@ -12,7 +18,11 @@ export default function page() {
           <section>
             <p className={styles.headerTitle}>리포트</p>
             <div className={styles.buttonLine}>
-              <Dropdown />
+              <Dropdown
+                options={options}
+                onSelect={handleSelect}
+                defaultSelect={selectedOption}
+              />
             </div>
           </section>
         </header>
