@@ -38,7 +38,7 @@ export default function Dropdown({ options, onSelect, defaultSelect }) {
           }}
         >
           <span>{order}</span>
-          <span>{view ? <DropdownClosed /> : <DropdownOpened />}</span>
+          <span>{view ? <DropdownOpened /> : <DropdownClosed />}</span>
         </p>
 
         {view && (

@@ -8,7 +8,7 @@ export default function DropdownOpened() {
       fill="none"
     >
       <path
-        d="M1 1L8 10L15 1"
+        d="M15 10L8 1L1 10"
         stroke="#737373"
         stroke-width="1.5"
         stroke-linecap="round"
