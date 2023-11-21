@@ -43,7 +43,7 @@ export default function Dropdown({ options, onSelect, defaultSelect }) {
 
         {view && (
           <ul className={styles.dropdown}>
-            {options.map((option) => (
+            {options.map((option, index) => (
               <li
                 key={option}
                 onClick={() => {
@@ -52,7 +52,7 @@ export default function Dropdown({ options, onSelect, defaultSelect }) {
                 }}
               >
                 {option}
-                <hr />
+                {index < options.length - 1 && <hr />}
               </li>
             ))}
           </ul>
