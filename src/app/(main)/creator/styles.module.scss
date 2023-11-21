@@ -1,0 +1,147 @@
+.article {
+  display: flex;
+  flex-direction: column;
+  text-align: start;
+}
+
+.header {
+  padding-bottom: 68px;
+  border-bottom: 1px solid var(--border-color);
+  padding-top: 100px;
+  display: flex;
+  flex-direction: column;
+
+  & > section {
+    max-width: var(--content-width);
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+  }
+}
+
+.profilePic {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  margin-right: 64px;
+}
+
+.creator {
+  height: 160px;
+}
+
+.creatorName {
+  font-size: 40px;
+  font-weight: 700;
+  font-family: Pretendard;
+  margin-bottom: 28px;
+}
+
+.greenCheck {
+  width: 30px;
+  height: 30px;
+}
+
+.describe {
+  font-family: Pretendard;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 29px;
+  text-align: left;
+}
+
+.sector {
+  border-radius: 20px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #b8b8b8;
+  background-color: transparent;
+  text-align: start;
+
+  width: max-content;
+  height: 400px;
+  justify-content: space-between;
+  margin: 15px;
+
+  & .reportImg {
+    width: 380px;
+    height: 207px;
+    border-radius: 20px 20px 0px 0px;
+  }
+  & .reportTextbox {
+    width: 318px;
+    height: 165px;
+    margin: 10px 25px 0px 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+}
+
+.reportCompany {
+  font-size: 25px;
+  font-weight: 800;
+  color: #454545;
+}
+
+.reportTitle {
+  font-size: 17px;
+  font-weight: 700;
+  color: #6c6c6c;
+}
+
+.reportInfo {
+  color: #9a9a9a;
+  font-size: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  & .reportCreator {
+    font-size: 20px;
+    font-weight: 700;
+    background-color: transparent;
+    border-style: none;
+    color: #9a9a9a;
+  }
+  & .buttons {
+    display: flex;
+    flex-direction: row;
+
+    justify-content: space-between;
+  }
+  & .reportLike {
+    display: flex;
+    flex-direction: row;
+    font-size: 20px;
+    font-weight: 600;
+    align-items: center;
+    border-style: none;
+    background-color: transparent;
+    margin-right: 20px;
+    color: #9a9a9a;
+  }
+  & .reportComment {
+    display: flex;
+    flex-direction: row;
+    font-size: 20px;
+    font-weight: 600;
+    align-items: center;
+    border-style: none;
+    background-color: transparent;
+    color: #9a9a9a;
+  }
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 50px 0px 40px 0px;
+}
+
+.body {
+  display: flex;
+  flex-direction: row;
+  width: 1230px;
+}
