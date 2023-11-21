@@ -32,7 +32,7 @@ const Header = () => {
             </ul>
           </div>
           <div className={styles.dropdown}>
-            <Link href="request">종목요청</Link>
+            <Link href="/request">종목요청</Link>
           </div>
         </nav>
       </div>
