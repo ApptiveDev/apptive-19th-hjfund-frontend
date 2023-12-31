@@ -17,7 +17,7 @@
   column-gap: 6px;
   font-weight: 800;
   font-size: 26px;
-  color: var(--main-color);
+  color: var(--logo-color-1);
 }
 
 .title {
@@ -61,7 +61,7 @@
       width: 22px;
       height: 22px;
       border-radius: 50%;
-      background-color: var(--main-color);
+      background-color: var(--logo-color-1);
       background-image: url('/images/icon/badge_checked.svg');
       background-repeat: no-repeat;
       background-position: center;
@@ -96,9 +96,9 @@
   position: relative;
   width: var(--content-width);
   margin: 74px auto;
-  font-size: 30px;
+  font-size: 16px;
   font-weight: 500;
-  line-height: 44px;
+  line-height: 24px;
 
 
   .react-container {
@@ -118,7 +118,7 @@
     flex-direction: column;
     align-items: center;
     row-gap: 20px;
-    background-color: var(--main-color);
+    background-color: var(--logo-color-2);
     padding: 40px 0;
     
     & > button {
@@ -177,7 +177,7 @@
     margin-bottom: 18px;
 
     & > span:nth-of-type(2) {
-      color: var(--main-color);
+      color: var(--logo-color-1);
     }
   }
 }
@@ -226,7 +226,7 @@
 
       & > div {
         font-weight: 600;
-        color: var(--main-color);
+        color: var(--logo-color-1);
       }
     }
 
