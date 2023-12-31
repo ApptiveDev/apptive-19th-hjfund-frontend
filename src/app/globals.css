@@ -7,8 +7,9 @@
 
   --text-color: #454545;
   --passive-text-color: #737373;
+  --placeholder-color: #A8A8A8;
   --border-color: #B8B8B8;
-  font-family: "Pretendard Variable", Arial, Helvetica, sans-serif;
+  font-family: "Pretendard", Arial, Helvetica, sans-serif;
 
   --window-min-width: 1360px;
   --content-width: 1200px;

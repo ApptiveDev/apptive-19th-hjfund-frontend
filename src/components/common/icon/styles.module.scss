@@ -1,0 +1,17 @@
+@font-face {
+  font-family: 'stocktree-icons';
+  src: url('/fonts/stocktree-icons.woff') format('woff'),
+        url('/fonts/stocktree-icons.ttf') format('truetype')
+        url('/fonts/stocktree-icons.eot') format('embedded-opentype'),
+        url('/fonts/stocktree-icons.svg') format('svg');
+
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+  line-height: 1;
+  color: var(--text-color);
+  font-family: 'stocktree-icons';
+  font-style: normal;
+}
