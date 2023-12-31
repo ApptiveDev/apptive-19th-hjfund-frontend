@@ -1,6 +1,6 @@
-import "../globals.css";
+import "@/styles/globals.scss";
 
-import { Header, Footer } from "@/components/common";
+import { Header, Footer } from "@/components";
 
 export const metadata = {
   title: process.env.WEBSITE_NAME,

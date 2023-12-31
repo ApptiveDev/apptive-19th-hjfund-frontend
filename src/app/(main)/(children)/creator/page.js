@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./styles.module.scss";
 import CheckboxGreen from "@/components/svg/checkbox_gr";
-import { Dropdown, Card } from "@/components/pages/report";
+import { Dropdown, Card } from "./(components)";
 
 export default function page() {
   return (

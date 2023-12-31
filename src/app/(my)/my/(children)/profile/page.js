@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import styles from "./styles.module.scss";
-import { ProfileForm } from "@/components/pages/my";
+import ProfileForm from "./(components)/profile-form";
 
 export default function Profile() {
   const [isCreator, setIsCreator] = useState(true);

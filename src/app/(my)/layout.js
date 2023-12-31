@@ -1,6 +1,6 @@
-import { Header, Footer, Navigation } from "@/components/pages/my";
+import { Header, Footer, Navigation } from "./(components)";
 
-import "@/app/globals.css";
+import "@/styles/globals.scss";
 import "./group.scss";
 
 export const metadata = {

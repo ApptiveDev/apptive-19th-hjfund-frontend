@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
 
-export default function My() {
+export async function GET() {
   redirect("/my/profile");
 }
