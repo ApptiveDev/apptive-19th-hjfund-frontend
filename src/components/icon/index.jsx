@@ -1,15 +1,17 @@
-import React from "react";
-import styles from "./styles.module.scss";
+"use client";
 
-export const Icon = ({ name, size }) => (
-  <i
-    className={styles.icon}
-    style={{
-      fontSize: size ? size : undefined,
-      width: size ? size : undefined,
-      height: size ? size : undefined,
-    }}
-  >
-    {"st-icon-" + name}
-  </i>
-);
+import React from "react";
+import PropTypes from "prop-types";
+import icons from "./assets";
+
+const Icon = ({ iconType = "add-square", ...props }) => {
+  const IconComponent = icons[iconType];
+
+  return <IconComponent {...props} />;
+};
+
+Icon.propTypes = {
+  iconType: PropTypes.oneOf(Object.keys(icons)).isRequired,
+};
+
+export default Icon;
