@@ -1,4 +1,4 @@
-import { Header, Footer, Navigation } from "@/components/pages/my";
+import { Header, Footer, Navigation } from "./(components)";
 
 import "@/app/globals.css";
 import "./group.scss";

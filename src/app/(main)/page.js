@@ -1,7 +1,7 @@
 import { HeartMainTitle } from "@/components/svg";
 
 import styles from "./styles.module.scss";
-import { Card, Cardlist } from "@/components/pages/main";
+import { Card, Cardlist } from "./(components)";
 
 export default function Home() {
   return (

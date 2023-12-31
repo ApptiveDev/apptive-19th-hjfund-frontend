@@ -2,7 +2,7 @@ import Link from "next/link";
 import { BellHeader, UserHeader } from "@/components/svg";
 
 import styles from "./styles.module.scss";
-import headerStyles from "@/components/common/header/styles.module.scss";
+import headerStyles from "@/components/header/styles.module.scss";
 
 export default function Header() {
   return (

@@ -1,4 +1,4 @@
-import { Checkbox } from "@/components/common";
+import { Checkbox } from "@/components";
 import styles from "./styles.module.scss";
 
 export default function Remove() {
