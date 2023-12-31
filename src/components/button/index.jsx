@@ -10,6 +10,9 @@ const Button = ({
   buttonBackgroundColor,
   buttonBorderColor,
   buttonTextColor,
+  buttonHoverBackgroundColor,
+  buttonHoverBorderColor,
+  buttonHoverTextColor,
   ...props
 }) => {
   return (
@@ -19,6 +22,9 @@ const Button = ({
         "--button-background-color": buttonBackgroundColor,
         "--button-border-color": buttonBorderColor,
         "--button-text-color": buttonTextColor,
+        "--button-hover-background-color": buttonHoverBackgroundColor,
+        "--button-hover-border-color": buttonHoverBorderColor,
+        "--button-hover-text-color": buttonHoverTextColor,
       }}
       {...props}
     >
@@ -33,6 +39,9 @@ Button.propTypes = {
   buttonBackgroundColor: PropTypes.string,
   buttonBorderColor: PropTypes.string,
   buttonTextColor: PropTypes.string,
+  buttonHoverBackgroundColor: PropTypes.string,
+  buttonHoverBorderColor: PropTypes.string,
+  buttonHoverTextColor: PropTypes.string,
 };
 
 export default Button;

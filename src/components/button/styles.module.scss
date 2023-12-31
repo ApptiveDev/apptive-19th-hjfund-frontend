@@ -1,3 +1,4 @@
+@import "../../styles/variables.scss";
 
 .button {
   display: flex;
@@ -5,6 +6,9 @@
   border-radius: 8px;
   outline: none;
   cursor: default;
+  justify-content: center;
+
+  @include ui-2;
 
   &.small {
     min-width: 60px;
@@ -29,8 +33,9 @@
 
   &.filled {
     border: 0;
-    background-color: var(--logo-color-1);
-    color: white;
+    background-color: var(--button-background-color, $color-primary);
+    color: var(--button-text-color, white);
+    transition: opacity 0.15s;
 
     &:hover {
       opacity: 0.9;
@@ -46,20 +51,19 @@
   }
 
   &.outlined {
-    border: 1px solid var(--logo-color-1);
-    background-color: white;
-    color: var(--logo-color-1);
+    border: 1px solid var(--button-border-color, $color-border);
+    background-color: var(--button-background-color, $color-background);
+    color: var(--button-text-color, $color-text);
+    transition: background-color 0.15s, opacity 0.15s;
 
     &:hover {
-      opacity: 0.9;
+      background-color: var(--button-hover-background-color, $color-border-2);
+      border-color: var(--button-hover-border-color, $color-border);
+      color: var(--button-hover-text-color, $color-text);
     }
 
     &:active {
-      opacity: 0.8;
-    }
-
-    &:disabled {
-      opacity: 0.5;
+      opacity: 0.6;
     }
   }
 }
