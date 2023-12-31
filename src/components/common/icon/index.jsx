@@ -1,5 +1,4 @@
 import React from "react";
-import icons from "./icons.json";
 import styles from "./styles.module.scss";
 
 export const Icon = ({ name, size }) => (
@@ -11,6 +10,6 @@ export const Icon = ({ name, size }) => (
       height: size ? size : undefined,
     }}
   >
-    {icons.icons["st-icon-" + name]}
+    {"st-icon-" + name}
   </i>
 );

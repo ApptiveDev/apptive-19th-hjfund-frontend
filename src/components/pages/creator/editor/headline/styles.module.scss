@@ -1,0 +1,55 @@
+.headline {
+  width: var(--content-width);
+  margin: 0 auto;
+  margin-top: 100px;
+  margin-bottom: 60px;
+  
+  & > h1 {
+    position: relative;
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 58px;
+    outline: none;
+    cursor: text;
+    margin-bottom: 20px;
+
+    &:before {
+      position: absolute;
+      pointer-events: none;
+      top: 0; left: 0;
+      content:attr(placeholder);
+      color: var(--placeholder-color);
+      opacity: 0;
+    }
+
+    &[data-empty=true]:before {
+      opacity: 1;
+    }
+  }
+
+  & > .buttons {
+    display: flex;
+    column-gap: 16px;
+    
+    & > button {
+      background-color: transparent;
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      color: var(--placeholder-color);
+      font-size: 20px;
+      font-weight: 500;
+      height: 42px;
+      padding: 0 16px;
+      transition: background-color 0.11s;
+
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.05);
+      }
+    }
+
+    & > .children {
+      display: flex;
+      column-gap: 14px;
+    }
+  }
+}
