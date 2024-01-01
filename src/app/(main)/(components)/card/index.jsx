@@ -1,7 +1,6 @@
 import Link from "next/link";
 // import Image from "next/image";
 
-import { CommentMainCard, HeartMainCard } from "@/components/svg";
 import styles from "./styles.module.scss";
 
 export default function Card({
@@ -33,11 +32,9 @@ export default function Card({
           <p>{author}</p>
           <div className={styles.reactions}>
             <div>
-              <CommentMainCard color={iconColor ?? "white"} />
               <span>{comments}</span>
             </div>
             <div>
-              <HeartMainCard color={iconColor ?? "white"} />
               <span>{hearts}</span>
             </div>
           </div>

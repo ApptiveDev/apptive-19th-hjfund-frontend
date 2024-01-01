@@ -1,8 +1,6 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 import styles from "./styles.module.scss";
-import DropdownClosed from "@/components/svg/dropdown_closed";
-import DropdownOpened from "@/components/svg/dropdown_opened";
 
 export default function Dropdown({ options, onSelect, defaultSelect }) {
   const [view, setView] = useState(false);
@@ -38,7 +36,6 @@ export default function Dropdown({ options, onSelect, defaultSelect }) {
           }}
         >
           <span>{order}</span>
-          <span>{view ? <DropdownOpened /> : <DropdownClosed />}</span>
         </p>
 
         {view && (

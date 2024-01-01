@@ -1,9 +1,7 @@
 "use client";
 import React, { useState } from "react";
-import ArticleLike from "@/components/svg/article_like";
 import styles from "./styles.module.scss";
 import Link from "next/link";
-import ArticleComment from "@/components/svg/article_comment";
 
 export default function Card({
   title,
@@ -44,12 +42,10 @@ export default function Card({
                 heartCount();
               }}
             >
-              <ArticleLike color={iconColor ? "#E73325" : "#737373"} />
               &nbsp;
               {heart}
             </span>
             <span>
-              <ArticleComment />
               &nbsp;
               {comments}
             </span>

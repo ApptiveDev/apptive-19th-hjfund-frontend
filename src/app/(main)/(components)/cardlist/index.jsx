@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 
-import { ArrowMainCardlist } from "@/components/svg";
 import { Card } from "..";
 import styles from "./styles.module.scss";
 
@@ -43,7 +42,6 @@ export default function CardList() {
       </div>
       <div className={styles.list}>
         <button onClick={() => move(true)}>
-          <ArrowMainCardlist color="white" />
         </button>
         <div className={styles.roll}>
           {Array.from({ length: DUMMY_LENGTH }).map((_, i) => (
@@ -63,12 +61,6 @@ export default function CardList() {
           ))}
         </div>
         <button onClick={() => move()}>
-          <ArrowMainCardlist
-            style={{
-              transform: "rotate(180deg)",
-            }}
-            color="white"
-          />
         </button>
       </div>
     </div>
