@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <footer className={styles.footer}>
       <div className={styles.container}>
-        <h2>StockTree 2023</h2>
+        <h2>StockTree</h2>
         <ul>
           <li><Link href="/terms">이용약관</Link></li>
           <li><Link href="/privacy">개인정보 처리방침</Link></li>
