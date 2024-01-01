@@ -1,6 +1,7 @@
 import { Button, Card, Icon } from "@/components";
 import styles from "./styles.module.scss";
 import Link from "next/link";
+import { useUserAgent } from "@/tools/user-agent";
 
 const examples = [
   {
@@ -63,12 +64,15 @@ const examples = [
 ];
 
 const CardList = () => {
+  const { isMobile } = useUserAgent();
+
   return (
     <div className={styles.container}>
-      <div className={styles["card-list"]}>
+      <div className={[styles["card-list"], isMobile ? styles.mobile : ""].join(" ")}>
         {examples.map((example, index) => (
           <Card
             key={index}
+            cardType={isMobile ? "list" : "card"}
             title={example.title}
             thumbnail={example.thumbnail}
             date={example.date}
