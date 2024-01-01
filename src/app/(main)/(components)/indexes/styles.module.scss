@@ -37,7 +37,7 @@
   row-gap: 80px;
 
   @media (max-width: calc($max-content-width + 80px)) {
-    grid-template-columns: 360px;
+    grid-template-columns: 324px;
   }
 
   & > .item {
