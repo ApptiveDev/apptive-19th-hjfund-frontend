@@ -9,10 +9,6 @@
   user-select: none;
   top: 0; left: 0;
 
-  @media (max-width: $mobile-breakpoint) {
-    height: 380px;
-  }
-
   & > .filter {
     width: 100%;
     height: 100%;
@@ -27,6 +23,10 @@
     height: 100%;
     object-fit: cover;
   }
+
+  &.mobile {
+    height: 300px;
+  }
 }
 
 .statement {
@@ -39,18 +39,18 @@
 
   & > h1 {
     @include title-1;
-
-    @media (max-width: $mobile-breakpoint) {
-      @include title-2;
-    }
   }
 
   & > p {
     @include ui-1;
     margin-top: 20px;
+  }
 
-    @media (max-width: $mobile-breakpoint) {
-      @include ui-2;
+  &.mobile {
+    top: 130px;
+
+    & > h1 {
+      @include title-2;
     }
   }
 }

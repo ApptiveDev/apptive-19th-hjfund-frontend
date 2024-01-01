@@ -4,12 +4,12 @@ import CardList from "./(components)/card-list";
 import Indexes from "./(components)/indexes";
 import styles from "./styles.module.scss";
 
-export default function Home() {
+export default function MainPage() {
   return (
-    <main className={styles.page}>
+    <div className={styles.container}>
       <Banner />
       <CardList />
       <Indexes />
-    </main>
+    </div>
   );
 }

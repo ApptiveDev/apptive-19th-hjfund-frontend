@@ -1,3 +1,4 @@
+import { useUserAgent } from "@/tools/user-agent";
 import styles from "./styles.module.scss";
 import Image from "next/image";
 
@@ -9,8 +10,10 @@ const statements = [
 ]
 
 const Statement = () => {
+  const { isMobile } = useUserAgent();
+
   return (
-    <div className={styles.statement}>
+    <div className={[styles.statement, isMobile ? styles.mobile : ""].join(" ")}>
       <h1>{statements[0].message}</h1>
       <p>- {statements[0].author} -</p>
     </div>
@@ -19,8 +22,10 @@ const Statement = () => {
 }
 
 const BannerBackground = () => {
+  const { isMobile } = useUserAgent();
+
   return (
-    <div className={styles.background}>
+    <div className={[styles.background, isMobile ? styles.mobile : ""].join(" ")}>
       <div className={styles.filter}></div>
       <Image
         alt="main-banner-background"

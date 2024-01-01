@@ -43,7 +43,7 @@
   }
 }
 
-@mixin card {
+.card {
   overflow: hidden;
   border-radius: 14px;
   height: 400px;
@@ -87,7 +87,7 @@
   }
 }
 
-@mixin list {
+.list {
   display: flex;
   column-gap: 20px;
   align-items: center;
@@ -105,21 +105,5 @@
     width: 90px;
     height: 72px;
     border-radius: 8px;
-  }
-}
-
-.list {
-  @include list
-}
-
-@media (max-width: $mobile-breakpoint) {
-  .card {
-    @include list;
-  }
-}
-
-@media (min-width: calc(#{$mobile-breakpoint} + 1px)) {
-  .card {
-    @include card;
   }
 }

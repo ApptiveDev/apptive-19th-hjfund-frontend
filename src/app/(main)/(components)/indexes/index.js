@@ -1,3 +1,4 @@
+import { useUserAgent } from "@/tools/user-agent";
 import styles from "./styles.module.scss";
 
 const examples = [
@@ -58,8 +59,10 @@ const IndexItem = ({ title, english, contents }) => {
 };
 
 const Indexes = () => {
+  const { isMobile } = useUserAgent();
+
   return (
-    <div className={styles.container}>
+    <div className={[styles.container, isMobile ? styles.mobile : ""].join(" ")}>
       <div className={styles.index}>
         {examples.map((example, index) => (
           <IndexItem key={index} {...example} />

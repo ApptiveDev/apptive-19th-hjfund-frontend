@@ -5,6 +5,8 @@ import ChatBubbleOval from "./chat-bubble-oval.svg";
 import CheckSquare from "./check-square.svg";
 import CircleClock from "./circle-clock.svg";
 import CompassNavigator from "./compass-navigator.svg";
+import DashboardCircle from "./dashboard-circle.svg";
+import Delete1 from "./delete-1.svg";
 import HandHeldTabletWriting from "./hand-held-tablet-writing.svg";
 import Heart from "./heart.svg";
 import MagnifyingGlass from "./magnifying-glass.svg";
@@ -23,6 +25,8 @@ const icons = {
   "check-square": CheckSquare,
   "circle-clock": CircleClock,
   "compass-navigator": CompassNavigator,
+  "dashboard-circle": DashboardCircle,
+  "delete-1": Delete1,
   "hand-held-tablet-writing": HandHeldTabletWriting,
   heart: Heart,
   "magnifying-glass": MagnifyingGlass,
