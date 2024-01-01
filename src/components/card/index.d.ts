@@ -1,4 +1,5 @@
 interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
+  cardType?: "list" | "card",
   id?: string;
   thumbnail?: string;
   title?: string;

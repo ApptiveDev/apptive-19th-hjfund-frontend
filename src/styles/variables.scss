@@ -78,3 +78,7 @@ $font-family: "Pretendard", Arial, Helvetica, sans-serif;
   max-width: calc($max-content-width + ($padding * 2));
   width: 100%;
 }
+
+@mixin mobile-padding($padding: 20px) {
+  padding: 0 $padding;
+}

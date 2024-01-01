@@ -2,10 +2,10 @@ import Link from "next/link";
 import Icon from "../icon";
 import styles from "./styles.module.scss";
 
-const Card = ({ id, thumbnail, title, date, comments, hearts }) => {
+const Card = ({ cardType = "card", id, thumbnail, title, date, comments, hearts }) => {
   return (
     <Link href={"/reports/" + id}>
-      <div className={styles.card}>
+      <div className={[styles[cardType]]}>
         <div className={styles.thumbnail}>
           <img alt="thumbnail" src={thumbnail} />
         </div>
