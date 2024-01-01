@@ -68,7 +68,13 @@ $font-family: "Pretendard", Arial, Helvetica, sans-serif;
 }
 
 @mixin icon-color($color: $color-text) {
-  & svg > g {
+  & svg > * {
     stroke: $color;
   }
+}
+
+@mixin max-width-container($padding: 40px) {
+  padding: 0 $padding;
+  max-width: calc($max-content-width + ($padding * 2));
+  width: 100%;
 }

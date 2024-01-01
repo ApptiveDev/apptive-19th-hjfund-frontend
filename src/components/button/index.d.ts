@@ -15,3 +15,4 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 declare const Button: React.FC<ButtonProps>;
+export default Button;

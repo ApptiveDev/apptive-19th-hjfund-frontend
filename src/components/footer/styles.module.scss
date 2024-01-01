@@ -8,9 +8,11 @@
 
   display: flex;
   align-items: center;
+  justify-content: center;
 
   & > .container {
     max-width: $max-content-width;
+    width: 100%;
 
     & > h2 {
       @include ui-1(700);

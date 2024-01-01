@@ -1,4 +1,4 @@
-import { ForwardRefExoticComponent } from "react";
+import { ForwardRefExoticComponent, RefAttributes } from "react";
 
 interface CheckboxProps extends React.InputHTMLAttributes<HTMLInputElement> {
   checkboxBackgroundColor?: string;
@@ -12,5 +12,5 @@ interface CheckboxProps extends React.InputHTMLAttributes<HTMLInputElement> {
   checkboxCheckedIconColor?: string;
 }
 
-declare const Checkbox: ForwardRefExoticComponent<CheckboxProps>;
+declare const Checkbox: ForwardRefExoticComponent<CheckboxProps & RefAttributes<HTMLInputElement>>;
 export default Checkbox;
