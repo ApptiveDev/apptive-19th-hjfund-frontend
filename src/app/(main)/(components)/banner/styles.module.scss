@@ -37,10 +37,18 @@
 
   & > h1 {
     @include title-1;
+
+    @media (max-width: $mobile-breakpoint) {
+      @include title-2;
+    }
   }
 
   & > p {
-    @include ui-1(400);
+    @include ui-1;
     margin-top: 20px;
+
+    @media (max-width: $mobile-breakpoint) {
+      @include ui-2;
+    }
   }
 }
