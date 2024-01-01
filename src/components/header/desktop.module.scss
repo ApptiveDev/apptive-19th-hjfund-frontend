@@ -91,7 +91,7 @@
     & > li {
       display: flex;
       align-items: center;
-      
+
       .icon-invert {
         & > g {
           stroke: white;
@@ -304,10 +304,6 @@
   border-color: transparent;
   color: white;
 
-  li svg > * {
-    stroke: white;
-  }
-
   nav svg > * {
     fill: white;
   }
@@ -329,5 +325,9 @@
     &:hover {
       color: black;
     }
+  }
+
+  .button-invert-icon > svg > * {
+    stroke: white;
   }
 }

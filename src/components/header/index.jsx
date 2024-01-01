@@ -3,7 +3,7 @@ import mobileStyles from "./mobile.module.scss";
 
 import Logo from "../logo";
 import Link from "next/link";
-import { Request, Notification, Search, UserProfile } from "./components";
+import { Request, Notification, Search, UserProfile, Menu } from "./components";
 import { UserAgentComponent } from "@/tools/user-agent";
 import { MobileSearch } from "./components";
 
@@ -38,13 +38,14 @@ const DesktopHeader = () => {
 const MobileHeader = () => {
   return (
     <header className={mobileStyles.header}>
-      <Link href="/">
+      <Link className={mobileStyles.logo} href="/">
         <Logo />
         <h1>StockTree</h1>
       </Link>
       <div style={{ flex: 1 }} />
       <ul>
         <MobileSearch />
+        <Menu />
       </ul>
     </header>
   );

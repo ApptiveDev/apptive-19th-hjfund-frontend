@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 
 import desktopStyles from "../../../../components/header/desktop.module.scss";
-import mobileStyles from "../../../../components/header/desktop.module.scss";
+import mobileStyles from "../../../../components/header/mobile.module.scss";
 
 const invertRules = [
   (pathname) => pathname === "/",

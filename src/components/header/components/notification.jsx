@@ -1,9 +1,9 @@
 "use client";
 
 import { forwardRef, useEffect, useRef, useState } from "react";
-import Icon from "../../../icon";
+import Icon from "../../icon";
 
-import styles from "../../desktop.module.scss";
+import styles from "../desktop.module.scss";
 
 const NotificationButton = forwardRef(({ onClick }, ref) => {
   return (
@@ -11,6 +11,7 @@ const NotificationButton = forwardRef(({ onClick }, ref) => {
       <Icon
         button
         iconType="bell-notification"
+        className={styles["button-invert-icon"]}
         onClick={onClick}
       />
     </li>

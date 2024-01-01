@@ -1,14 +1,15 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Icon from "../../../icon";
+import Icon from "../../icon";
 
-import styles from "../../desktop.module.scss";
+import styles from "../desktop.module.scss";
 
 const SearchButton = ({ onClick, ...props }) => {
   return (
     <li {...props}>
       <Icon
+        className={styles["button-invert-icon"]}
         button
         iconType="magnifying-glass"
         onClick={onClick}
@@ -49,7 +50,7 @@ const Search = () => {
     } else {
       document.body.style.overflow = "unset";
     }
-  }, [isOpened])
+  }, [isOpened]);
 
   return (
     <>

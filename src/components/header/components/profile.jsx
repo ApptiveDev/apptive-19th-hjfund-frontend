@@ -1,9 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import Button from "../../../button";
+import Button from "../../button";
 
-import styles from "../../desktop.module.scss";
+import styles from "../desktop.module.scss";
 import { forwardRef, useEffect, useRef, useState } from "react";
 
 const UserProfileButton = forwardRef(({ onClick, isLoggedIn = false, ...props }, ref) => {
