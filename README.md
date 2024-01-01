@@ -34,12 +34,12 @@ yarn dev
 │ ├── (children)/
 │ │ ├── report
 │ │ │ ├── page.jsx
-│ │ │ ├── styles.module.scss
-│ │ └── login
+│ │ │ └──styles.module.scss
+│ │ ├── login
 │ │ │ ├── page.jsx
-│ │ │ ├── styles.module.scss
+│ │ │ └── styles.module.scss
 │ ├── styles.module.scss
 │ └── page.jsx
 ```
 
-4. 공용 컴포넌트는 Props의 자료형을 명시하는 `d.ts` 파일을 되도록 작성해주시기 바랍니다.
+3. 공용 컴포넌트는 Props의 자료형을 명시하는 `d.ts` 파일을 되도록 작성해주시기 바랍니다.
