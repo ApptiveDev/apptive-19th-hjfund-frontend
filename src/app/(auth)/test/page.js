@@ -1,6 +1,7 @@
 import { Button } from "@/components";
 import Icon from "@/components/icon";
 import Textfield from "@/components/textfield";
+import Checkbox from "@/components/checkbox";
 
 export default function TestPage() {
   return (
@@ -8,6 +9,7 @@ export default function TestPage() {
       <Icon iconType="share-link" />
       <Button buttonStyle="outlined">Hello</Button>
       <Textfield placeholder="hello" textfieldSize="small" />
+      <Checkbox />
     </div>
   );
 }
