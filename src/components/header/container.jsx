@@ -3,16 +3,17 @@
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 
-import desktopStyles from "../../../../components/header/desktop.module.scss";
-import mobileStyles from "../../../../components/header/mobile.module.scss";
+import desktopStyles from "./desktop.module.scss";
+import mobileStyles from "./mobile.module.scss";
 
 const invertRules = [
   (pathname) => pathname === "/",
   (pathname) => pathname.startsWith("/report/"),
 ];
 
-const HeaderInverter = ({ children }) => {
+const HeaderContainer = ({ children }) => {
   const [invert, setInvert] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const pathname = usePathname();
 
   useEffect(() => {
@@ -20,6 +21,10 @@ const HeaderInverter = ({ children }) => {
       const scrollTop = window.scrollY;
       setInvert(scrollTop <= 0 && invertRules.some((rule) => rule(pathname)));
     };
+
+    // check mobile with user-agent
+    const userAgent = window.navigator.userAgent;
+    setIsMobile(/Mobile/.test(userAgent));
 
     handleScroll();
     window.addEventListener("scroll", handleScroll);
@@ -31,13 +36,14 @@ const HeaderInverter = ({ children }) => {
 
   return (
     <div
-      className={
-        invert ? [desktopStyles.invert, mobileStyles.invert].join(" ") : ""
-      }
+      className={[
+        isMobile ? mobileStyles.root : desktopStyles.root,
+        invert ? [mobileStyles.invert, desktopStyles.invert].join(" ") : "",
+      ].join(" ")}
     >
       {children}
     </div>
   );
 };
 
-export default HeaderInverter;
+export default HeaderContainer;
