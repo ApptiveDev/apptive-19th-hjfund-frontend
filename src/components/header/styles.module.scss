@@ -6,6 +6,26 @@
   align-items: center;
   padding: 0 40px;
 
+  position: fixed;
+  width: 100%;
+  top: 0; left: 0;
+
+  background-color: $color-background;
+  border-bottom: 1px solid $color-border;
+  z-index: 200;
+
+  transition: background-color 0.15s, border-color 0.15s;
+
+  .logo-invert > path {
+    fill: white; 
+  }
+  
+  &.invert {
+    background-color: transparent;
+    border-color: transparent;
+    color: white;
+  }
+
   & > nav {
     display: flex;
     align-items: center;
@@ -53,6 +73,31 @@
     & > li {
       display: flex;
       align-items: center;
+
+      .button-invert-filled {
+        color: black;
+        background-color: white;
+
+        &:hover {
+          color: black;
+        }
+      }
+
+      .button-invert-outlined {
+        background-color: transparent;
+        color: white;
+
+        &:hover {
+          background-color: rgba(255, 255, 255, 0.1);
+          color: white;
+        }
+      }
+
+      .icon-invert {
+        & > g {
+          stroke: white;
+        }
+      }
     }
 
     & .profile {

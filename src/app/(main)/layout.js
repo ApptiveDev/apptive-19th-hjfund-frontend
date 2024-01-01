@@ -1,6 +1,7 @@
 import "@/styles/globals.scss";
 
-import { Header, Footer } from "@/components";
+import { Footer } from "@/components";
+import HeaderInverter from "./(components)/header-inverter";
 
 export const metadata = {
   title: process.env.WEBSITE_NAME,
@@ -11,7 +12,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <Header />
+        <HeaderInverter />
         {children}
         <Footer />
       </body>

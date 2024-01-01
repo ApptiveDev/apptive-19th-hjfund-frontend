@@ -2,14 +2,14 @@ import styles from "./styles.module.scss";
 
 import Logo from "../logo";
 import Link from "next/link";
-import {  NotificationButton, RequestButton, SearchButton, UserProfileButton } from "./components";
+import { RequestButton, NotificationButton, SearchButton, UserProfileButton } from "./components";
 
-const Header = () => {
+const Header = ({ invert = false }) => {
   return (
-    <header className={styles.header}>
+    <header className={[styles.header, invert ? styles.invert : ""].join(" ")}>
       <nav>
         <Link href="/">
-          <Logo />
+          <Logo className={invert ? styles["logo-invert"] : ""} />
           <h1>StockTree</h1>
         </Link>
         <div>
@@ -23,10 +23,10 @@ const Header = () => {
       </nav>
       <div style={{ flex: 1 }} />
       <ul>
-        {/* <RequestButton /> */}
-        <SearchButton />
-        <NotificationButton />
-        <UserProfileButton />
+        <RequestButton invert={invert} />
+        <SearchButton invert={invert} />
+        <NotificationButton invert={invert} />
+        <UserProfileButton invert={invert} />
       </ul>
     </header>
   );

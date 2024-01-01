@@ -4,11 +4,15 @@ import Button from "../button";
 
 import styles from "./styles.module.scss";
 
-export const RequestButton = () => {
+export const RequestButton = ({ invert = false }) => {
   return (
     <li className={styles["non-icon-button"]}>
       <Link href="/request">
-        <Button buttonSize="small" buttonStyle="outlined">
+        <Button
+          className={invert ? styles["button-invert-outlined"] : ""}
+          buttonSize="small"
+          buttonStyle="outlined"
+        >
           종목 요청하기
         </Button>
       </Link>
@@ -16,23 +20,31 @@ export const RequestButton = () => {
   );
 };
 
-export const SearchButton = () => {
+export const SearchButton = ({ invert = false }) => {
   return (
     <li>
-      <Icon button iconType="magnifying-glass" />
+      <Icon
+        className={invert ? styles["icon-invert"] : ""}
+        button
+        iconType="magnifying-glass"
+      />
     </li>
   );
 };
 
-export const NotificationButton = () => {
+export const NotificationButton = ({ invert = false }) => {
   return (
     <li>
-      <Icon button iconType="bell-notification" />
+      <Icon
+        className={invert ? styles["icon-invert"] : ""}
+        button
+        iconType="bell-notification"
+      />
     </li>
   );
 };
 
-export const UserProfileButton = () => {
+export const UserProfileButton = ({ invert = false }) => {
   const isLoggedIn = false;
 
   return isLoggedIn ? (
@@ -44,7 +56,11 @@ export const UserProfileButton = () => {
   ) : (
     <li className={styles["non-icon-button"]}>
       <Link href="/login">
-        <Button buttonSize="small" buttonStyle="filled">
+        <Button
+          className={invert ? styles["button-invert-filled"] : ""}
+          buttonSize="small"
+          buttonStyle="filled"
+        >
           로그인
         </Button>
       </Link>
