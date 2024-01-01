@@ -10,10 +10,12 @@
   column-gap: 8px;
   transition: border-color 0.15s, background-color 0.15s;
   
-  &:hover {
-    color: var(--textfield-hover-text-color, $color-text);
-    border-color: var(--textfield-hover-border-color, $color-text-passive-2);
-    background-color: var(--textfield-hover-background-color, $color-foreground);
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      color: var(--textfield-hover-text-color, $color-text);
+      border-color: var(--textfield-hover-border-color, $color-text-passive-2);
+      background-color: var(--textfield-hover-background-color, $color-foreground);
+    }
   }
 
   &.small {

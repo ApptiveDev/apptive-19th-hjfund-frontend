@@ -37,7 +37,13 @@
     color: var(--button-text-color, white);
     transition: opacity 0.15s;
 
-    &:hover {
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+
+    &:active {
       opacity: 0.8;
     }
 
@@ -52,7 +58,15 @@
     color: var(--button-text-color, $color-text);
     transition: background-color 0.15s, border-color 0.15s;
 
-    &:hover {
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        background-color: var(--button-hover-background-color, $color-hover);
+        border-color: var(--button-hover-border-color, $color-border);
+        color: var(--button-hover-text-color, $color-text);
+      }
+    }
+
+    &:active {
       background-color: var(--button-hover-background-color, $color-hover);
       border-color: var(--button-hover-border-color, $color-border);
       color: var(--button-hover-text-color, $color-text);
