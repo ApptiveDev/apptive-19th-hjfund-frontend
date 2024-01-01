@@ -2,7 +2,7 @@ import styles from "./styles.module.scss";
 
 import Logo from "../logo";
 import Link from "next/link";
-import { RequestButton, NotificationButton, SearchButton, UserProfileButton } from "./components";
+import { Request, Notification, Search, UserProfile } from "./components";
 
 const Header = ({ invert = false }) => {
   return (
@@ -23,10 +23,10 @@ const Header = ({ invert = false }) => {
       </nav>
       <div style={{ flex: 1 }} />
       <ul>
-        <RequestButton invert={invert} />
-        <SearchButton invert={invert} />
-        <NotificationButton invert={invert} />
-        <UserProfileButton invert={invert} />
+        <Request invert={invert} />
+        <Search invert={invert} />
+        <Notification invert={invert} />
+        <UserProfile invert={invert} />
       </ul>
     </header>
   );

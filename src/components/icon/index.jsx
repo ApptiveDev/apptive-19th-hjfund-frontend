@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import PropTypes from "prop-types";
 
 import icons from "./assets";
 import styles from "./styles.module.scss";
@@ -11,6 +10,7 @@ const Icon = ({
   buttonSize = 36,
   size = 24,
   iconType = "add-square",
+  onClick,
   ...props
 }) => {
   const IconComponent = icons[iconType];
@@ -19,16 +19,14 @@ const Icon = ({
     return (
       <button
         className={styles.button}
+        onClick={onClick}
         style={{
           width: buttonSize,
           height: buttonSize,
         }}
       >
         <IconComponent
-          style={{
-            width: size,
-            height: size,
-          }}
+          width={size} height={size} viewBox="0 0 24 24"
           {...props}
         />
       </button>
@@ -37,20 +35,10 @@ const Icon = ({
 
   return (
     <IconComponent
-      style={{
-        width: size,
-        height: size,
-      }}
+      width={size} height={size} viewBox="0 0 24 24"
       {...props}
     />
   );
-};
-
-Icon.propTypes = {
-  button: PropTypes.bool,
-  buttonSize: PropTypes.number,
-  size: PropTypes.number,
-  iconType: PropTypes.oneOf(Object.keys(icons)).isRequired,
 };
 
 export default Icon;

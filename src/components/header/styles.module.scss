@@ -1,5 +1,24 @@
 @import "../../styles/variables.scss";
 
+@keyframes FadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes FadeInContainer {
+  from {
+    transform: translateY(50px) scale(0.8);
+  }
+
+  to {
+    transform: translateY(0) scale(1);
+  }
+}
+
 .header {
   height: 60px;
   display: flex;
@@ -11,7 +30,7 @@
   top: 0; left: 0;
 
   background-color: $color-background;
-  border-bottom: 1px solid $color-border;
+  @include bottom-border;
   z-index: 200;
 
   transition: background-color 0.15s, border-color 0.15s;
@@ -53,9 +72,7 @@
         border-radius: 6px;
         transition: background-color 0.1s;
         
-        &:hover {
-          background-color: $color-hover;
-        }
+        @include hover-background;
       }
     }
   }
@@ -100,19 +117,201 @@
       }
     }
 
-    & .profile {
+    .profile {
       width: 24px;
       height: 24px;
       border-radius: 50%;
       overflow: hidden;
-      background-color: $color-blue;
       border: 0;
       outline: none;
       margin: 0 6px;
+      transition: opacity 0.15s;
 
-      & > span {
-        display: none;
+      &:hover {
+        opacity: 0.8;
       }
+
+      & > img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+  }
+
+  .layer {
+    position: absolute;
+    top: 56px; right: 20px;
+  }
+}
+
+@mixin sheet-box {
+  background-color: $color-background;
+  color: $color-text;
+  border: 1px solid $color-border;
+  border-radius: 10px;
+  box-shadow: 0 14px 28px 0 $color-hover;
+  animation: FadeIn 0.1s;
+}
+
+.profile-sheet {
+  @include sheet-box;
+  overflow: hidden;
+
+  & > ul {
+    list-style: none;
+    width: 240px;
+
+    & > li {
+      @include ui-2;
+      @include bottom-border;
+    }
+
+    & > .info {
+      padding: 16px 20px;
+    }
+
+    & > .info > .email {
+      margin-top: 2px;
+      color: $color-text-passive-2;
+    }
+
+    & button {
+      @include ui-2;
+      background-color: transparent;
+      border: 0;
+    }
+
+    & button, & a {
+      cursor: pointer;
+      display: flex;
+      padding: 12px 20px;
+      width: 100%;
+      transition: background-color 0.15s;
+
+      &:hover {
+        background-color: $color-hover;
+      }
+    }
+  }
+}
+
+.notification-sheet {
+  @include sheet-box;
+  width: 400px;
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+
+  & > header {
+    width: 100%;
+    display: flex;
+    padding: 0 20px;
+    align-items: center;
+    height: 54px;
+    @include bottom-border;
+
+    & > h3 {
+      flex: 1;
+      @include ui-1(700);
+    }
+  }
+
+  & > ul {
+    list-style: none;
+    
+    & > li {
+      @include ui-2;
+      @include icon-color($color-text-passive-2);
+
+      display: flex;
+      align-items: center;
+      column-gap: 20px;
+      height: 68px;
+      padding: 0 20px;
+      @include bottom-border;
+      transition: background-color 0.15s;
+
+      @include hover-background;
+    }
+  }
+}
+
+.search-sheet {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 201;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: auto;
+  padding: 40px 20px;
+  animation: FadeIn 0.2s;
+
+  & > .container {
+    background-color: $color-background;
+    color: $color-text;
+    border: 1px solid $color-border;
+    border-radius: 10px;
+    box-shadow: 0 20px 40px 0 $color-hover;
+    animation: FadeInContainer 0.2s;
+    display: flex;
+    flex-direction: column;
+
+    width: 600px;
+    min-height: 300px;
+  }
+
+  & .search-input {
+    height: 54px;
+    display: flex;
+    align-items: center;
+    @include bottom-border;
+
+    & > input, & > button {
+      height: 100%;
+      display: flex;
+      background-color: transparent;
+      border: 0;
+      outline: none;
+    }
+
+    & > input {
+      @include ui-1;
+
+      padding: 0 20px;
+      align-items: center;
+      flex: 1;
+    }
+
+    & > button {
+      margin-right: 14px;
+
+      @include hover-background;
+    }
+  }
+
+  & .recommends {
+    list-style: none;
+    background-color: $color-foreground;
+    flex: 1;
+    display: flex;
+    width: 100%;
+
+    & > li {
+      width: 100%;
+      height: 42px;
+      padding: 0 20px;
+      display: flex;
+      column-gap: 12px;
+      align-items: center;
+      @include bottom-border;
+      transition: background-color 0.15s;
+
+      @include hover-background;
+      @include icon-color($color-text-passive-2);
     }
   }
 }

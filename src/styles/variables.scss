@@ -50,3 +50,19 @@ $font-family: "Pretendard", Arial, Helvetica, sans-serif;
 @mixin paragraph-2($weight: 400) {
   @include font-style($weight, 14px, 24px);
 }
+
+@mixin bottom-border($color: $color-border) {
+  border-bottom: 1px solid $color;
+}
+
+@mixin hover-background($color: $color-hover) {
+  &:hover {
+    background-color: $color;
+  }
+}
+
+@mixin icon-color($color: $color-text) {
+  & svg > g {
+    stroke: $color;
+  }
+}
