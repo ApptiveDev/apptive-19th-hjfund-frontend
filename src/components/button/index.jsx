@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 const Button = ({
   children,
   className,
+  style,
   buttonSize = "medium",
   buttonStyle = "filled",
   // overrides
@@ -25,23 +26,13 @@ const Button = ({
         "--button-hover-background-color": buttonHoverBackgroundColor,
         "--button-hover-border-color": buttonHoverBorderColor,
         "--button-hover-text-color": buttonHoverTextColor,
+        ...style,
       }}
       {...props}
     >
       {children}
     </button>
   );
-};
-
-Button.propTypes = {
-  buttonSize: PropTypes.oneOf(["small", "medium", "big"]),
-  buttonStyle: PropTypes.oneOf(["filled", "outlined"]),
-  buttonBackgroundColor: PropTypes.string,
-  buttonBorderColor: PropTypes.string,
-  buttonTextColor: PropTypes.string,
-  buttonHoverBackgroundColor: PropTypes.string,
-  buttonHoverBorderColor: PropTypes.string,
-  buttonHoverTextColor: PropTypes.string,
 };
 
 export default Button;
