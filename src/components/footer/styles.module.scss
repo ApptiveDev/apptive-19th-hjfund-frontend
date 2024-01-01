@@ -1,45 +1,37 @@
+@import "../../styles/variables";
+
 .footer {
-  height: 500px;
-  width: 100%;
-  min-width: var(--window-min-width);
-  color: white;
-  background-color: var(--logo-color-1);
-  text-align: center;
-}
+  background-color: $color-foreground;
+  height: 200px;
+  padding: 0 40px;
+  color: $color-text-passive-2;
 
-.logo {
-  & > p {
-    display: none;
-  }
+  display: flex;
+  align-items: center;
 
-  & > img {
-    filter:brightness(0) invert(1);
-  }
-}
+  & > .container {
+    max-width: $max-content-width;
 
-.grid {
-  margin: 60px auto 120px auto;
-  padding: 0 30px;
-  display: grid;
-  width: 100%;
-  max-width: var(--content-width);;
+    & > h2 {
+      @include ui-1(700);
+      margin-bottom: 8px;
+    }
+  
+    & > ul {
+      list-style: none;
+      display: flex;
+      column-gap: 20px;
+      margin-bottom: 26px;
 
-  grid-template-columns: repeat(4, 1fr);
-  column-gap: var(--column-gap);
+      a {
+        transition: color 0.15s;
+      }
 
-  & > div {
-    text-align: left;
-    & > a {
-      display: block;
-      font-size: 20px;
-      font-weight: 600;
-      margin-bottom: 22px;
-
-      &.link-big {
-        font-size: 30px;
-        font-weight: 700;
-        margin-bottom: 38px;
+      a:hover {
+        color: $color-text;
+        text-decoration: underline;
       }
     }
   }
+
 }
