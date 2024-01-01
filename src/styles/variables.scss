@@ -55,6 +55,12 @@ $font-family: "Pretendard", Arial, Helvetica, sans-serif;
   border-bottom: 1px solid $color;
 }
 
+@mixin bottom-border-no-last($color: $color-border) {
+  &:not(:last-child) {
+    @include bottom-border($color);
+  }
+}
+
 @mixin hover-background($color: $color-hover) {
   &:hover {
     background-color: $color;

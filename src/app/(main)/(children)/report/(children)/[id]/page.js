@@ -1,11 +1,3 @@
-import {
-  ReportCommentLinear,
-  ReportComments,
-  ReportLikeLinear,
-  ReportLikes,
-  ReportShareLinear,
-  ReportViews,
-} from "@/components/svg";
 import styles from "./styles.module.scss";
 import { Comment } from "./components";
 
@@ -34,15 +26,12 @@ export default function ReportViewerPage({}) {
               </div>
               <ul className={styles.reactions}>
                 <li>
-                  <ReportLikes color="var(--passive-text-color)" />
                   <span>4</span>
                 </li>
                 <li>
-                  <ReportComments color="var(--passive-text-color)" />
                   <span>8</span>
                 </li>
                 <li>
-                  <ReportViews color="var(--passive-text-color)" />
                   <span>56</span>
                 </li>
               </ul>
@@ -82,15 +71,12 @@ export default function ReportViewerPage({}) {
           <div className={styles["react-container"]}>
             <div className={styles.react}>
               <button>
-                <ReportLikeLinear color="white" />
               </button>
               <span role="seperator" />
               <button style={{ margin: "10px 0" }}>
-                <ReportCommentLinear color="white" />
               </button>
               <span role="seperator" />
               <button>
-                <ReportShareLinear color="white" />
               </button>
             </div>
           </div>

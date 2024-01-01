@@ -1,9 +1,3 @@
-import {
-  CommentLikeLinear,
-  CommentMoreLinear,
-  CommentReplyLinear,
-} from "@/components/svg";
-
 import styles from "./styles.module.scss";
 
 export const Comment = ({
@@ -26,21 +20,17 @@ export const Comment = ({
         <div>
           <time>{date}</time>
           <div>
-            <CommentLikeLinear color="var(--logo-color-1)" />
             <span style={{ marginLeft: "4px" }}>{likes}</span>
           </div>
         </div>
         <div>
           <button>
-            <CommentReplyLinear color="var(--passive-text-color)" />
           </button>
           <span role="separator" />
           <button>
-            <CommentLikeLinear color="var(--passive-text-color)" />
           </button>
           <span role="separator" />
           <button>
-            <CommentMoreLinear color="var(--passive-text-color)" />
           </button>
         </div>
       </div>

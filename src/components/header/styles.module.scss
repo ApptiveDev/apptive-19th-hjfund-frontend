@@ -165,7 +165,7 @@
 
     & > li {
       @include ui-2;
-      @include bottom-border;
+      @include bottom-border-no-last;
     }
 
     & > .info {
