@@ -1,3 +1,5 @@
+import { ForwardRefExoticComponent, RefAttributes } from "react";
+
 type TextfieldSize = "small" | "medium";
 
 interface TextfieldProps extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -15,5 +17,5 @@ interface TextfieldProps extends React.InputHTMLAttributes<HTMLInputElement> {
   textfieldFocusTextColor?: string;
 }
 
-declare const Textfield: React.FC<TextfieldProps>;
+declare const Textfield: ForwardRefExoticComponent<TextfieldProps & RefAttributes<HTMLInputElement>>;
 export default Textfield;

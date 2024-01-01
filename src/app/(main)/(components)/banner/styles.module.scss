@@ -1,0 +1,56 @@
+@import "../../../../styles/variables";
+
+.background {
+  width: 100%;
+  height: 500px;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+  user-select: none;
+  top: 0; left: 0;
+
+  @media (max-width: $mobile-breakpoint) {
+    height: 380px;
+  }
+
+  & > .filter {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.00) 0%, rgba(0, 0, 0, 0.60) 100%), rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(6px);
+    position: absolute;
+    top: 0; left: 0;
+  }
+
+  & > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.statement {
+  color: white;
+  position: absolute;
+  top: 150px; left: 0;
+  width: 100%;
+  white-space: pre-wrap;
+  text-align: center;
+
+  & > h1 {
+    @include title-1;
+
+    @media (max-width: $mobile-breakpoint) {
+      @include title-2;
+    }
+  }
+
+  & > p {
+    @include ui-1;
+    margin-top: 20px;
+
+    @media (max-width: $mobile-breakpoint) {
+      @include ui-2;
+    }
+  }
+}
