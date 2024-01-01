@@ -1,18 +1,20 @@
 "use client";
 
-import { Header } from "@/components";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
+
+import desktopStyles from "../../../../components/header/desktop.module.scss";
+import mobileStyles from "../../../../components/header/desktop.module.scss";
 
 const invertRules = [
   (pathname) => pathname === "/",
   (pathname) => pathname.startsWith("/report/"),
-]
+];
 
-const HeaderInverter = () => {
+const HeaderInverter = ({ children }) => {
   const [invert, setInvert] = useState(false);
   const pathname = usePathname();
-  
+
   useEffect(() => {
     const handleScroll = () => {
       const scrollTop = window.scrollY;
@@ -27,7 +29,15 @@ const HeaderInverter = () => {
     };
   }, [pathname]);
 
-  return <Header invert={invert} />;
-}
+  return (
+    <div
+      className={
+        invert ? [desktopStyles.invert, mobileStyles.invert].join(" ") : ""
+      }
+    >
+      {children}
+    </div>
+  );
+};
 
 export default HeaderInverter;

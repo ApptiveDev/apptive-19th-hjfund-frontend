@@ -3,13 +3,12 @@
 import { forwardRef, useEffect, useRef, useState } from "react";
 import Icon from "../../../icon";
 
-import styles from "../../styles.module.scss";
+import styles from "../../desktop.module.scss";
 
-const NotificationButton = forwardRef(({ invert, onClick }, ref) => {
+const NotificationButton = forwardRef(({ onClick }, ref) => {
   return (
     <li ref={ref}>
       <Icon
-        className={invert ? styles["icon-invert"] : ""}
         button
         iconType="bell-notification"
         onClick={onClick}
@@ -43,7 +42,7 @@ const NotificationSheet = forwardRef((props, ref) => {
   );
 });
 
-const Notification = ({ invert }) => {
+const Notification = () => {
   const [isOpened, setIsOpened] = useState(false);
 
   const buttonRef = useRef();
@@ -69,7 +68,7 @@ const Notification = ({ invert }) => {
 
   return (
     <>
-      <NotificationButton invert={invert} onClick={() => setIsOpened(!isOpened)} />
+      <NotificationButton onClick={() => setIsOpened(!isOpened)} />
       {isOpened && <NotificationSheet ref={sheetRef} />}
     </>
   );

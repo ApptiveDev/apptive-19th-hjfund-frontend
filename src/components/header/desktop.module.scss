@@ -91,26 +91,7 @@
     & > li {
       display: flex;
       align-items: center;
-
-      .button-invert-filled {
-        color: black;
-        background-color: white;
-
-        &:hover {
-          color: black;
-        }
-      }
-
-      .button-invert-outlined {
-        background-color: transparent;
-        color: white;
-
-        &:hover {
-          background-color: rgba(255, 255, 255, 0.1);
-          color: white;
-        }
-      }
-
+      
       .icon-invert {
         & > g {
           stroke: white;
@@ -313,6 +294,40 @@
 
       @include hover-background;
       @include icon-color($color-text-passive-2);
+    }
+  }
+}
+
+
+.invert > .header {
+  background-color: transparent;
+  border-color: transparent;
+  color: white;
+
+  li svg > * {
+    stroke: white;
+  }
+
+  nav svg > * {
+    fill: white;
+  }
+
+  .button-invert-outlined {
+    background-color: transparent;
+    color: white;
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+      color: white;
+    }
+  }
+
+  .button-invert-filled {
+    color: black;
+    background-color: white;
+
+    &:hover {
+      color: black;
     }
   }
 }

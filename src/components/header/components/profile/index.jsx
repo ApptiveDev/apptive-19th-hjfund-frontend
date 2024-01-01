@@ -3,10 +3,10 @@
 import Link from "next/link";
 import Button from "../../../button";
 
-import styles from "../../styles.module.scss";
+import styles from "../../desktop.module.scss";
 import { forwardRef, useEffect, useRef, useState } from "react";
 
-const UserProfileButton = forwardRef(({ invert, onClick, isLoggedIn = false, ...props }, ref) => {
+const UserProfileButton = forwardRef(({ onClick, isLoggedIn = false, ...props }, ref) => {
   return isLoggedIn ? (
     <li ref={ref} {...props}>
       <button className={styles.profile} onClick={onClick}>
@@ -17,9 +17,9 @@ const UserProfileButton = forwardRef(({ invert, onClick, isLoggedIn = false, ...
     <li ref={ref} className={styles["non-icon-button"]} {...props}>
       <Link href="/login">
         <Button
-          className={invert ? styles["button-invert-filled"] : ""}
           buttonSize="small"
           buttonStyle="filled"
+          className={styles["button-invert-filled"]}
         >
           로그인
         </Button>
@@ -47,7 +47,7 @@ const UserProfileSheet = forwardRef((props, ref) => {
   );
 });
 
-const UserProfile = ({ invert }) => {
+const UserProfile = () => {
   const isLoggedIn = true;
   const [isOpened, setIsOpened] = useState(false);
 
@@ -77,7 +77,6 @@ const UserProfile = ({ invert }) => {
       <UserProfileButton
         isLoggedIn={isLoggedIn}
         ref={buttonRef}
-        invert={invert}
         onClick={() => setIsOpened(!isOpened)}
       />
       {isOpened && isLoggedIn && <UserProfileSheet ref={sheetRef} />}

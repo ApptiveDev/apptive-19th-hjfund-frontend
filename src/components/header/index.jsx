@@ -1,15 +1,18 @@
-import styles from "./styles.module.scss";
+import desktopStyles from "./desktop.module.scss";
+import mobileStyles from "./mobile.module.scss";
 
 import Logo from "../logo";
 import Link from "next/link";
 import { Request, Notification, Search, UserProfile } from "./components";
+import { UserAgentComponent } from "@/tools/user-agent";
+import { MobileSearch } from "./components";
 
-const Header = ({ invert = false }) => {
+const DesktopHeader = () => {
   return (
-    <header className={[styles.header, invert ? styles.invert : ""].join(" ")}>
+    <header className={desktopStyles.header}>
       <nav>
         <Link href="/">
-          <Logo className={invert ? styles["logo-invert"] : ""} />
+          <Logo />
           <h1>StockTree</h1>
         </Link>
         <div>
@@ -23,13 +26,33 @@ const Header = ({ invert = false }) => {
       </nav>
       <div style={{ flex: 1 }} />
       <ul>
-        <Request invert={invert} />
-        <Search invert={invert} />
-        <Notification invert={invert} />
-        <UserProfile invert={invert} />
+        <Request />
+        <Search />
+        <Notification />
+        <UserProfile />
       </ul>
     </header>
   );
 };
+
+const MobileHeader = () => {
+  return (
+    <header className={mobileStyles.header}>
+      <Link href="/">
+        <Logo />
+        <h1>StockTree</h1>
+      </Link>
+      <div style={{ flex: 1 }} />
+      <ul>
+        <MobileSearch />
+      </ul>
+    </header>
+  );
+};
+
+const Header = UserAgentComponent({
+  desktop: DesktopHeader,
+  mobile: MobileHeader,
+});
 
 export default Header;

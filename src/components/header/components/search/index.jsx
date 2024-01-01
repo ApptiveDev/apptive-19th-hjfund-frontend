@@ -3,13 +3,12 @@
 import { useEffect, useState } from "react";
 import Icon from "../../../icon";
 
-import styles from "../../styles.module.scss";
+import styles from "../../desktop.module.scss";
 
-const SearchButton = ({ invert, onClick, ...props }) => {
+const SearchButton = ({ onClick, ...props }) => {
   return (
     <li {...props}>
       <Icon
-        className={invert ? styles["icon-invert"] : ""}
         button
         iconType="magnifying-glass"
         onClick={onClick}
@@ -41,7 +40,7 @@ const SearchSheet = ({ setIsOpened }) => {
   );
 };
 
-const Search = ({ invert }) => {
+const Search = () => {
   const [isOpened, setIsOpened] = useState(false);
 
   useEffect(() => {
@@ -54,7 +53,7 @@ const Search = ({ invert }) => {
 
   return (
     <>
-      <SearchButton onClick={() => setIsOpened(true)} invert={invert} />
+      <SearchButton onClick={() => setIsOpened(true)} />
       {isOpened && <SearchSheet setIsOpened={setIsOpened} />}
     </>
   );
