@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import styles from "./styles.module.scss";
-import { Dropdown, Card } from "@/components/pages/report";
+import { Dropdown, Card } from "./(components)";
 
 const options = ["정확도순", "최신순"];
 
