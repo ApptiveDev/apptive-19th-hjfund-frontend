@@ -32,15 +32,24 @@
   @include max-width-container;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  column-gap: 20px;
   justify-content: center;
   color: white;
   row-gap: 80px;
 
   @media (max-width: calc($max-content-width + 80px)) {
-    grid-template-columns: 324px;
+    grid-template-columns: 1fr;
+  }
+
+  @media (max-width: $mobile-breakpoint) {
+    @include mobile-padding;  
   }
 
   & > .item {
+    margin: 0 auto;  
+    max-width: 500px;
+    width: 100%;
+
     & > .title {
       display: flex;
       align-items: flex-end;
@@ -59,9 +68,12 @@
     
       & > div {
         display: grid;
-        grid-template-columns: 100px 80px 1fr;
+        grid-template-columns: 25fr 15fr 36fr;
 
         & > .rate {
+          text-align: right;
+          padding-right: 20px;
+
           &[data-up="true"] {
             color: $color-red;
           }
