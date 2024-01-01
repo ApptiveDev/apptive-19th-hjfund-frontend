@@ -45,7 +45,7 @@ export const NotificationButton = ({ invert = false }) => {
 };
 
 export const UserProfileButton = ({ invert = false }) => {
-  const isLoggedIn = false;
+  const isLoggedIn = true;
 
   return isLoggedIn ? (
     <li>
