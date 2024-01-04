@@ -4,6 +4,7 @@
   display: flex;
   padding: 0 40px;
   column-gap: 20px;
+  align-items: flex-start;
 
   &.mobile {
     padding: 0 24px;
