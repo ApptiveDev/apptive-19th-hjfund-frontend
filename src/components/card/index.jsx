@@ -4,7 +4,7 @@ import styles from "./styles.module.scss";
 
 const Card = ({ cardType = "card", id, thumbnail, title, date, comments, hearts }) => {
   return (
-    <Link href={"/reports/" + id}>
+    <Link href={"/report/" + id}>
       <div className={[styles[cardType]]}>
         <div className={styles.thumbnail}>
           <img alt="thumbnail" src={thumbnail} />

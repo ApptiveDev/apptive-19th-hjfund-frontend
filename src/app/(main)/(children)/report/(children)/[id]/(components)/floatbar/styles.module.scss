@@ -1,0 +1,46 @@
+@import "../../../../../../../../styles/variables.scss";
+
+.container {
+  flex-shrink: 0;
+  width: 200px;
+  margin-top: 78px;
+
+  position: sticky;
+  top: 78px;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+}
+
+.editor {
+  & > img {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 24px;
+  }
+
+  .caption {
+    margin-bottom: 4px;
+    color: $color-text-passive-1;
+  }
+
+  .name {
+    @include ui-1(700);
+    margin-bottom: 20px;
+  }
+
+  .description {
+    color: $color-text-passive-1;
+  }
+
+  margin-bottom: 40px;
+}
+
+.icons {
+  display: flex;
+  column-gap: 8px;
+  margin-left: -6px;
+}
