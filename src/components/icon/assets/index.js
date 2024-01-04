@@ -13,9 +13,11 @@ import MagnifyingGlass from "./magnifying-glass.svg";
 import NewsPaper from "./news-paper.svg";
 import ShareLink from "./share-link.svg";
 import Star2 from "./star-2.svg";
+import TextStyle from "./text-style.svg";
 import UploadCircle from "./upload-circle.svg";
 import UserCircleSingle from "./user-circle-single.svg";
 import VerticalSliderSquare from "./vertical-slider-square.svg";
+import Visible from "./visible.svg";
 
 // icons object
 const icons = {
@@ -33,9 +35,11 @@ const icons = {
   "news-paper": NewsPaper,
   "share-link": ShareLink,
   "star-2": Star2,
+  "text-style": TextStyle,
   "upload-circle": UploadCircle,
   "user-circle-single": UserCircleSingle,
   "vertical-slider-square": VerticalSliderSquare,
+  visible: Visible,
 };
 
 export default icons;

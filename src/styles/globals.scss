@@ -6,6 +6,7 @@
 :root {
   font-family: $font-family;
   color: $color-text;
+  @include ui-1;
 }
 
 input, button, textarea, select, a {
