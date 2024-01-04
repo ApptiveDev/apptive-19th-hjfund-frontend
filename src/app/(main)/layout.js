@@ -1,6 +1,7 @@
 import "@/styles/globals.scss";
 
 import { Footer } from "@/components";
+import { RecoilRoot } from "@/store";
 
 export const metadata = {
   title: process.env.WEBSITE_NAME,
@@ -9,11 +10,13 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body>
-        {children}
-        <Footer />
-      </body>
-    </html>
+    <RecoilRoot>
+      <html lang="en">
+        <body>
+          {children}
+          <Footer />
+        </body>
+      </html>
+    </RecoilRoot>
   );
 }

@@ -9,8 +9,8 @@ import {
   UserProfile,
   Menu,
   Progress,
+  MobileSearch
 } from "./components";
-import { MobileSearch } from "./components";
 import desktopStyles from "./desktop.module.scss";
 import mobileStyles from "./mobile.module.scss";
 import { useEffect, useState } from "react";

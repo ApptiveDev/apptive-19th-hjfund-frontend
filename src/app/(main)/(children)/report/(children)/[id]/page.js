@@ -3,7 +3,7 @@ import Article from "./(components)/article";
 import Floatbar from "./(components)/floatbar";
 import Headline from "./(components)/headline";
 import styles from "./styles.module.scss";
-import { Header } from "@/components";
+import Header from "./(components)/header";
 
 const loremIpsum = `형사피고인은 유죄의 판결이 확정될 때까지는 무죄로 추정된다. 농업생산성의 제고와 농지의 합리적인 이용을 위하거나 불가피한 사정으로 발생하는 농지의 임대차와 위탁경영은 법률이 정하는 바에 의하여 인정된다. 국교는 인정되지 아니하며, 종교와 정치는 분리된다. 위원은 탄핵 또는 금고 이상의 형의 선고에 의하지 아니하고는 파면되지 아니한다.\n\n
 외국인은 국제법과 조약이 정하는 바에 의하여 그 지위가 보장된다. 공무원의 신분과 정치적 중립성은 법률이 정하는 바에 의하여 보장된다. 의무교육은 무상으로 한다. 국가는 농업 및 어업을 보호·육성하기 위하여 농·어촌종합개발과 그 지원등 필요한 계획을 수립·시행하여야 한다. 헌법개정안이 제2항의 찬성을 얻은 때에는 헌법개정은 확정되며, 대통령은 즉시 이를 공포하여야 한다.\n\n
@@ -19,7 +19,7 @@ export default function ReportViewerPage({}) {
 
   return (
     <main>
-      <Header invert />
+      <Header title="K-웹툰 OSMU 성공할 수 있을까? 🙋‍♂️" />
       <Headline
         title="K-웹툰 OSMU 성공할 수 있을까? 🙋‍♂️"
         itemName="디앤씨미디어"

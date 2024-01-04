@@ -1,4 +1,4 @@
-import { Card, Header } from "@/components";
+import { Header } from "@/components";
 import Banner from "./(components)/banner";
 import CardList from "./(components)/card-list";
 import Indexes from "./(components)/indexes";
