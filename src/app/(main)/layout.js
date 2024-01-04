@@ -1,8 +1,7 @@
 import "@/styles/globals.scss";
 
 import { Footer } from "@/components";
-import { DesktopHeader, MobileHeader } from "@/components/header/headers";
-import HeaderContainer from "@/components/header/container";
+import { RecoilRoot } from "@/store";
 
 export const metadata = {
   title: process.env.WEBSITE_NAME,
@@ -11,15 +10,13 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body>
-        <HeaderContainer>
-          <DesktopHeader />
-          <MobileHeader />
-        </HeaderContainer>
-        {children}
-        <Footer />
-      </body>
-    </html>
+    <RecoilRoot>
+      <html lang="en">
+        <body>
+          {children}
+          <Footer />
+        </body>
+      </html>
+    </RecoilRoot>
   );
 }
