@@ -2,6 +2,7 @@ export { default as Notification } from "./notification";
 export { default as Search } from "./search";
 export { default as UserProfile } from "./profile";
 export { default as Menu } from "./menu";
+export { default as Progress } from "./progress";
 
 import Link from "next/link";
 import Button from "../../button";
