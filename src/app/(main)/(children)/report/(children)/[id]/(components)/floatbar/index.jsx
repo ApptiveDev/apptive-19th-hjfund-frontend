@@ -1,5 +1,5 @@
 import styles from "./styles.module.scss";
-import { Icon } from "@/components";
+import Icon from "@/components/icon";
 
 const Floatbar = ({ authorName, authorProfile, authorDescription }) => {
   return (

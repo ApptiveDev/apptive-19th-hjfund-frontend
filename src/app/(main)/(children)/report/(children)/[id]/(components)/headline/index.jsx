@@ -1,4 +1,6 @@
-import { Button, Icon } from "@/components";
+import Button from "@/components/button";
+import Icon from "@/components/icon";
+
 import styles from "./styles.module.scss";
 import { useUserAgent } from "@/tools/user-agent";
 
