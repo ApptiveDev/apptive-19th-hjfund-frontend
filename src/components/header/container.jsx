@@ -9,11 +9,13 @@ import {
   UserProfile,
   Menu,
   Progress,
-  MobileSearch
+  MobileSearch,
 } from "./components";
 import desktopStyles from "./desktop.module.scss";
 import mobileStyles from "./mobile.module.scss";
 import { useEffect, useState } from "react";
+import { classes } from "@/tools/classes";
+import { conditionalClass } from "@/tools/classes";
 
 const useHeaderScroll = ({
   invert = false,
@@ -75,10 +77,10 @@ export const DesktopHeader = ({
 
   return (
     <header
-      className={[
+      className={classes(
         desktopStyles.header,
-        isInvert ? desktopStyles.invert : "",
-      ].join(" ")}
+        conditionalClass(isInvert, desktopStyles.invert)
+      )}
     >
       <nav>
         <Link href="/">
@@ -91,10 +93,10 @@ export const DesktopHeader = ({
         </div>
         {progress && progressDesktopOverride && (
           <div
-            className={[
+            className={classes(
               desktopStyles.override,
-              isProgress ? desktopStyles.enabled : "",
-            ].join(" ")}
+              conditionalClass(isProgress, desktopStyles.enabled)
+            )}
           >
             {progressDesktopOverride}
           </div>
@@ -130,10 +132,10 @@ export const MobileHeader = ({
 
   return (
     <header
-      className={[
+      className={classes(
         mobileStyles.header,
-        isInvert ? mobileStyles.invert : "",
-      ].join(" ")}
+        conditionalClass(isInvert, mobileStyles.invert)
+      )}
     >
       <nav>
         <Link className={mobileStyles.logo} href="/">
@@ -147,10 +149,10 @@ export const MobileHeader = ({
       </ul>
       {progress && progressMobileOverride && (
         <div
-          className={[
-            desktopStyles.override,
-            isProgress ? desktopStyles.enabled : "",
-          ].join(" ")}
+          className={classes(
+            mobileStyles.override,
+            conditionalClass(isProgress, mobileStyles.enabled)
+          )}
         >
           {progressMobileOverride}
         </div>

@@ -4,6 +4,7 @@ import React from "react";
 
 import icons from "./assets";
 import styles from "./styles.module.scss";
+import { classes } from "@/tools/classes";
 
 const Icon = ({
   button,
@@ -20,7 +21,7 @@ const Icon = ({
   if (button) {
     return (
       <button
-        className={[styles.button, className].join(" ")}
+        className={classes(styles.button, className)}
         onClick={onClick}
         style={{
           width: buttonSize,

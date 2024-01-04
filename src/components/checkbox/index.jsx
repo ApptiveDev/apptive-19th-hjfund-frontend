@@ -4,6 +4,8 @@ import { forwardRef, useImperativeHandle, useRef, useState } from "react";
 
 import CheckIcon from "./icon.svg";
 import styles from "./styles.module.scss";
+import { classes } from "@/tools/classes";
+import { conditionalClass } from "@/tools/classes";
 
 const Checkbox = forwardRef(
   (
@@ -32,7 +34,10 @@ const Checkbox = forwardRef(
     return (
       <span
         role="checkbox"
-        className={[styles.checkbox, isChecked ? styles.checked : ""].join(" ")}
+        className={classes(
+          styles.checkbox,
+          conditionalClass(isChecked, styles.checked)
+        )}
         onClick={(e) => {
           e.stopPropagation();
           inputRef.current.click();
@@ -52,7 +57,8 @@ const Checkbox = forwardRef(
             "--checkbox-hover-background-color": checkboxHoverBackgroundColor,
             "--checkbox-hover-border-color": checkboxHoverBorderColor,
             "--checkbox-hover-icon-color": checkboxHoverIconColor,
-            "--checkbox-checked-background-color": checkboxCheckedBackgroundColor,
+            "--checkbox-checked-background-color":
+              checkboxCheckedBackgroundColor,
             "--checkbox-checked-border-color": checkboxCheckedBorderColor,
             "--checkbox-checked-icon-color": checkboxCheckedIconColor,
             ...style,

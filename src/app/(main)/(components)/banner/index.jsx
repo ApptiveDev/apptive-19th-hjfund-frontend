@@ -1,31 +1,42 @@
 import { useUserAgent } from "@/tools/user-agent";
 import styles from "./styles.module.scss";
 import Image from "next/image";
+import { classes } from "@/tools/classes";
+import { conditionalClass } from "@/tools/classes";
 
 const statements = [
   {
     message: "Don't invest in what\nyou don't understand.",
-    author: "Warren Buffett"
-  }
-]
+    author: "Warren Buffett",
+  },
+];
 
 const Statement = () => {
   const { isMobile } = useUserAgent();
 
   return (
-    <div className={[styles.statement, isMobile ? styles.mobile : ""].join(" ")}>
+    <div
+      className={classes(
+        styles.statement,
+        conditionalClass(isMobile, styles.mobile)
+      )}
+    >
       <h1>{statements[0].message}</h1>
       <p>- {statements[0].author} -</p>
     </div>
   );
-
-}
+};
 
 const BannerBackground = () => {
   const { isMobile } = useUserAgent();
 
   return (
-    <div className={[styles.background, isMobile ? styles.mobile : ""].join(" ")}>
+    <div
+      className={classes(
+        styles.background,
+        conditionalClass(isMobile, styles.mobile)
+      )}
+    >
       <div className={styles.filter}></div>
       <Image
         alt="main-banner-background"
@@ -44,7 +55,7 @@ const Banner = () => {
       <Statement />
       <BannerBackground />
     </>
-  )
-}
+  );
+};
 
 export default Banner;

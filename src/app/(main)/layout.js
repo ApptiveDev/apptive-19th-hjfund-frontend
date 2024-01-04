@@ -1,6 +1,6 @@
 import "@/styles/globals.scss";
 
-import { Footer } from "@/components";
+import Footer from "@/components/footer";
 import { RecoilRoot } from "@/store";
 
 export const metadata = {

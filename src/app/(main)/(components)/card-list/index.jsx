@@ -1,7 +1,12 @@
-import { Button, Card, Icon } from "@/components";
+import Button from "@/components/button";
+import Card from "@/components/card";
+import Icon from "@/components/icon";
+
 import styles from "./styles.module.scss";
 import Link from "next/link";
 import { useUserAgent } from "@/tools/user-agent";
+import { classes } from "@/tools/classes";
+import { conditionalClass } from "@/tools/classes";
 
 const examples = [
   {
@@ -68,7 +73,12 @@ const CardList = () => {
 
   return (
     <div className={styles.container}>
-      <div className={[styles["card-list"], isMobile ? styles.mobile : ""].join(" ")}>
+      <div
+        className={classes(
+          styles["card-list"],
+          conditionalClass(isMobile, styles.mobile)
+        )}
+      >
         {examples.map((example, index) => (
           <Card
             key={index}
