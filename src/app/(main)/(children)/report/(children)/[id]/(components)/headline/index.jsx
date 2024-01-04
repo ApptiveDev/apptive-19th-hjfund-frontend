@@ -1,8 +1,9 @@
-import Button from "@/components/button";
 import Icon from "@/components/icon";
 
 import styles from "./styles.module.scss";
 import { useUserAgent } from "@/tools/user-agent";
+import { classes } from "@/tools/classes";
+import { conditionalClass } from "@/tools/classes";
 
 const Thumbnail = ({ thumbnail }) => {
   return (
@@ -24,7 +25,12 @@ const Headline = ({
   const { isMobile } = useUserAgent();
 
   return (
-    <section className={[styles.headline, isMobile ? styles.mobile : ""].join(" ")}>
+    <section
+      className={classes(
+        styles.headline,
+        conditionalClass(isMobile, styles.mobile)
+      )}
+    >
       <div className={styles.container}>
         <div className={styles.item}>
           <span role="link">{itemName}</span>

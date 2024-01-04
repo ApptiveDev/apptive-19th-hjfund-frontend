@@ -4,6 +4,7 @@ import { forwardRef, useEffect, useRef, useState } from "react";
 import Icon from "../../icon";
 
 import styles from "../desktop.module.scss";
+import { classes } from "@/tools/classes";
 
 const NotificationButton = forwardRef(({ onClick }, ref) => {
   return (
@@ -21,23 +22,30 @@ const NotificationButton = forwardRef(({ onClick }, ref) => {
 const NotificationItem = ({ icon, content }) => {
   return (
     <li className={styles.item}>
-      <div>
-        {icon}
-      </div>
+      <div>{icon}</div>
       <p className={styles.content}>{content}</p>
     </li>
   );
-}
+};
 
 const NotificationSheet = forwardRef((props, ref) => {
   return (
-    <li ref={ref} className={[styles.layer, styles["notification-sheet"]].join(" ")} {...props}>
+    <li
+      ref={ref}
+      className={classes(styles.layer, styles["notification-sheet"])}
+      {...props}
+    >
       <header>
         <h3>알림</h3>
         <Icon size={18} button iconType="vertical-slider-square" />
       </header>
       <ul className={styles["notification-list"]}>
-        <NotificationItem icon={<Icon iconType="news-paper" />} content={"일하는개미 님의 새 리포트가 등록되었습니다.\n지금 확인해 보세요!"} />
+        <NotificationItem
+          icon={<Icon iconType="news-paper" />}
+          content={
+            "일하는개미 님의 새 리포트가 등록되었습니다.\n지금 확인해 보세요!"
+          }
+        />
       </ul>
     </li>
   );

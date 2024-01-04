@@ -2,6 +2,8 @@
 
 import { forwardRef, useEffect, useState } from "react";
 import styles from "./styles.module.scss";
+import { classes } from "@/tools/classes";
+import { conditionalClass } from "@/tools/classes";
 
 const Textfield = forwardRef(
   (
@@ -28,12 +30,12 @@ const Textfield = forwardRef(
 
     return (
       <div
-        className={[
+        className={classes(
           styles.textfield,
           styles[textfieldSize],
-          isFocused ? styles.focus : "",
-          className,
-        ].join(" ")}
+          conditionalClass(isFocused, styles.focus),
+          className
+        )}
       >
         {textfieldLeft}
         <input

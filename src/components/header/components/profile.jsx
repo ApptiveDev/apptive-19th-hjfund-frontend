@@ -5,32 +5,39 @@ import Button from "../../button";
 
 import styles from "../desktop.module.scss";
 import { forwardRef, useEffect, useRef, useState } from "react";
+import { classes } from "@/tools/classes";
 
-const UserProfileButton = forwardRef(({ onClick, isLoggedIn = false, ...props }, ref) => {
-  return isLoggedIn ? (
-    <li ref={ref} {...props}>
-      <button className={styles.profile} onClick={onClick}>
-        <img src="/examples/example-profile-1.jpg" alt="profile" />
-      </button>
-    </li>
-  ) : (
-    <li ref={ref} className={styles["non-icon-button"]} {...props}>
-      <Link href="/login">
-        <Button
-          buttonSize="small"
-          buttonStyle="filled"
-          className={styles["button-invert-filled"]}
-        >
-          로그인
-        </Button>
-      </Link>
-    </li>
-  );
-});
+const UserProfileButton = forwardRef(
+  ({ onClick, isLoggedIn = false, ...props }, ref) => {
+    return isLoggedIn ? (
+      <li ref={ref} {...props}>
+        <button className={styles.profile} onClick={onClick}>
+          <img src="/examples/example-profile-1.jpg" alt="profile" />
+        </button>
+      </li>
+    ) : (
+      <li ref={ref} className={styles["non-icon-button"]} {...props}>
+        <Link href="/login">
+          <Button
+            buttonSize="small"
+            buttonStyle="filled"
+            className={styles["button-invert-filled"]}
+          >
+            로그인
+          </Button>
+        </Link>
+      </li>
+    );
+  }
+);
 
 const UserProfileSheet = forwardRef((props, ref) => {
   return (
-    <li ref={ref} className={[styles.layer, styles["profile-sheet"]].join(" ")} {...props}>
+    <li
+      ref={ref}
+      className={classes(styles.layer, styles["profile-sheet"])}
+      {...props}
+    >
       <ul>
         <li className={styles.info}>
           <p>사용자 이름</p>
@@ -70,7 +77,7 @@ const UserProfile = () => {
     return () => {
       document.removeEventListener("click", handleClickOutside);
     };
-  })
+  });
 
   return (
     <>

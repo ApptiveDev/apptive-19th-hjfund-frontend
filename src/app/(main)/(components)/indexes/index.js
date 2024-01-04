@@ -1,5 +1,7 @@
 import { useUserAgent } from "@/tools/user-agent";
 import styles from "./styles.module.scss";
+import { classes } from "@/tools/classes";
+import { conditionalClass } from "@/tools/classes";
 
 const examples = [
   {
@@ -49,7 +51,8 @@ const IndexItem = ({ title, english, contents }) => {
               data-up={item[3] > 0 ? "true" : undefined}
               data-down={item[3] < 0 ? "true" : undefined}
             >
-              {item[3] > 0 ? "▲ " : item[3] < 0 ? "▼ " : " "}{item[2]}{" "}({item[3]}%)
+              {item[3] > 0 ? "▲ " : item[3] < 0 ? "▼ " : " "}
+              {item[2]} ({item[3]}%)
             </span>
           </div>
         ))}
@@ -62,7 +65,12 @@ const Indexes = () => {
   const { isMobile } = useUserAgent();
 
   return (
-    <div className={[styles.container, isMobile ? styles.mobile : ""].join(" ")}>
+    <div
+      className={classes(
+        styles.container,
+        conditionalClass(isMobile, styles.mobile)
+      )}
+    >
       <div className={styles.index}>
         {examples.map((example, index) => (
           <IndexItem key={index} {...example} />

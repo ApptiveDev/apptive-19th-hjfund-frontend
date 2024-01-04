@@ -1,3 +1,4 @@
+import { classes } from "@/tools/classes";
 import styles from "./styles.module.scss";
 import PropTypes from "prop-types";
 
@@ -18,7 +19,7 @@ const Button = ({
 }) => {
   return (
     <button
-      className={[styles.button, styles[buttonSize], styles[buttonStyle], className].join(" ")}
+      className={classes(styles.button, styles[buttonSize], styles[buttonStyle], className)}
       style={{
         "--button-background-color": buttonBackgroundColor,
         "--button-border-color": buttonBorderColor,
