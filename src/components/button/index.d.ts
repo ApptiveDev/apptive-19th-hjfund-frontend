@@ -1,11 +1,11 @@
 
 
 type ButtonSize = "small" | "medium" | "big";
-type ButtonType = "filled" | "outlined";
+type ButtonStyle = "filled" | "outlined";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   buttonSize?: ButtonSize;
-  buttonType?: ButtonType;
+  buttonStyle?: ButtonStyle;
   buttonBackgroundColor?: string;
   buttonBorderColor?: string;
   buttonTextColor?: string;

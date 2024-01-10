@@ -1,0 +1,35 @@
+@import "../../../../../styles/variables.scss";
+
+.form {
+  .texts {
+    display: flex;
+    flex-direction: column;
+    row-gap: 12px;
+
+    margin-bottom: 18px;
+  }
+
+  .terms {
+    @include ui-2;
+    display: flex;
+
+    .checkbox {
+      margin-right: 10px;
+    }
+
+    margin-bottom: 26px;
+  }
+
+  .button {
+    width: 100%;
+  }
+
+  .error {
+    @include ui-2;
+    color: red;
+    margin-top: 12px;
+    height: 18px;
+    text-align: center;
+    margin-bottom: 16px;
+  }
+}

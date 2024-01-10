@@ -10,6 +10,8 @@ const Textfield = forwardRef(
     {
       className,
       style,
+      onFocus,
+      onBlur,
       textfieldSize = "medium",
       textfieldLeft,
       textfieldRight,
@@ -36,23 +38,29 @@ const Textfield = forwardRef(
           conditionalClass(isFocused, styles.focus),
           className
         )}
+        style={{
+          "--textfield-background-color": textfieldBackgroundColor,
+          "--textfield-border-color": textfieldBorderColor,
+          "--textfield-text-color": textfieldTextColor,
+          "--textfield-hover-background-color": textfieldHoverBackgroundColor,
+          "--textfield-hover-border-color": textfieldHoverBorderColor,
+          "--textfield-hover-text-color": textfieldHoverTextColor,
+          "--textfield-focus-background-color": textfieldFocusBackgroundColor,
+          "--textfield-focus-border-color": textfieldFocusBorderColor,
+          "--textfield-focus-text-color": textfieldFocusTextColor,
+          ...style,
+        }}
       >
         {textfieldLeft}
         <input
           ref={ref}
-          onFocus={() => setIsFocused(true)}
-          onBlur={() => setIsFocused(false)}
-          style={{
-            "--textfield-background-color": textfieldBackgroundColor,
-            "--textfield-border-color": textfieldBorderColor,
-            "--textfield-text-color": textfieldTextColor,
-            "--textfield-hover-background-color": textfieldHoverBackgroundColor,
-            "--textfield-hover-border-color": textfieldHoverBorderColor,
-            "--textfield-hover-text-color": textfieldHoverTextColor,
-            "--textfield-focus-background-color": textfieldFocusBackgroundColor,
-            "--textfield-focus-border-color": textfieldFocusBorderColor,
-            "--textfield-focus-text-color": textfieldFocusTextColor,
-            ...style,
+          onFocus={(e) => {
+            setIsFocused(true);
+            onFocus && onFocus(e);
+          }}
+          onBlur={(e) => {
+            setIsFocused(false);
+            onBlur && onBlur(e);
           }}
           {...props}
         />
