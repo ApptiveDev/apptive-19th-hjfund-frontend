@@ -36,20 +36,23 @@ const Checkbox = forwardRef(
         role="checkbox"
         className={classes(
           styles.checkbox,
-          conditionalClass(isChecked, styles.checked)
+          conditionalClass(isChecked, styles.checked),
+          className
         )}
         onClick={(e) => {
           e.stopPropagation();
-          inputRef.current.click();
+          setIsChecked(!isChecked);
         }}
       >
         <input
           type="checkbox"
           className={styles.input}
+          checked={isChecked}
           onChange={(e) => {
             setIsChecked(e.target.checked);
             onChange && onChange(e);
           }}
+          onClick={(e) => e.stopPropagation()}
           style={{
             "--checkbox-background-color": checkboxBackgroundColor,
             "--checkbox-border-color": checkboxBorderColor,

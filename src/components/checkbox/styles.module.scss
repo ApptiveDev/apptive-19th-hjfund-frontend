@@ -18,7 +18,7 @@
   }
 
   @media (hover:hover) and (pointer: fine) {
-    &:hover {
+    &:hover, label:hover + &, label:hover > & {
       background-color: var(--checkbox-hover-background-color, $color-hover);
       border-color: var(--checkbox-hover-border-color, $color-text-passive-2);
 
@@ -28,7 +28,7 @@
     }
   }
 
-  &.checked {
+  &.checked, label > &.checked {
     background-color: var(--checkbox-checked-background-color, $color-primary);
     border-color: var(--checkbox-checked-border-color, $color-primary);
 

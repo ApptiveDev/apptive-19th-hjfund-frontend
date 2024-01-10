@@ -42,6 +42,7 @@ const BannerBackground = () => {
         alt="main-banner-background"
         src="/images/bg/main.jpg"
         srcSet="/images/bg/main@2x.jpg 2x, /images/bg/main@3x.jpg 3x"
+        priority
         width={1366}
         height={911}
       />

@@ -1,0 +1,46 @@
+@import "../../../../../styles/variables.scss";
+
+.container {
+   margin-top: 16px;
+
+   .divider {
+      display: flex;
+      justify-content: center;
+      position: relative;
+      
+      & > span {
+        @include ui-2;
+        color: $color-text-passive-2;
+        padding: 0 10px;
+        background-color: $color-background;
+        position: relative;
+        z-index: 1;
+      }
+
+      &:before {
+        content: "";
+        position: absolute;
+        top: 50%; transform: translateY(-50%);
+        left: 0; right: 0;
+        height: 1px;
+        background-color: $color-border;
+      }
+
+      margin-bottom: 16px;
+   }
+
+   .links {
+      display: flex;
+      align-items: center;
+
+      column-gap: 10px;
+   }
+
+   .register {
+      flex: 1;
+
+      & > button {
+        width: 100%;
+      }
+   }
+}

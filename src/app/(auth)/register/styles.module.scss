@@ -1,0 +1,19 @@
+@import "../../../styles/variables.scss";
+
+.title {
+  h1 {
+    @include title-2;
+    margin-bottom: 12px;
+  }
+
+  margin-bottom: 50px;
+}
+
+.lost {
+  @include ui-2;
+  margin-top: 60px;
+
+  display: flex;
+  justify-content: center;
+  column-gap: 10px;
+}
