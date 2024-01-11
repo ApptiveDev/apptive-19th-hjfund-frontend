@@ -1,0 +1,31 @@
+@import "../../../../../../styles/variables";
+
+.title {
+  margin-top: 150px;
+  margin-left: 70px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  & > h1 {
+    @include title-1;
+    padding-right: 20px;
+  }
+
+  & > .category {
+    @include title-2;
+    padding-left: 10px;
+    padding-right: 10px;
+    color: $color-text-passive-2;
+
+    .selected {
+      color: $color-primary;
+    }
+  }
+}
+
+.search {
+  margin-top: 20px;
+  margin-left: 70px;
+  display: absolute;
+}
