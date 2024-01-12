@@ -1,52 +1,33 @@
 import Link from "next/link";
 import styles from "./styles.module.scss";
-import { SearchHeader } from "@/components/svg";
 
 export default function Request() {
   return (
-    <main className={styles.page}>
-      <section className={styles.banner}>
-        <section className={styles.contents}>
-          <div className={styles.title}>종목요청</div>
-          <div className={styles.category}>
-            <div className={styles.selectedcategorybox}>
-              <span className={styles.number}>1</span>
-              <span className={styles.text}>기업선택</span>
-            </div>
-            <div className={styles.categorybox}>
-              <span className={styles.number}>2</span>
-              <span className={styles.text}>세부요청</span>
-            </div>
-            <div className={styles.categorybox}>
-              <span className={styles.number}>3</span>
-              <span className={styles.text}>요청완료</span>
-            </div>
-          </div>
-          <div style={{ flex: "1", width: "100%" }}>
-            <div className={styles.searchbox}>
-              <input
-                placeholder="회사명/종목코드를 입력하세요"
-                type="search"
-              ></input>
-              <button>
-                <SearchHeader color="var(--text-color)" />
-              </button>
-            </div>
-          </div>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              width: "100%",
-            }}
-          >
-            <span style={{ flex: "1" }} />
-            <Link href="/request/2">
-              <button className={styles.nextbutton}>다음</button>
-            </Link>
-          </div>
-        </section>
-      </section>
-    </main>
+    <div className={styles.container}>
+      <div className={styles.requestbox}>
+        <div className={styles.requestboxheader}>
+          <span className={styles.selected}>➊ 종목 선택</span>
+          <span>➋ 세부정보 입력</span>
+          <span>------------------------------</span>
+          <span>➌ 요청 완료</span>
+        </div>
+        <div className={styles.requestboxbody}>
+          <p className={styles.textbox}>
+            <span className={styles.boxtitle}>종목 선택</span>
+            <span className={styles.boxsubtitle}>
+              요청하려는 종목을 입력하세요.
+            </span>
+          </p>
+
+          <p className={styles.searchbox}>검색창</p>
+        </div>
+        <div className={styles.requestboxfooter}>
+          <button className={styles.tomainbutton}>메인 화면으로</button>
+          <Link href="/request/2">
+            <button className={styles.nextbutton}>다음</button>
+          </Link>
+        </div>
+      </div>
+    </div>
   );
 }

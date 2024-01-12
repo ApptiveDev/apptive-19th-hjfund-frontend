@@ -1,134 +1,98 @@
-.banner {
-  --request-width: 1000px;
+@import "../../../../styles/variables.scss";
 
-  height: 650px;
-
-  background-size: cover;
-  background-position: center;
-
-  display: flex;
+.container {
+  display: grid;
   justify-content: center;
+}
 
-  & .contents {
-    width: 100%;
-    max-width: var(--request-width);
+.requestbox {
+  margin-top: 150px;
+  margin-bottom: 150px;
+  height: 600px;
+  width: 600px;
+  border: 2px solid $color-border;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+}
 
+.requestboxheader {
+  height: 50px;
+  border-bottom: 2px solid $color-border;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  color: $color-text-passive-2;
+  padding-left: 20px;
+  padding-right: 20px;
+
+  & > .selected {
+    color: $color-primary;
+  }
+}
+.requestboxbody {
+  height: 495px;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+
+  & > .textbox {
+    width: 490px;
     display: flex;
-    grid-template-columns: 1fr 478px;
-    column-gap: var(--column-gap);
-    justify-content: center;
     flex-direction: column;
-    align-items: center;
-    margin: 40px 0px 40px 0px;
+    align-items: start;
   }
 
-  & .title {
-    color: #454545;
-    text-align: center;
-    font-family: Pretendard;
-    font-size: 35px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
+  & > .searchbox {
+    height: 44px;
   }
+}
 
-  & .category {
-    width: 100%;
-    height: 107px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 30px;
-    margin-bottom: 30px;
+.boxtitle {
+  @include title-2;
+  color: $color-text;
+  margin-top: 60px;
+  margin-bottom: 12px;
+}
 
-    & .selectedcategorybox {
-      width: 205px;
-      height: 70px;
-      background: var(--logo-color-1);
-      text-align: center;
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: space-evenly;
-      padding-right: 8px;
-    }
+.boxsubtitle {
+  @include ui-1;
+  color: $color-text-passive-2;
+  margin-bottom: 40px;
+}
 
-    & .categorybox {
-      width: 205px;
-      height: 70px;
-      background: #7b7b7b;
-      text-align: center;
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: space-evenly;
-      padding-right: 8px;
-    }
+.requestboxfooter {
+  height: 54px;
+  border-top: 2px solid $color-border;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  background-color: $color-foreground;
+  padding-left: 16px;
+  padding-right: 16px;
+}
 
-    & .number {
-      color: #fff;
-      font-family: Pretendard;
-      font-size: 85px;
-      font-style: normal;
-      font-weight: 800;
-      line-height: 1;
-      align-self: flex-start;
-      letter-spacing: 0.9px;
-    }
+.tomainbutton {
+  height: 32px;
+  padding-left: 17px;
+  padding-right: 17px;
+  border-radius: 8px;
+  border-style: solid;
+  border-color: $color-border;
+  background-color: white;
+}
 
-    & .text {
-      color: #fff;
-      text-align: center;
-      font-family: Pretendard;
-      font-size: 21px;
-      font-style: normal;
-      font-weight: 400;
-      line-height: normal;
-      letter-spacing: 0.25px;
-    }
-  }
-
-  & .searchbox {
-    width: 100%;
-    height: 50px;
-    border-radius: 45px;
-    background: #fff;
-    box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.5);
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    padding: 20px;
-
-    & > input[type="search"] {
-      border: none;
-      text-decoration: none;
-      color: #9c9c9c;
-      font-family: Pretendard;
-      font-size: 20px;
-      font-style: normal;
-      line-height: normal;
-      letter-spacing: 0.25px;
-      flex: 1;
-      outline: none;
-    }
-
-    & > button {
-      display: flex;
-      border: 0;
-      background-color: transparent;
-      outline: none;
-    }
-  }
-
-  & .nextbutton {
-    width: 75px;
-    height: 45px;
-    font-size: 20px;
-    box-shadow: none;
-    border: none;
-    border-radius: 15px;
-    color: white;
-    background: var(--logo-color-1);
-  }
+.nextbutton {
+  height: 32px;
+  padding-left: 17px;
+  padding-right: 17px;
+  border-radius: 8px;
+  border-style: none;
+  background-color: $color-primary;
+  color: white;
 }
