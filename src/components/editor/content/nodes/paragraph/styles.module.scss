@@ -1,0 +1,12 @@
+@import "../../../../../styles/variables.scss";
+
+.empty:before {
+  position: absolute;
+  pointer-events: none;
+  content: attr(placeholder);
+  color: $color-text-passive-2;
+}
+
+.node {
+  @include paragraph-1;
+}

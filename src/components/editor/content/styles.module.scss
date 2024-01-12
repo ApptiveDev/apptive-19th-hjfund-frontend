@@ -1,0 +1,12 @@
+@import "../../../styles/variables.scss";
+
+.container {
+  padding: 40px;
+  padding-bottom: 200px;
+}
+
+.editor {
+  margin: 0 auto;
+  max-width: $max-article-width;
+  outline: none;
+}

@@ -1,6 +1,6 @@
 .header {
-  position: absolute;
-  
+  position: absolute !important;
+
   & > * {
     transition: opacity 0.2s;
     opacity: 0.5;
