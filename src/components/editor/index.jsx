@@ -14,7 +14,9 @@ import PlaceholderPlugin from "./plugins/placeholder";
 import { HeadingNode } from "@lexical/rich-text";
 import EditorHeadline from "./plugins/headline";
 import { HorizontalRuleNode } from "@lexical/react/LexicalHorizontalRuleNode";
-import CustomQuoteNode from "./nodes/quote";
+import { TabIndentationPlugin } from "@lexical/react/LexicalTabIndentationPlugin";
+import { ListPlugin } from "@lexical/react/LexicalListPlugin";
+import { ListNode, ListItemNode } from "@lexical/list";
 
 const onError = (error) => {
   console.error(error);
@@ -23,7 +25,7 @@ const onError = (error) => {
 const initialConfig = {
   namespace: "stocktree-editor",
   onError,
-  nodes: [HeadingNode, HorizontalRuleNode, CustomQuoteNode],
+  nodes: [HeadingNode, HorizontalRuleNode, ListNode, ListItemNode],
 };
 
 const Editor = () => {
@@ -36,7 +38,7 @@ const Editor = () => {
     const observer = new ResizeObserver((entries) => {
       const height = entries[0].target.clientHeight;
       setHeadlineHeight(height);
-    })
+    });
 
     if (headlineRef.current) {
       observer.observe(headlineRef.current);
@@ -44,7 +46,7 @@ const Editor = () => {
 
     return () => {
       observer.disconnect();
-    }
+    };
   });
 
   useEffect(() => {
@@ -71,6 +73,8 @@ const Editor = () => {
           <HistoryPlugin />
           <OnChangePlugin />
           <PlaceholderPlugin />
+          <TabIndentationPlugin />
+          <ListPlugin />
         </div>
       </LexicalComposer>
     )

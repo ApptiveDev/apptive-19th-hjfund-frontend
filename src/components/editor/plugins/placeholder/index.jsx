@@ -6,6 +6,7 @@ import styles from "./styles.module.scss";
 
 const placeholders = {
   paragraph: "'/'를 입력하여 명령어를 사용하세요.",
+  quote: "인용문",
   h2: "제목 1",
   h3: "제목 2",
   h4: "제목 3",

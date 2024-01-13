@@ -5,7 +5,10 @@ import {
   useBasicTypeaheadTriggerMatch,
 } from "@lexical/react/LexicalTypeaheadMenuPlugin";
 import { useCallback, useMemo, useState } from "react";
-
+import {
+  INSERT_ORDERED_LIST_COMMAND,
+  INSERT_UNORDERED_LIST_COMMAND,
+} from "@lexical/list";
 import styles from "./styles.module.scss";
 import { classes } from "@/tools/classes";
 import { conditionalClass } from "@/tools/classes";
@@ -20,7 +23,6 @@ import { $setBlocksType } from "@lexical/selection";
 import { $createHeadingNode } from "@lexical/rich-text";
 import { $createHorizontalRuleNode } from "@lexical/react/LexicalHorizontalRuleNode";
 import Icon from "@/components/icon";
-import { $createQuoteNode } from "../../nodes/quote";
 
 const DIVIDER = "DIVIDER";
 const EMPTY = "EMPTY";
@@ -134,14 +136,18 @@ const getOptions = (editor) => [
     description: "순서 없는 목록",
     icon: <Icon size={18} iconType="bullet-list" />,
     keywords: ["순서없는목록", "ul", "리스트", "unoredredlist"],
-    onSelect: () => {},
+    onSelect: () => {
+      editor.dispatchCommand(INSERT_UNORDERED_LIST_COMMAND, undefined);
+    },
   }),
   new CommandInfo("ol", {
     title: "목록",
     description: "순서 있는 목록",
     icon: <Icon size={18} iconType="ascending-number-order" />,
     keywords: ["순서있는목록", "ol", "리스트", "orderedlist"],
-    onSelect: () => {},
+    onSelect: () => {
+      editor.dispatchCommand(INSERT_ORDERED_LIST_COMMAND, undefined);
+    },
   }),
   DIVIDER,
   new CommandInfo("quote", {
@@ -149,14 +155,7 @@ const getOptions = (editor) => [
     description: "인용",
     icon: <span />,
     keywords: ["quote", "인용"],
-    onSelect: () => {
-      editor.update(() => {
-        const selection = $getSelection();
-        if ($isRangeSelection(selection)) {
-          $setBlocksType(selection, () => $createQuoteNode());
-        }
-      });
-    },
+    onSelect: () => {},
   }),
   new CommandInfo("divider", {
     title: "구분선",
