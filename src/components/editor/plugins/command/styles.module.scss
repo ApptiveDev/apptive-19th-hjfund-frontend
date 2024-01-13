@@ -70,15 +70,10 @@
   }
 }
 
-.icon.h1, .icon.h2, .icon.h3 {
-  @include ui-2;
-  font-weight: 700;
-}
-
 .icon.quote > span {
   width: 16px; height: 16px;
   border-radius: 3px;
-  border: 1px solid $color-text;
+  border: calc(18 / 24 * 1px) solid $color-text;
   position: relative;
 
   &:before {
@@ -98,4 +93,9 @@
     top: -6px;
     z-index: 3;
   }
+}
+
+.icon.divider > span {
+  width: 14px; height: calc(18 / 24 * 1px);
+  background-color: $color-text;
 }

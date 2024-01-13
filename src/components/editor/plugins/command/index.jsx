@@ -74,7 +74,7 @@ const getOptions = (editor) => [
   new CommandInfo("p", {
     title: "본문",
     description: "본문 텍스트",
-    icon: <>Aa</>,
+    icon: <Icon size={18} iconType="paragraph" />,
     keywords: ["paragraph", "text", "본문", "텍스트"],
     onSelect: () => {
       editor.update(() => {
@@ -95,7 +95,7 @@ const getOptions = (editor) => [
       new CommandInfo("h" + item.type, {
         title: "제목 " + item.type,
         description: item.description,
-        icon: <>H{item.type}</>,
+        icon: <Icon size={18} iconType={`heading-${item.type}-paragraph-styles-heading`} />,
         keywords: ["title", "heading", "제목", "헤딩", "h" + item.type],
         onSelect: () => {
           editor.update(() => {
@@ -168,7 +168,7 @@ const getOptions = (editor) => [
   new CommandInfo("divider", {
     title: "구분선",
     description: "글 영역 분리",
-    icon: <>—</>,
+    icon: <span />,
     keywords: ["divider", "구분선", "분리"],
     onSelect: () => {
       editor.update(() => {
