@@ -1,8 +1,14 @@
-@import "../../../styles/variables.scss";
+@import "../../styles/variables.scss";
+
+.container {
+  display: flex;
+  flex: 1;
+}
 
 .editor {
   outline: none;
   padding: 40px;
+  padding-top: calc(40px + var(--headline-height, 0px));
   padding-bottom: 200px;
   flex: 1;
 
@@ -13,6 +19,10 @@
 
   & p {
     @include paragraph-1;
+  }
+
+  & h2, & h3, & h4 {
+    margin-bottom: 8px;
   }
 
   & h2 {

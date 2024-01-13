@@ -1,12 +1,23 @@
-@import "../../../../../styles/variables.scss";
+@import "../../../../styles/variables.scss";
+
+@keyframes FadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
 
 .container {
   background-color: $color-background;
   border: 1px solid $color-border;
   border-radius: 10px;
   box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.08);
+  animation: FadeIn 0.1s;
   
   width: 300px;
+  max-height: 40vh;
 
   overflow-y: auto;
 
@@ -56,5 +67,35 @@
     .description {
       color: $color-text-passive-2;
     }
+  }
+}
+
+.icon.h1, .icon.h2, .icon.h3 {
+  @include ui-2;
+  font-weight: 700;
+}
+
+.icon.quote > span {
+  width: 16px; height: 16px;
+  border-radius: 3px;
+  border: 1px solid $color-text;
+  position: relative;
+
+  &:before {
+    content: "";
+    position: absolute;
+    width: 10px; height: 6px;
+    background-color: $color-background;
+    left: 50%; transform: translateX(-50%);
+    top: -2px;
+    z-index: 2;
+  }
+
+  &:after {
+    content: "\"";
+    position: absolute;
+    left: 50%; transform: translateX(-50%);
+    top: -6px;
+    z-index: 3;
   }
 }

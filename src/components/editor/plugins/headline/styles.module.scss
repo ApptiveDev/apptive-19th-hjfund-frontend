@@ -1,8 +1,9 @@
-@import "../../../styles/variables.scss";
+@import "../../../../styles/variables.scss";
 
 .container {
   padding: 24px 40px 40px 40px;
-  position: relative;
+  position: absolute;
+  width: 100%;
 }
 
 .headline {

@@ -3,6 +3,7 @@
 import Button from "@/components/button";
 import styles from "./styles.module.scss";
 import Icon from "@/components/icon";
+import { forwardRef } from "react";
 
 const TransparentButton = ({ children, ...props }) => {
   return (
@@ -22,9 +23,9 @@ const TransparentButton = ({ children, ...props }) => {
   );
 };
 
-const EditorHeadline = () => {
+const EditorHeadline = forwardRef((_, ref) => {
   return (
-    <div className={styles.container}>
+    <div ref={ref} className={styles.container}>
       <div className={styles.headline}>
         <div className={styles["thumbnail-handler"]}>
           <TransparentButton>
@@ -47,6 +48,6 @@ const EditorHeadline = () => {
       </div>
     </div>
   );
-};
+});
 
 export default EditorHeadline;
