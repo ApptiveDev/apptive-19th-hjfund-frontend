@@ -31,8 +31,17 @@ const Editor = () => {
   const headlineRef = useRef(null);
 
   useEffect(() => {
+    const observer = new ResizeObserver((entries) => {
+      const height = entries[0].target.clientHeight;
+      setHeadlineHeight(height);
+    })
+
     if (headlineRef.current) {
-      setHeadlineHeight(headlineRef.current.offsetHeight);
+      observer.observe(headlineRef.current);
+    }
+
+    return () => {
+      observer.disconnect();
     }
   });
 

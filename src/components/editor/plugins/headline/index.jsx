@@ -39,7 +39,13 @@ const EditorHeadline = forwardRef((_, ref) => {
         </div>
         <div className={styles.title}>
           <TransparentButton>종목코드 등록</TransparentButton>
-          <h1 contentEditable placeholder="제목을 입력하세요"></h1>
+          <h1
+            contentEditable
+            onKeyDown={(e) => {
+              if (e.key === "Enter") e.preventDefault();
+            }}
+            placeholder="제목을 입력하세요"
+          ></h1>
         </div>
       </div>
       <div className={styles.image}>
