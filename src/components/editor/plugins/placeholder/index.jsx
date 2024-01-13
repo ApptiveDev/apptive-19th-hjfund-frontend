@@ -1,6 +1,6 @@
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import { $getRoot, $getSelection } from "lexical";
-import { useEffect, useState } from "react";
+import { useEffect, useRef } from "react";
 
 import styles from "./styles.module.scss";
 
@@ -66,7 +66,7 @@ function cleanUpPreviousCursor(editor, cursorAt, key) {
 
 export default function PlaceholderPlugin() {
   const [editor] = useLexicalComposerContext();
-  const [cursorAt, setCursorAt] = useState(null);
+  const cursorAt = useRef(null);
 
   if (!editor.isEditable()) return null;
 
@@ -85,10 +85,10 @@ export default function PlaceholderPlugin() {
             const key = node.getKey();
             const element = editor.getElementByKey(key);
 
-            cleanUpPreviousCursor(editor, cursorAt, key);
+            cleanUpPreviousCursor(editor, cursorAt.current, key);
             addPlaceholder(element, node);
             checkIsEmpty(element, node);
-            if (node.getType() === "paragraph") setCursorAt(key);
+            if (node.getType() === "paragraph") cursorAt.current = key;
           }
         }
       });
@@ -97,7 +97,7 @@ export default function PlaceholderPlugin() {
     return () => {
       removeUpdateListener();
     };
-  }, [cursorAt]);
+  }, []);
 
   return <></>;
 }

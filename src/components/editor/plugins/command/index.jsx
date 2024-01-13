@@ -95,7 +95,12 @@ const getOptions = (editor) => [
       new CommandInfo("h" + item.type, {
         title: "제목 " + item.type,
         description: item.description,
-        icon: <Icon size={18} iconType={`heading-${item.type}-paragraph-styles-heading`} />,
+        icon: (
+          <Icon
+            size={18}
+            iconType={`heading-${item.type}-paragraph-styles-heading`}
+          />
+        ),
         keywords: ["title", "heading", "제목", "헤딩", "h" + item.type],
         onSelect: () => {
           editor.update(() => {
@@ -162,7 +167,7 @@ const getOptions = (editor) => [
         if ($isRangeSelection(selection)) {
           $setBlocksType(selection, () => $createQuoteNode());
         }
-      })
+      });
     },
   }),
   new CommandInfo("divider", {
@@ -196,7 +201,7 @@ const getOptions = (editor) => [
         }
       });
     },
-  }),
+  })
 ];
 
 export default function CommandPlugin() {
