@@ -37,4 +37,11 @@
   & h4 {
     @include editor-title-3;
   }
+
+  & hr {
+    border: none;
+    height: 1px;
+    background-color: $color-border;
+    margin: 24px auto;
+  }
 }

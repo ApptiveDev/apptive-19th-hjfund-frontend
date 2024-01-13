@@ -4,7 +4,7 @@ import {
   MenuOption,
   useBasicTypeaheadTriggerMatch,
 } from "@lexical/react/LexicalTypeaheadMenuPlugin";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 
 import styles from "./styles.module.scss";
 import { classes } from "@/tools/classes";
@@ -12,11 +12,13 @@ import { conditionalClass } from "@/tools/classes";
 import { createPortal } from "react-dom";
 import {
   $createParagraphNode,
+  $getRoot,
   $getSelection,
   $isRangeSelection,
 } from "lexical";
 import { $setBlocksType } from "@lexical/selection";
 import { $createHeadingNode } from "@lexical/rich-text";
+import { $createHorizontalRuleNode } from "@lexical/react/LexicalHorizontalRuleNode";
 import Icon from "@/components/icon";
 
 const DIVIDER = "DIVIDER";
@@ -155,7 +157,29 @@ const getOptions = (editor) => [
     description: "글 영역 분리",
     icon: <>—</>,
     keywords: ["divider", "구분선", "분리"],
-    onSelect: () => {},
+    onSelect: () => {
+      editor.update(() => {
+        const root = $getRoot();
+        const selection = $getSelection();
+        if ($isRangeSelection(selection)) {
+          const anchorNode = selection.anchor.getNode();
+
+          if (anchorNode) {
+            const dividerNode = $createHorizontalRuleNode();
+            anchorNode.getTopLevelElement().insertAfter(dividerNode);
+            
+            if (anchorNode.getTextContentSize() === 0 && root.getChildrenSize() > 2) {
+              anchorNode.remove();
+            }
+
+            const newParagraph = $createParagraphNode();
+            dividerNode.insertAfter(newParagraph);
+
+            newParagraph.select();
+          }
+        }
+      })
+    },
   }),
 ];
 
@@ -225,7 +249,6 @@ export default function CommandPlugin() {
         anchorElementRef,
         { selectedIndex, selectOptionAndCleanUp, setHighlightedIndex }
       ) => {
-        console.log(selectedIndex);
         if (selectedIndex >= filteredOptions.length) {
           setHighlightedIndex(0);
         }

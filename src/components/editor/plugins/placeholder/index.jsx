@@ -76,7 +76,7 @@ export default function PlaceholderPlugin() {
         const selection = $getSelection();
 
         // check cursor position
-        if (selection.isCollapsed()) {
+        if (selection.isCollapsed && selection.isCollapsed()) {
           const nodes = selection.getNodes();
           if (nodes.length === 1) {
             const node = nodes[0].getTopLevelElement();
