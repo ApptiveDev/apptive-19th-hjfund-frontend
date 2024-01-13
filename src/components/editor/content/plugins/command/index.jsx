@@ -12,6 +12,7 @@ import { conditionalClass } from "@/tools/classes";
 import { createPortal } from "react-dom";
 
 const DIVIDER = "DIVIDER";
+const EMPTY = "EMPTY";
 
 class CommandInfo extends MenuOption {
   title;
@@ -64,19 +65,19 @@ const getOptions = (editor) => [
   new CommandInfo("제목 1", {
     description: "큰 제목",
     icon: <>H1</>,
-    keywords: ["title", "heading", "제목", "제목 1", "큰 제목", "h1"],
+    keywords: ["title1", "heading1", "제목1", "큰제목", "h1"],
     onSelect: () => {},
   }),
   new CommandInfo("제목 2", {
     description: "중간 제목",
     icon: <>H2</>,
-    keywords: ["title", "heading", "제목", "제목 2", "중간 제목", "h2"],
+    keywords: ["title1", "heading2", "제목2", "중간제목", "h2"],
     onSelect: () => {},
   }),
   new CommandInfo("제목 3", {
     description: "작은 제목",
     icon: <>H3</>,
-    keywords: ["title", "heading", "제목", "제목 3", "작은 제목", "h3"],
+    keywords: ["title3", "heading3", "제목3", "작은제목", "h3"],
     onSelect: () => {},
   }),
   DIVIDER,
@@ -113,7 +114,21 @@ export default function CommandPlugin() {
     [editor]
   );
 
-  const options = useMemo(() => getOptions(editor), [editor]);
+  const options = useMemo(() => {
+    const defaultOptions = getOptions(editor);
+    if (!queryString) return defaultOptions;
+
+    const matchingOptions = defaultOptions.filter((option) => {
+      if (option === DIVIDER) return false;
+
+      return option.keywords.some((keyword) => {
+        return keyword.includes(queryString.toLowerCase());
+      });
+    });
+
+    return matchingOptions.length > 0 ? matchingOptions : [EMPTY];
+  }, [editor, queryString]);
+
   const filteredOptions = options.filter((option) => option !== DIVIDER);
 
   return (
@@ -126,7 +141,6 @@ export default function CommandPlugin() {
         anchorElementRef,
         { selectedIndex, selectOptionAndCleanUp, setHighlightedIndex }
       ) => {
-
         if (selectedIndex >= filteredOptions.length) {
           setHighlightedIndex(0);
         }
@@ -138,6 +152,11 @@ export default function CommandPlugin() {
               {
                 options.reduce(
                   (acc, option, i) => {
+                    if (options.length === 1 && option === EMPTY) {
+                      acc.components.push(<li key={0} className={styles.empty}>결과 없음</li>)
+                      return acc;
+                    }
+
                     if (option === DIVIDER) {
                       acc.components.push(
                         <li className={styles.divider} key={i} />

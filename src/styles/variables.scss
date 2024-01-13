@@ -14,6 +14,8 @@ $mobile-breakpoint: 768px;
 $window-min-width: 320px;
 $max-content-width: 1300px;
 $max-article-width: 640px;
+$max-article-headline-width: 970px;
+$max-article-editor-width: 860px;
 $header-height: 60px;
 
 $font-family: "Pretendard", Arial, Helvetica, sans-serif;
@@ -31,6 +33,18 @@ $font-family: "Pretendard", Arial, Helvetica, sans-serif;
 
 @mixin title-2 {
   @include font-style(700, 24px, 30px);
+}
+
+@mixin editor-title-1 {
+  @include font-style(700, 32px, 40px);
+}
+
+@mixin editor-title-2 {
+  @include font-style(700, 24px, 30px);
+}
+
+@mixin editor-title-3 {
+  @include font-style(700, 20px, 26px);
 }
 
 @mixin ui-1($weight: 400) {

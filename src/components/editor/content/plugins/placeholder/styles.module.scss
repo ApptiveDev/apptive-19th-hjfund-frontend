@@ -1,0 +1,15 @@
+@import "../../../../../styles/variables.scss";
+
+.placeholder {
+  &:before {
+    position: absolute;
+    content: attr(placeholder);
+    pointer-events: none;
+    color: $color-text-passive-2;
+    opacity: 0;
+  }
+
+  &.empty:before {
+    opacity: 1;
+  }
+}

@@ -6,7 +6,7 @@ import EditorContent from "@/components/editor/content";
 
 export default function Page() {
   return (
-    <main>
+    <main className={styles.main}>
       <Header className={styles.header} />
       <Toolbar />
       <EditorHeadline />

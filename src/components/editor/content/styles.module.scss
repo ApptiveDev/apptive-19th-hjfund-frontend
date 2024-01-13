@@ -1,12 +1,29 @@
 @import "../../../styles/variables.scss";
 
-.container {
+.editor {
+  outline: none;
   padding: 40px;
   padding-bottom: 200px;
-}
+  flex: 1;
 
-.editor {
-  margin: 0 auto;
-  max-width: $max-article-width;
-  outline: none;
+  & > * {
+    max-width: $max-article-editor-width;
+    margin: 0 auto;
+  }
+
+  & p {
+    @include paragraph-1;
+  }
+
+  & h2 {
+    @include editor-title-1;
+  }
+
+  & h3 {
+    @include editor-title-2;
+  }
+
+  & h4 {
+    @include editor-title-3;
+  }
 }

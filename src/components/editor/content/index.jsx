@@ -8,41 +8,40 @@ import { ContentEditable } from "@lexical/react/LexicalContentEditable";
 import { HistoryPlugin } from "@lexical/react/LexicalHistoryPlugin";
 import { OnChangePlugin } from "@lexical/react/LexicalOnChangePlugin";
 import CommandPlugin from "./plugins/command";
-import CustomParagraphNode from "./nodes/paragraph";
-import { ParagraphNode } from "lexical";
 import LexicalErrorBoundary from "@lexical/react/LexicalErrorBoundary";
+import { useEffect, useState } from "react";
+import PlaceholderPlugin from "./plugins/placeholder";
 
 const onError = (error) => {
   console.error(error);
-}
+};
 
 const initialConfig = {
   namespace: "stocktree-editor",
   onError,
-  nodes: [
-    CustomParagraphNode,
-    {
-      replace: ParagraphNode,
-      with: () => {
-        return new CustomParagraphNode();
-      },
-    },
-  ],
+  nodes: [],
 };
 
 const EditorContent = () => {
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    setIsLoaded(true);
+  }, []);
+
   return (
-    <LexicalComposer initialConfig={initialConfig}>
-      <CommandPlugin />
-      <div className={styles.container}>
+    isLoaded && (
+      <LexicalComposer initialConfig={initialConfig}>
+        <CommandPlugin />
         <RichTextPlugin
           contentEditable={<ContentEditable className={styles.editor} />}
           ErrorBoundary={LexicalErrorBoundary}
         />
         <HistoryPlugin />
         <OnChangePlugin />
-      </div>
-    </LexicalComposer>
+        <PlaceholderPlugin />
+      </LexicalComposer>
+    )
   );
 };
 

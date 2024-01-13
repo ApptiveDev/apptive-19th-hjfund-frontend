@@ -1,20 +1,10 @@
 @import "../../../../../styles/variables.scss";
 
-@keyframes fade-in {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
 .container {
   background-color: $color-background;
   border: 1px solid $color-border;
   border-radius: 10px;
   box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.08);
-  animation: fade-in 0.1s;
   
   width: 300px;
 
@@ -25,6 +15,13 @@
     background-color: $color-border;
     margin: 2px 0;
   }
+
+  .empty {
+    @include ui-2;
+    color: $color-text-passive-2;
+    padding: 10px 0;
+    text-align: center;
+  }
 }
 
 .item {
@@ -33,6 +30,8 @@
   padding: 0 14px;
   height: 62px;
   column-gap: 10px;
+
+  transition: background-color 0.1s;
 
   &.selected {
     background-color: rgba(0, 0, 0, 0.1);
