@@ -23,6 +23,7 @@ import { $setBlocksType } from "@lexical/selection";
 import { $createHeadingNode } from "@lexical/rich-text";
 import { $createHorizontalRuleNode } from "@lexical/react/LexicalHorizontalRuleNode";
 import Icon from "@/components/icon";
+import { $createQuoteNode } from "../../nodes/quote";
 
 const DIVIDER = "DIVIDER";
 const EMPTY = "EMPTY";
@@ -155,7 +156,14 @@ const getOptions = (editor) => [
     description: "인용",
     icon: <span />,
     keywords: ["quote", "인용"],
-    onSelect: () => {},
+    onSelect: () => {
+      editor.update(() => {
+        const selection = $getSelection();
+        if ($isRangeSelection(selection)) {
+          $setBlocksType(selection, () => $createQuoteNode());
+        }
+      })
+    },
   }),
   new CommandInfo("divider", {
     title: "구분선",

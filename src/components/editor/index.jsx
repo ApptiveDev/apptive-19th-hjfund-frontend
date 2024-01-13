@@ -17,6 +17,7 @@ import { HorizontalRuleNode } from "@lexical/react/LexicalHorizontalRuleNode";
 import { TabIndentationPlugin } from "@lexical/react/LexicalTabIndentationPlugin";
 import { ListPlugin } from "@lexical/react/LexicalListPlugin";
 import { ListNode, ListItemNode } from "@lexical/list";
+import CustomQuoteNode from "./nodes/quote";
 
 const onError = (error) => {
   console.error(error);
@@ -25,7 +26,7 @@ const onError = (error) => {
 const initialConfig = {
   namespace: "stocktree-editor",
   onError,
-  nodes: [HeadingNode, HorizontalRuleNode, ListNode, ListItemNode],
+  nodes: [HeadingNode, HorizontalRuleNode, ListNode, ListItemNode, CustomQuoteNode],
 };
 
 const Editor = () => {
