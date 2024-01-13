@@ -16,14 +16,11 @@
   & > * {
     max-width: $max-article-editor-width;
     margin: 0 auto;
+    margin-bottom: 8px;
   }
 
   & p {
     @include paragraph-1;
-  }
-
-  & h2, & h3, & h4 {
-    margin-bottom: 8px;
   }
 
   & h2 {

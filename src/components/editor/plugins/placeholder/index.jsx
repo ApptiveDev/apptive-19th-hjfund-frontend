@@ -68,6 +68,8 @@ export default function PlaceholderPlugin() {
   const [editor] = useLexicalComposerContext();
   const [cursorAt, setCursorAt] = useState(null);
 
+  if (!editor.isEditable()) return null;
+
   useEffect(() => {
     initialize(editor);
 

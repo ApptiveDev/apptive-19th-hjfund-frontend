@@ -20,6 +20,7 @@ import { $setBlocksType } from "@lexical/selection";
 import { $createHeadingNode } from "@lexical/rich-text";
 import { $createHorizontalRuleNode } from "@lexical/react/LexicalHorizontalRuleNode";
 import Icon from "@/components/icon";
+import { $createQuoteNode } from "../../nodes/quote";
 
 const DIVIDER = "DIVIDER";
 const EMPTY = "EMPTY";
@@ -57,9 +58,7 @@ const CommandItem = ({ isSelected, onClick, onPointerEnter, info }) => {
         conditionalClass(isSelected, styles.selected)
       )}
     >
-      <div className={classes(styles.icon, styles[info.id])}>
-        {info.icon}
-      </div>
+      <div className={classes(styles.icon, styles[info.id])}>{info.icon}</div>
       <div className={styles.texts}>
         <p className={styles.title}>{info.title}</p>
         <p className={styles.description}>{info.description}</p>
@@ -150,7 +149,14 @@ const getOptions = (editor) => [
     description: "인용",
     icon: <span />,
     keywords: ["quote", "인용"],
-    onSelect: () => {},
+    onSelect: () => {
+      editor.update(() => {
+        const selection = $getSelection();
+        if ($isRangeSelection(selection)) {
+          $setBlocksType(selection, () => $createQuoteNode());
+        }
+      });
+    },
   }),
   new CommandInfo("divider", {
     title: "구분선",
@@ -167,8 +173,11 @@ const getOptions = (editor) => [
           if (anchorNode) {
             const dividerNode = $createHorizontalRuleNode();
             anchorNode.getTopLevelElement().insertAfter(dividerNode);
-            
-            if (anchorNode.getTextContentSize() === 0 && root.getChildrenSize() > 2) {
+
+            if (
+              anchorNode.getTextContentSize() === 0 &&
+              root.getChildrenSize() > 2
+            ) {
               anchorNode.remove();
             }
 
@@ -178,7 +187,7 @@ const getOptions = (editor) => [
             newParagraph.select();
           }
         }
-      })
+      });
     },
   }),
 ];

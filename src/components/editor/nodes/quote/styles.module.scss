@@ -1,0 +1,32 @@
+@import "../../../../styles/variables.scss";
+
+.quote {
+  position: relative;
+  border: 1px solid $color-primary;
+  border-radius: 10px;
+  padding: 24px 20px;
+}
+
+.icon {
+  position: absolute;
+
+  background-color: $color-background;
+  width: 26px; height: 18px;
+  padding: 0 4px;
+  color: $color-primary;
+
+  & > * {
+    fill: $color-primary;
+  }
+}
+
+.left {
+  left: 18px;
+  top: -9px;
+}
+
+.right {
+  transform: rotate(180deg);
+  right: 18px;
+  bottom: -9px;
+}

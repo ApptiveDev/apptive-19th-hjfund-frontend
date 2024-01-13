@@ -14,6 +14,7 @@ import PlaceholderPlugin from "./plugins/placeholder";
 import { HeadingNode } from "@lexical/rich-text";
 import EditorHeadline from "./plugins/headline";
 import { HorizontalRuleNode } from "@lexical/react/LexicalHorizontalRuleNode";
+import CustomQuoteNode from "./nodes/quote";
 
 const onError = (error) => {
   console.error(error);
@@ -22,7 +23,7 @@ const onError = (error) => {
 const initialConfig = {
   namespace: "stocktree-editor",
   onError,
-  nodes: [HeadingNode, HorizontalRuleNode],
+  nodes: [HeadingNode, HorizontalRuleNode, CustomQuoteNode],
 };
 
 const Editor = () => {
