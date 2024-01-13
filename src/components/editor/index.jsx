@@ -18,6 +18,7 @@ import { TabIndentationPlugin } from "@lexical/react/LexicalTabIndentationPlugin
 import { ListPlugin } from "@lexical/react/LexicalListPlugin";
 import { ListNode, ListItemNode } from "@lexical/list";
 import CustomQuoteNode from "./nodes/quote";
+import ShortcutPlugin from "./plugins/shortcut";
 
 const onError = (error) => {
   console.error(error);
@@ -75,6 +76,7 @@ const Editor = () => {
           <OnChangePlugin />
           <PlaceholderPlugin />
           <TabIndentationPlugin />
+          <ShortcutPlugin />
           <ListPlugin />
         </div>
       </LexicalComposer>
