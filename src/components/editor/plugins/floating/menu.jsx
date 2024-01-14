@@ -92,10 +92,10 @@ export const FloatingMenu = forwardRef(({ editor, coords }, ref) => {
       >
         <UnderlineIcon />
       </button>
-      <button className={classes(styles.icon, styles.pallete)}>
+      {/* <button className={classes(styles.icon, styles.pallete)}>
         <span />
         <PalleteIcon />
-      </button>
+      </button> */}
     </div>
   );
 });

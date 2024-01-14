@@ -24,7 +24,7 @@
   & > * {
     max-width: $max-article-editor-width;
     margin: 0 auto;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
   }
 
   hr {
@@ -63,11 +63,7 @@
 }
 
 .nested-list-item {
-
-}
-
-.list-item {
-
+  list-style: none;
 }
 
 .bold {
