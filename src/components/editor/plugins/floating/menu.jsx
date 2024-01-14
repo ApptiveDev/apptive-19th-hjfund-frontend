@@ -10,6 +10,7 @@ import StrikethroughIcon from "./icons/strikethrough.svg";
 import UnderlineIcon from "./icons/underline.svg";
 import PalleteIcon from "./icons/pallete.svg";
 import { $getSelection, $isRangeSelection, FORMAT_TEXT_COMMAND } from "lexical";
+import { TOGGLE_LINK_COMMAND } from "@lexical/link";
 
 export const FloatingMenu = forwardRef(({ editor, coords }, ref) => {
   const [inlineState, setInlineState] = useState({
@@ -49,7 +50,7 @@ export const FloatingMenu = forwardRef(({ editor, coords }, ref) => {
         conditionalClass(!coords, styles.hidden)
       )}
     >
-      <button className={styles.link}>
+      <button className={styles.link} onClick={() => editor.dispatchCommand(TOGGLE_LINK_COMMAND, null)}>
         <Icon size={16} iconType="link-chain" />
         <span>링크</span>
       </button>

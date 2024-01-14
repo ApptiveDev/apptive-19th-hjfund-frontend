@@ -1,20 +1,10 @@
 @import "../../../../styles/variables";
 
-@keyframes FadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
 .floating {
   background-color: $color-background;
   border: 1px solid $color-border;
   border-radius: 10px;
   box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.08);
-  animation: FadeIn 0.1s;
 
   z-index: 1;
   pointer-events: all;

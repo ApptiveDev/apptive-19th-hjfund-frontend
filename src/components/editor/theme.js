@@ -23,6 +23,7 @@ const editorTheme = {
   text: {
     bold: styles.bold,
     italic: styles.italic,
+    code: styles.code,
     underline: styles.underline,
     strikethrough: styles.strikethrough,
     underlineStrikethrough: styles["underline-strikethrough"],

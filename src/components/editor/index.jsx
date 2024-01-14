@@ -20,8 +20,10 @@ import { ListNode, ListItemNode } from "@lexical/list";
 import { LinkNode, AutoLinkNode } from "@lexical/link";
 import ShortcutPlugin from "./plugins/shortcut";
 import FloatingPlugin from "./plugins/floating";
+import LinkHoverPlugin from "./plugins/link/hover";
 import LinkPlugin from "./plugins/link";
 import editorTheme from "./theme";
+import DebugPlugin from "./plugins/debug";
 
 const onError = (error) => {
   console.error(error);
@@ -36,8 +38,8 @@ const initialConfig = {
     ListNode,
     ListItemNode,
     QuoteNode,
-    AutoLinkNode,
     LinkNode,
+    AutoLinkNode,
   ],
   theme: editorTheme,
 };
@@ -72,6 +74,7 @@ const Editor = () => {
       <LexicalComposer initialConfig={initialConfig}>
         <div className={styles.layer}>
           <FloatingPlugin />
+          <LinkHoverPlugin />
         </div>
         <div className={styles.container}>
           <EditorHeadline ref={headlineRef} />
@@ -95,6 +98,7 @@ const Editor = () => {
           <ShortcutPlugin />
           <ListPlugin />
           <LinkPlugin />
+          {process.env.NODE_ENV === "development" && <DebugPlugin />}
         </div>
       </LexicalComposer>
     )

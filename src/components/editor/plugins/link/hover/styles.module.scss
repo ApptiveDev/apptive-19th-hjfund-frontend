@@ -1,0 +1,54 @@
+@import "../../../../../styles/variables";
+
+.container {
+  background-color: $color-background;
+  border: 1px solid $color-border;
+  border-radius: 10px;
+  box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.08);
+
+  z-index: 1;
+  pointer-events: all;
+  position: absolute;
+  transition: opacity 0.1s;
+  height: 32px;
+
+  @include ui-3;
+
+  display: flex;
+  align-items: center;
+
+  &.hidden {
+    opacity: 0;
+    transition: none;
+  }
+
+  & > .url, & > .button {
+    display: flex;
+    align-items: center;
+  }
+
+  .url {
+    padding: 0 8px;
+    column-gap: 6px;
+  }
+
+  & > .buttons {
+    column-gap: 2px;
+    padding: 0 1px;
+  }
+
+  & > .buttons > button {
+    background-color: transparent;
+    border: 0; outline: 0;
+    width: 28px; height: 28px;
+    border-radius: 8px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+      background-color: rgba(black, 0.05);
+    }
+  }
+}
