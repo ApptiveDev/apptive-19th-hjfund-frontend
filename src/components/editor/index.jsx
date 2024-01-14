@@ -21,6 +21,7 @@ import { LinkNode, AutoLinkNode } from "@lexical/link";
 import ShortcutPlugin from "./plugins/shortcut";
 import FloatingPlugin from "./plugins/floating";
 import LinkPlugin from "./plugins/link";
+import editorTheme from "./theme";
 
 const onError = (error) => {
   console.error(error);
@@ -38,6 +39,7 @@ const initialConfig = {
     AutoLinkNode,
     LinkNode,
   ],
+  theme: editorTheme,
 };
 
 const Editor = () => {

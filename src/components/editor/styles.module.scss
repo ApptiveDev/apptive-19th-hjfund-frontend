@@ -27,22 +27,6 @@
     margin-bottom: 8px;
   }
 
-  p {
-    @include paragraph-1;
-  }
-
-  h2 {
-    @include editor-title-1;
-  }
-
-  h3 {
-    @include editor-title-2;
-  }
-
-  h4 {
-    @include editor-title-3;
-  }
-
   hr {
     border: none;
     height: 1px;
@@ -54,59 +38,101 @@
       background-color: $color-primary;
     }
   }
+}
 
-  ul, ol {
-    padding-left: 20px;
+/* Editor Themes */
+
+.paragraph {
+  @include paragraph-1;
+}
+
+.heading-1 {
+  @include editor-title-1;
+}
+
+.heading-2 {
+  @include editor-title-2;
+}
+
+.heading-3 {
+  @include editor-title-3;
+}
+
+.ul, .ol {
+  padding-left: 20px;
+}
+
+.nested-list-item {
+
+}
+
+.list-item {
+
+}
+
+.bold {
+  font-weight: 700;
+}
+
+.italic {
+  font-style: italic;
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+.strikethrough {
+  text-decoration: line-through;
+}
+
+.underline-strikethrough {
+  text-decoration: underline line-through;
+}
+
+.quote {
+  position: relative;
+  border: 1px solid $color-primary;
+  border-radius: 10px;
+  padding: 24px 20px;
+  margin: 9px auto 17px auto !important;
+
+  &:before, &:after {
+    content: "";
+    position: absolute;
+
+    background-color: $color-background;
+    width: 26px; height: 18px;
+    padding: 0 4px;
+    color: $color-primary;
+
+    background-image: url("/images/etc/quote-icon.svg");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+  
+    & > * {
+      fill: $color-primary;
+    }
   }
 
-  li:has(ul), li:has(ol) {
-    list-style: none;
+  &:before {
+    top: -9px;
+    left: 18px;
   }
 
-  blockquote {
-    position: relative;
-    border: 1px solid $color-primary;
-    border-radius: 10px;
-    padding: 24px 20px;
-    margin: 9px auto 17px auto !important;
-  
-    &:before, &:after {
-      content: "";
-      position: absolute;
-  
-      background-color: $color-background;
-      width: 26px; height: 18px;
-      padding: 0 4px;
-      color: $color-primary;
-  
-      background-image: url("/images/etc/quote-icon.svg");
-      background-size: contain;
-      background-position: center;
-      background-repeat: no-repeat;
-    
-      & > * {
-        fill: $color-primary;
-      }
-    }
-  
-    &:before {
-      top: -9px;
-      left: 18px;
-    }
-  
-    &:after {
-      bottom: -9px;
-      right: 18px;
-      transform: rotate(180deg);
-    }
+  &:after {
+    bottom: -9px;
+    right: 18px;
+    transform: rotate(180deg);
   }
+}
 
-  a {
-    color: $color-link;
-    font-weight: inherit;
+.link {
+  color: $color-link;
+  font-weight: inherit;
 
-    &:hover {
-      text-decoration: underline;
-    }
+  &:hover {
+    text-decoration: underline;
   }
 }
