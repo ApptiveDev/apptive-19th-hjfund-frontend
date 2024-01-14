@@ -3,31 +3,17 @@ import styles from "./styles.module.scss";
 import Icon from "@/components/icon";
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import { AutoLinkNode, $isAutoLinkNode, LinkNode } from "@lexical/link";
-import { computePosition, inline, offset, shift } from "@floating-ui/react";
+import { computePosition, inline, shift } from "@floating-ui/react";
 import { classes } from "@/tools/classes";
 import { conditionalClass } from "@/tools/classes";
 import { $getNodeByKey } from "lexical";
 
 export const LinkHoverToolbar = forwardRef(
-  ({ pos, isOpen, setPointerState, nodeKey, editor }, ref) => {
+  ({ pos, isOpen, setPointerState, url, isLinkNode }, ref) => {
     function copyLink() {
       navigator.clipboard.writeText(url);
       setPointerState({ reference: false, target: false });
     }
-
-    const [url, setURL] = useState(undefined);
-    const [isLinkNode, setIsLinkNode] = useState(false);
-
-    useEffect(() => {
-      editor.getEditorState().read(() => {
-        const node = $getNodeByKey(nodeKey);
-        if (!node) return;
-
-        const url = node.getURL();
-        setURL(url);
-        setIsLinkNode(!$isAutoLinkNode(node));
-      });
-    }, [isOpen]);
 
     return (
       <div
@@ -81,7 +67,11 @@ export default function LinkHoverPlugin() {
     reference: false,
     target: false,
   });
-  const [nodeKey, setNodeKey] = useState(undefined);
+
+  const [linkState, setLinkState] = useState({
+    isLinkNode: false,
+    url: "",
+  });
 
   useEffect(() => {
     if (Object.values(pointerState).every((e) => !e)) {
@@ -107,24 +97,24 @@ export default function LinkHoverPlugin() {
       )
         return;
 
-      computePosition(e.target, linkHoverToolbarRef.current, {
-        placement: "bottom-start",
-        middleware: [
-          offset({
-            crossAxis: -10,
-          }),
-          inline(),
-          shift()
-        ],
-      })
-        .then((pos) =>
-          setTimeout(() => {
-            setPos(pos);
-            console.log(pos);
-            setNodeKey(key);
-          }, 200)
-        )
-        .catch(() => setPos(undefined));
+      editor.getEditorState().read(() => {
+        setIsOpen(false);
+        const node = $getNodeByKey(key);
+
+        setLinkState({
+          isLinkNode: !$isAutoLinkNode(node),
+          url: node.getURL(),
+        });
+      });
+
+      setTimeout(() => {
+        computePosition(e.target, linkHoverToolbarRef.current, {
+          placement: "bottom",
+          middleware: [shift({ padding: 30 }), inline()],
+        })
+          .then((pos) => setPos(pos))
+          .catch(() => setPos(undefined));
+      }, 200);
     }
 
     function PointerLeaveHandler() {
@@ -170,7 +160,8 @@ export default function LinkHoverPlugin() {
       pos={pos}
       isOpen={isOpen}
       setPointerState={setPointerState}
-      nodeKey={nodeKey}
+      isLinkNode={linkState.isLinkNode}
+      url={linkState.url}
     />
   );
 }
