@@ -5,6 +5,7 @@ import { conditionalClass } from "@/tools/classes";
 import Icon from "@/components/icon";
 
 import BoldIcon from "./icons/bold.svg";
+import ItalicIcon from "./icons/italic.svg";
 import StrikethroughIcon from "./icons/strikethrough.svg";
 import UnderlineIcon from "./icons/underline.svg";
 import PalleteIcon from "./icons/pallete.svg";
@@ -13,6 +14,7 @@ import { $getSelection, $isRangeSelection, FORMAT_TEXT_COMMAND } from "lexical";
 export const FloatingMenu = forwardRef(({ editor, coords }, ref) => {
   const [inlineState, setInlineState] = useState({
     isBold: false,
+    isItalic: false,
     isStrikethrough: false,
     isUnderline: false,
   });
@@ -26,6 +28,7 @@ export const FloatingMenu = forwardRef(({ editor, coords }, ref) => {
 
           setInlineState({
             isBold: selection.hasFormat("bold"),
+            isItalic: selection.hasFormat("italic"),
             isStrikethrough: selection.hasFormat("strikethrough"),
             isUnderline: selection.hasFormat("underline"),
           });
@@ -59,6 +62,15 @@ export const FloatingMenu = forwardRef(({ editor, coords }, ref) => {
         onClick={() => editor.dispatchCommand(FORMAT_TEXT_COMMAND, "bold")}
       >
         <BoldIcon />
+      </button>
+      <button
+        className={classes(
+          styles.icon,
+          conditionalClass(inlineState.isItalic, styles.active)
+        )}
+        onClick={() => editor.dispatchCommand(FORMAT_TEXT_COMMAND, "italic")}
+      >
+        <ItalicIcon />
       </button>
       <button
         className={classes(
