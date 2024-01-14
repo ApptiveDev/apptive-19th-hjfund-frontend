@@ -3,6 +3,7 @@ import styles from "./styles.module.scss";
 import Icon from "@/components/icon";
 import { classes } from "@/tools/classes";
 import { conditionalClass } from "@/tools/classes";
+import openLink from "@/components/editor/tools/openLink";
 
 const LinkHoverToolbar = forwardRef(
   ({ pos, isOpen, setPointerState, url }, ref) => {
@@ -32,8 +33,7 @@ const LinkHoverToolbar = forwardRef(
             className={styles.url}
             onClick={(e) => {
               e.preventDefault();
-              const newWindow = window.open(url, "_blank");
-              if (window.focus) newWindow.blur();
+              openLink(url);
             }}
             href={url}
           >

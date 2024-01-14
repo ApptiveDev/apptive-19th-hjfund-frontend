@@ -71,8 +71,6 @@ export default function LinkHoverPlugin() {
   function mutatedNodesHandler(mutatedNodes) {
     for (const [nodeKey, mutation] of mutatedNodes) {
       if (mutation === "created") {
-        console.log("Hello");
-
         const element = editor.getElementByKey(nodeKey);
         if (!element) return;
 
@@ -94,12 +92,12 @@ export default function LinkHoverPlugin() {
   }
 
   useEffect(() => {
-    return editor.registerMutationListener(AutoLinkNode, mutatedNodesHandler);
-  }, [editor]);
+    const unregister = [LinkNode, AutoLinkNode].map((node) =>
+      editor.registerMutationListener(node, (node) => mutatedNodesHandler(node))
+    );
 
-  useEffect(() => {
-    return editor.registerMutationListener(LinkNode, mutatedNodesHandler);
-  }, [editor]);
+    return () => unregister.forEach((fn) => fn());
+  });
 
   return (
     <LinkHoverToolbar

@@ -8,6 +8,7 @@ import { $getSelection, $isRangeSelection } from "lexical";
 import { getSelectedNode } from "@/components/editor/tools/getSelectedNode";
 import { $isLinkNode, TOGGLE_LINK_COMMAND } from "@lexical/link";
 import Checkbox from "@/components/checkbox";
+import openLink from "@/components/editor/tools/openLink";
 
 const LinkInsertToolbar = forwardRef(({ editor, pos }, ref) => {
   const [link, setLink] = useState("");
@@ -23,7 +24,7 @@ const LinkInsertToolbar = forwardRef(({ editor, pos }, ref) => {
       if (node) {
         setLink(node.getURL());
         setNewTab(node.getTarget() === "_blank");
-      };
+      }
     });
   }, [pos]);
 
@@ -68,11 +69,10 @@ const LinkInsertToolbar = forwardRef(({ editor, pos }, ref) => {
         <Button
           buttonSize="small"
           buttonStyle="outlined"
-          onClick={() => {
-            const newWindow = window.open(link, "_blank");
-            if (window.focus) newWindow.blur();
-          }}
-        >링크 열기</Button>
+          onClick={() => openLink(link)}
+        >
+          링크 열기
+        </Button>
         <Button buttonSize="small" buttonStyle="filled" onClick={enableLink}>
           적용
         </Button>
