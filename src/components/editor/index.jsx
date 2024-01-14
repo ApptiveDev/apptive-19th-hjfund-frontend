@@ -17,8 +17,10 @@ import { HorizontalRuleNode } from "@lexical/react/LexicalHorizontalRuleNode";
 import { TabIndentationPlugin } from "@lexical/react/LexicalTabIndentationPlugin";
 import { ListPlugin } from "@lexical/react/LexicalListPlugin";
 import { ListNode, ListItemNode } from "@lexical/list";
+import { LinkNode, AutoLinkNode } from "@lexical/link";
 import ShortcutPlugin from "./plugins/shortcut";
 import FloatingPlugin from "./plugins/floating";
+import LinkPlugin from "./plugins/link";
 
 const onError = (error) => {
   console.error(error);
@@ -33,6 +35,8 @@ const initialConfig = {
     ListNode,
     ListItemNode,
     QuoteNode,
+    AutoLinkNode,
+    LinkNode,
   ],
 };
 
@@ -87,6 +91,7 @@ const Editor = () => {
           <TabIndentationPlugin />
           <ShortcutPlugin />
           <ListPlugin />
+          <LinkPlugin />
         </div>
       </LexicalComposer>
     )

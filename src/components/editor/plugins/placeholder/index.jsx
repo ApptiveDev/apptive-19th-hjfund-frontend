@@ -1,5 +1,5 @@
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
-import { $getRoot, $getSelection } from "lexical";
+import { $getRoot, $getSelection, $isRangeSelection } from "lexical";
 import { useEffect, useRef } from "react";
 
 import styles from "./styles.module.scss";
@@ -78,7 +78,7 @@ export default function PlaceholderPlugin() {
         const selection = $getSelection();
 
         // check cursor position
-        if (selection.isCollapsed && selection.isCollapsed()) {
+        if ($isRangeSelection(selection) && selection.isCollapsed()) {
           const nodes = selection.getNodes();
           if (nodes.length === 1) {
             const node = nodes[0].getTopLevelElement();

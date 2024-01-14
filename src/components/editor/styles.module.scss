@@ -95,4 +95,13 @@
       transform: rotate(180deg);
     }
   }
+
+  a {
+    color: $color-link;
+    font-weight: inherit;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 }
