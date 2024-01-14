@@ -175,7 +175,7 @@ const getOptions = (editor) => [
     title: "구분선",
     description: "글 영역 분리",
     icon: <span />,
-    keywords: ["divider", "hr", "구분선", "분리"],
+    keywords: ["divider", "hr", "line", "구분선", "분리"],
     onSelect: () => {
       editor.update(() => {
         const root = $getRoot();

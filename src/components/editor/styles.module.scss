@@ -47,7 +47,12 @@
     border: none;
     height: 1px;
     background-color: $color-border;
+    transition: background-color 0.1s;
     margin: 24px auto;
+    
+    &:global(.selected) {
+      background-color: $color-primary;
+    }
   }
 
   ul, ol {
