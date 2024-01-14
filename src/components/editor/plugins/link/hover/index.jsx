@@ -3,7 +3,7 @@ import styles from "./styles.module.scss";
 import Icon from "@/components/icon";
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import { AutoLinkNode, $isAutoLinkNode, LinkNode } from "@lexical/link";
-import { computePosition, inline, offset } from "@floating-ui/react";
+import { computePosition, inline, offset, shift } from "@floating-ui/react";
 import { classes } from "@/tools/classes";
 import { conditionalClass } from "@/tools/classes";
 import { $getNodeByKey } from "lexical";
@@ -114,11 +114,13 @@ export default function LinkHoverPlugin() {
             crossAxis: -10,
           }),
           inline(),
+          shift()
         ],
       })
         .then((pos) =>
           setTimeout(() => {
             setPos(pos);
+            console.log(pos);
             setNodeKey(key);
           }, 200)
         )

@@ -6,6 +6,8 @@
   padding-top: 10px;
   transition: opacity 0.1s;
 
+  max-width: calc(100% - 60px);
+  
   &.hidden {
     opacity: 0;
     transition: none;
@@ -17,6 +19,8 @@
   border: 1px solid $color-border;
   border-radius: 10px;
   box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.08);
+
+  overflow: hidden;
 
   z-index: 1;
   height: 32px;
@@ -34,6 +38,17 @@
   .url {
     padding: 0 8px;
     column-gap: 6px;
+    overflow: hidden;
+
+    & > svg {
+      flex-shrink: 0;
+    }
+
+    & > span {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
   }
 
   & > .buttons {
