@@ -1,0 +1,44 @@
+@import "../../../../../styles/variables";
+
+.container {
+  background-color: $color-background;
+  border: 1px solid $color-border;
+  border-radius: 10px;
+  box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.08);
+  min-width: 300px;
+  width: 60vw;
+  max-width: 420px;
+
+  z-index: 1;
+  pointer-events: all;
+  position: absolute;
+  transition: opacity 0.1s;
+
+  &.hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+  padding: 8px;
+
+  .textfield {
+    border-radius: 6px;
+  }
+
+  .bottom {
+    display: flex;
+    column-gap: 10px;
+
+    .newTab {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      column-gap: 6px;
+      @include ui-2;
+      padding: 0 4px;
+    }
+  }
+}

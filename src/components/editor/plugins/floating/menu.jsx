@@ -10,10 +10,14 @@ import StrikethroughIcon from "./icons/strikethrough.svg";
 import UnderlineIcon from "./icons/underline.svg";
 import PalleteIcon from "./icons/pallete.svg";
 import { $getSelection, $isRangeSelection, FORMAT_TEXT_COMMAND } from "lexical";
-import { TOGGLE_LINK_COMMAND } from "@lexical/link";
+import { TOGGLE_LINK_COMMAND, $isLinkNode } from "@lexical/link";
+import { getSelectedNode } from "../../tools/getSelectedNode";
 
 export const FloatingMenu = forwardRef(({ editor, coords }, ref) => {
+  const [isSameNode, setIsSameNode] = useState(false);
+
   const [inlineState, setInlineState] = useState({
+    isLink: false,
     isBold: false,
     isItalic: false,
     isStrikethrough: false,
@@ -27,7 +31,20 @@ export const FloatingMenu = forwardRef(({ editor, coords }, ref) => {
           const selection = $getSelection();
           if (!$isRangeSelection(selection)) return;
 
+          const anchorNode = selection.anchor.getNode();
+          const focusNode = selection.focus.getNode();
+
+          const isSameNode =
+            anchorNode.getTopLevelElement().getKey() ===
+            focusNode.getTopLevelElement().getKey();
+
+          setIsSameNode(isSameNode);
+
+          const node = getSelectedNode(selection);
+          const parent = node.getParent();
+
           setInlineState({
+            isLink: isSameNode && ($isLinkNode(parent) || $isLinkNode(node)),
             isBold: selection.hasFormat("bold"),
             isItalic: selection.hasFormat("italic"),
             isStrikethrough: selection.hasFormat("strikethrough"),
@@ -50,11 +67,26 @@ export const FloatingMenu = forwardRef(({ editor, coords }, ref) => {
         conditionalClass(!coords, styles.hidden)
       )}
     >
-      <button className={styles.link} onClick={() => editor.dispatchCommand(TOGGLE_LINK_COMMAND, null)}>
-        <Icon size={16} iconType="link-chain" />
-        <span>링크</span>
-      </button>
-      <span className={styles.divider} />
+      {isSameNode && (
+        <>
+          <button
+            className={classes(
+              styles.link,
+              conditionalClass(inlineState.isLink, styles.active)
+            )}
+            onClick={() =>
+              editor.dispatchCommand(
+                TOGGLE_LINK_COMMAND,
+                inlineState.isLink ? null : "https://"
+              )
+            }
+          >
+            <Icon size={16} iconType="link-chain" />
+            <span>링크</span>
+          </button>
+          <span className={styles.divider} />
+        </>
+      )}
       <button
         className={classes(
           styles.icon,

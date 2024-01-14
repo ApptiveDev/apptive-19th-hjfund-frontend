@@ -19,10 +19,7 @@ export default function LinkHoverPlugin() {
     target: false,
   });
 
-  const [linkState, setLinkState] = useState({
-    isLinkNode: false,
-    url: "",
-  });
+  const [url, setURL] = useState("");
 
   useEffect(() => {
     if (Object.values(pointerState).every((e) => !e)) {
@@ -38,72 +35,71 @@ export default function LinkHoverPlugin() {
     }
   }, [pos]);
 
-  useEffect(() => {
-    function PointerEnterHandler(e, key) {
-      const { anchorOffset, focusOffset } = getSelection();
-      if (
-        !e.target ||
-        !linkHoverToolbarRef.current ||
-        anchorOffset != focusOffset
-      )
-        return;
+  function PointerEnterHandler(e, key) {
+    const { anchorOffset, focusOffset } = getSelection();
+    if (
+      !e.target ||
+      !linkHoverToolbarRef.current ||
+      anchorOffset != focusOffset
+    )
+      return;
 
-      editor.getEditorState().read(() => {
-        setIsOpen(false);
-        const node = $getNodeByKey(key);
+    editor.getEditorState().read(() => {
+      setIsOpen(false);
+      const node = $getNodeByKey(key);
 
-        keyRef.current = key;
+      keyRef.current = key;
 
-        setLinkState({
-          isLinkNode: !$isAutoLinkNode(node),
-          url: node.getURL(),
-        });
-      });
+      setURL(node.getURL());
+    });
 
-      timeoutRef.current = setTimeout(() => {
-        computePosition(e.target, linkHoverToolbarRef.current, {
-          placement: "bottom",
-          middleware: [shift({ padding: 30 }), inline()],
-        })
-          .then((pos) => setPos(pos))
-          .catch(() => setPos(undefined));
-      }, 200);
-    }
+    timeoutRef.current = setTimeout(() => {
+      computePosition(e.target, linkHoverToolbarRef.current, {
+        placement: "bottom",
+        middleware: [shift({ padding: 30 }), inline()],
+      })
+        .then((pos) => setPos(pos))
+        .catch(() => setPos(undefined));
+    }, 200);
+  }
 
-    function PointerLeaveHandler() {
-      clearTimeout(timeoutRef.current);
-      setPointerState((prev) => ({ ...prev, reference: false }));
-    }
+  function PointerLeaveHandler() {
+    clearTimeout(timeoutRef.current);
+    setPointerState((prev) => ({ ...prev, reference: false }));
+  }
 
-    function mutatedNodesHandler(mutatedNodes) {
-      for (const [nodeKey, mutation] of mutatedNodes) {
-        if (mutation === "created") {
-          const element = editor.getElementByKey(nodeKey);
-          if (!element) return;
+  function mutatedNodesHandler(mutatedNodes) {
+    for (const [nodeKey, mutation] of mutatedNodes) {
+      if (mutation === "created") {
+        console.log("Hello");
 
-          element.addEventListener("pointerleave", PointerLeaveHandler);
-          element.addEventListener("pointerenter", (e) =>
-            PointerEnterHandler(e, nodeKey)
-          );
-        } else if (mutation === "destroyed") {
-          const element = editor.getElementByKey(nodeKey);
-          if (keyRef.current === nodeKey) setPos(undefined);
-          if (!element) return;
+        const element = editor.getElementByKey(nodeKey);
+        if (!element) return;
 
-          element.removeEventListener("pointerleave", PointerLeaveHandler);
-          element.removeEventListener("pointerenter", (e) =>
-            PointerEnterHandler(e, nodeKey)
-          );
-        }
+        element.addEventListener("pointerleave", PointerLeaveHandler);
+        element.addEventListener("pointerenter", (e) =>
+          PointerEnterHandler(e, nodeKey)
+        );
+      } else if (mutation === "destroyed") {
+        const element = editor.getElementByKey(nodeKey);
+        if (keyRef.current === nodeKey) setPos(undefined);
+        if (!element) return;
+
+        element.removeEventListener("pointerleave", PointerLeaveHandler);
+        element.removeEventListener("pointerenter", (e) =>
+          PointerEnterHandler(e, nodeKey)
+        );
       }
     }
+  }
 
-    const removeListeners = [LinkNode, AutoLinkNode].map((node) =>
-      editor.registerMutationListener(node, mutatedNodesHandler)
-    );
+  useEffect(() => {
+    return editor.registerMutationListener(AutoLinkNode, mutatedNodesHandler);
+  }, [editor]);
 
-    return () => removeListeners.forEach((fn) => fn());
-  }, []);
+  useEffect(() => {
+    return editor.registerMutationListener(LinkNode, mutatedNodesHandler);
+  }, [editor]);
 
   return (
     <LinkHoverToolbar
@@ -112,8 +108,7 @@ export default function LinkHoverPlugin() {
       pos={pos}
       isOpen={isOpen}
       setPointerState={setPointerState}
-      isLinkNode={linkState.isLinkNode}
-      url={linkState.url}
+      url={url}
     />
   );
 }

@@ -28,11 +28,6 @@
     background-color: $color-text-passive-3;
   }
 
-  .link {
-    column-gap: 6px;
-    padding: 0 8px;
-  }
-
   button {
     background-color: transparent;
     padding: 0 4px;
@@ -63,5 +58,20 @@
 
   .icon {
     width: 28px;
+  }
+
+  .link {
+    column-gap: 6px;
+    padding: 0 8px;
+    
+    &.active > svg path {
+      fill: unset;
+      stroke: $color-link;
+    }
+
+    &.active {
+      background-color: rgba($color-link, 0.1);
+      color: $color-link;
+    }
   }
 };

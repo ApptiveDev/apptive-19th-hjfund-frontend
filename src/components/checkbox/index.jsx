@@ -1,6 +1,12 @@
 "use client";
 
-import { forwardRef, useImperativeHandle, useRef, useState } from "react";
+import {
+  forwardRef,
+  useEffect,
+  useImperativeHandle,
+  useRef,
+  useState,
+} from "react";
 
 import CheckIcon from "./icon.svg";
 import styles from "./styles.module.scss";
@@ -13,6 +19,7 @@ const Checkbox = forwardRef(
       onChange,
       className,
       style,
+      checked,
       checkboxBackgroundColor,
       checkboxBorderColor,
       checkboxIconColor,
@@ -27,6 +34,10 @@ const Checkbox = forwardRef(
     ref
   ) => {
     const [isChecked, setIsChecked] = useState(false);
+
+    useEffect(() => {
+      if (checked !== undefined) setIsChecked(checked);
+    }, [checked]);
 
     const inputRef = useRef(null);
     useImperativeHandle(ref, () => inputRef.current, []);
@@ -48,10 +59,9 @@ const Checkbox = forwardRef(
           type="checkbox"
           className={styles.input}
           checked={isChecked}
-          onChange={(e) => {
-            setIsChecked(e.target.checked);
-            onChange && onChange(e);
-          }}
+          onChange={(e) =>
+            onChange ? onChange(e) : setIsChecked(e.target.checked)
+          }
           onClick={(e) => e.stopPropagation()}
           style={{
             "--checkbox-background-color": checkboxBackgroundColor,

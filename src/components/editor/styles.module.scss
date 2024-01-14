@@ -38,6 +38,10 @@
       background-color: $color-primary;
     }
   }
+
+  mark {
+    background-color: rgba($color-primary, 0.2);
+  }
 }
 
 /* Editor Themes */

@@ -2,10 +2,10 @@ import { forwardRef } from "react";
 import styles from "./styles.module.scss";
 import Icon from "@/components/icon";
 import { classes } from "@/tools/classes";
-import { conditionalClass } from "@/tools/classes";;
+import { conditionalClass } from "@/tools/classes";
 
 const LinkHoverToolbar = forwardRef(
-  ({ pos, isOpen, setPointerState, url, isLinkNode }, ref) => {
+  ({ pos, isOpen, setPointerState, url }, ref) => {
     function copyLink() {
       navigator.clipboard.writeText(url);
       setPointerState({ reference: false, target: false });
@@ -30,9 +30,12 @@ const LinkHoverToolbar = forwardRef(
         <div className={styles.container}>
           <a
             className={styles.url}
+            onClick={(e) => {
+              e.preventDefault();
+              const newWindow = window.open(url, "_blank");
+              if (window.focus) newWindow.blur();
+            }}
             href={url}
-            target="_blank"
-            rel="__noreferrer"
           >
             <Icon size={12} iconType="link-chain" className={styles.linkicon} />
             <span>{url}</span>
@@ -41,11 +44,6 @@ const LinkHoverToolbar = forwardRef(
             <button onClick={() => copyLink()}>
               <Icon size={14} iconType="copy-paste" />
             </button>
-            {isLinkNode && (
-              <button>
-                <Icon size={14} iconType="pencil" />
-              </button>
-            )}
           </div>
         </div>
       </div>

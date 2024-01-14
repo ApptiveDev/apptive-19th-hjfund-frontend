@@ -24,6 +24,7 @@ import LinkHoverPlugin from "./plugins/link/hover";
 import LinkPlugin from "./plugins/link";
 import editorTheme from "./theme";
 import DebugPlugin from "./plugins/debug";
+import LinkEditPlugin from "./plugins/link/edit";
 
 const onError = (error) => {
   console.error(error);
@@ -75,6 +76,7 @@ const Editor = () => {
         <div className={styles.layer}>
           <FloatingPlugin />
           <LinkHoverPlugin />
+          <LinkEditPlugin />
         </div>
         <div className={styles.container}>
           <EditorHeadline ref={headlineRef} />
