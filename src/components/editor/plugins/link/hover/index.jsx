@@ -1,64 +1,15 @@
-import { forwardRef, useEffect, useRef, useState } from "react";
-import styles from "./styles.module.scss";
-import Icon from "@/components/icon";
+import { useEffect, useRef, useState } from "react";
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import { AutoLinkNode, $isAutoLinkNode, LinkNode } from "@lexical/link";
 import { computePosition, inline, shift } from "@floating-ui/react";
-import { classes } from "@/tools/classes";
-import { conditionalClass } from "@/tools/classes";
 import { $getNodeByKey } from "lexical";
 
-export const LinkHoverToolbar = forwardRef(
-  ({ pos, isOpen, setPointerState, url, isLinkNode }, ref) => {
-    function copyLink() {
-      navigator.clipboard.writeText(url);
-      setPointerState({ reference: false, target: false });
-    }
-
-    return (
-      <div
-        ref={ref}
-        onPointerEnter={() =>
-          setPointerState((prev) => ({ ...prev, target: true }))
-        }
-        onPointerLeave={() =>
-          setPointerState((prev) => ({ ...prev, target: false }))
-        }
-        className={classes(
-          styles.marginer,
-          conditionalClass(!isOpen, styles.hidden)
-        )}
-        aria-hidden={!isOpen}
-        style={isOpen && pos ? { top: pos.y, left: pos.x } : undefined}
-      >
-        <div className={styles.container}>
-          <a
-            className={styles.url}
-            href={url}
-            target="_blank"
-            rel="__noreferrer"
-          >
-            <Icon size={12} iconType="link-chain" className={styles.linkicon} />
-            <span>{url}</span>
-          </a>
-          <div className={styles.buttons}>
-            <button onClick={() => copyLink()}>
-              <Icon size={14} iconType="copy-paste" />
-            </button>
-            {isLinkNode && (
-              <button>
-                <Icon size={14} iconType="pencil" />
-              </button>
-            )}
-          </div>
-        </div>
-      </div>
-    );
-  }
-);
+import LinkHoverToolbar from "./toolbar";
 
 export default function LinkHoverPlugin() {
   const linkHoverToolbarRef = useRef(null);
+  const timeoutRef = useRef(null);
+  const keyRef = useRef(null);
 
   const [editor] = useLexicalComposerContext();
   const [isOpen, setIsOpen] = useState(false);
@@ -101,13 +52,15 @@ export default function LinkHoverPlugin() {
         setIsOpen(false);
         const node = $getNodeByKey(key);
 
+        keyRef.current = key;
+
         setLinkState({
           isLinkNode: !$isAutoLinkNode(node),
           url: node.getURL(),
         });
       });
 
-      setTimeout(() => {
+      timeoutRef.current = setTimeout(() => {
         computePosition(e.target, linkHoverToolbarRef.current, {
           placement: "bottom",
           middleware: [shift({ padding: 30 }), inline()],
@@ -118,10 +71,8 @@ export default function LinkHoverPlugin() {
     }
 
     function PointerLeaveHandler() {
-      setTimeout(
-        () => setPointerState((prev) => ({ ...prev, reference: false })),
-        100
-      );
+      clearTimeout(timeoutRef.current);
+      setPointerState((prev) => ({ ...prev, reference: false }));
     }
 
     function mutatedNodesHandler(mutatedNodes) {
@@ -136,6 +87,7 @@ export default function LinkHoverPlugin() {
           );
         } else if (mutation === "destroyed") {
           const element = editor.getElementByKey(nodeKey);
+          if (keyRef.current === nodeKey) setPos(undefined);
           if (!element) return;
 
           element.removeEventListener("pointerleave", PointerLeaveHandler);
