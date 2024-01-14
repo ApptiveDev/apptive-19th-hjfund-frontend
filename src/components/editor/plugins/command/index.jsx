@@ -4,7 +4,7 @@ import {
   MenuOption,
   useBasicTypeaheadTriggerMatch,
 } from "@lexical/react/LexicalTypeaheadMenuPlugin";
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import {
   INSERT_ORDERED_LIST_COMMAND,
   INSERT_UNORDERED_LIST_COMMAND,
@@ -18,6 +18,8 @@ import {
   $getRoot,
   $getSelection,
   $isRangeSelection,
+  COMMAND_PRIORITY_LOW,
+  KEY_ARROW_DOWN_COMMAND,
 } from "lexical";
 import { $setBlocksType } from "@lexical/selection";
 import { $createHeadingNode } from "@lexical/rich-text";
@@ -201,12 +203,13 @@ const getOptions = (editor) => [
         }
       });
     },
-  })
+  }),
 ];
 
 export default function CommandPlugin() {
   const [editor] = useLexicalComposerContext();
   const [queryString, setQueryString] = useState(null);
+  const [isPointerBlocked, setIsPointerBlocked] = useState(false);
 
   const checkForTriggerMatch = useBasicTypeaheadTriggerMatch("/", {
     minLength: 0,
@@ -260,6 +263,33 @@ export default function CommandPlugin() {
     [options]
   );
 
+  useEffect(() => {
+    function listener() {
+      setIsPointerBlocked(true);
+    }
+
+    const unregisterArrowDown = editor.registerCommand(
+      KEY_ARROW_DOWN_COMMAND,
+      listener,
+      COMMAND_PRIORITY_LOW
+    );
+    const unregisterArrowUp = editor.registerCommand(
+      KEY_ARROW_DOWN_COMMAND,
+      listener,
+      COMMAND_PRIORITY_LOW
+    );
+
+    document.addEventListener("pointermove", () => setIsPointerBlocked(false));
+
+    return () => {
+      unregisterArrowDown();
+      unregisterArrowUp();
+      document.removeEventListener("pointermove", () =>
+        setIsPointerBlocked(false)
+      );
+    };
+  }, []);
+
   return (
     <LexicalTypeaheadMenuPlugin
       onQueryChange={setQueryString}
@@ -299,7 +329,7 @@ export default function CommandPlugin() {
                       setHighlightedIndex(option.index);
                       selectOptionAndCleanUp(option.item);
                     }}
-                    onPointerEnter={() => setHighlightedIndex(option.index)}
+                    onPointerEnter={() => !isPointerBlocked && setHighlightedIndex(option.index)}
                     info={option.item}
                   />
                 );
