@@ -6,6 +6,7 @@ import AlignLeft from "./align-left.svg";
 import AlignRight from "./align-right.svg";
 import AscendingNumberOrder from "./ascending-number-order.svg";
 import BellNotification from "./bell-notification.svg";
+import BrokenLink2 from "./broken-link-2.svg";
 import BulletList from "./bullet-list.svg";
 import ChatBubbleOval from "./chat-bubble-oval.svg";
 import CheckSquare from "./check-square.svg";
@@ -20,9 +21,11 @@ import Heading2ParagraphStylesHeading from "./heading-2-paragraph-styles-heading
 import Heading3ParagraphStylesHeading from "./heading-3-paragraph-styles-heading.svg";
 import Heart from "./heart.svg";
 import Landscape2 from "./landscape-2.svg";
+import LinkChain from "./link-chain.svg";
 import MagnifyingGlass from "./magnifying-glass.svg";
 import NewsPaper from "./news-paper.svg";
 import Paragraph from "./paragraph.svg";
+import Pencil from "./pencil.svg";
 import ShareLink from "./share-link.svg";
 import Star2 from "./star-2.svg";
 import TextStyle from "./text-style.svg";
@@ -40,6 +43,7 @@ const icons = {
   "align-right": AlignRight,
   "ascending-number-order": AscendingNumberOrder,
   "bell-notification": BellNotification,
+  "broken-link-2": BrokenLink2,
   "bullet-list": BulletList,
   "chat-bubble-oval": ChatBubbleOval,
   "check-square": CheckSquare,
@@ -54,9 +58,11 @@ const icons = {
   "heading-3-paragraph-styles-heading": Heading3ParagraphStylesHeading,
   heart: Heart,
   "landscape-2": Landscape2,
+  "link-chain": LinkChain,
   "magnifying-glass": MagnifyingGlass,
   "news-paper": NewsPaper,
   paragraph: Paragraph,
+  pencil: Pencil,
   "share-link": ShareLink,
   "star-2": Star2,
   "text-style": TextStyle,

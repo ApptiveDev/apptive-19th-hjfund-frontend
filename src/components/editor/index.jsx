@@ -18,6 +18,7 @@ import { TabIndentationPlugin } from "@lexical/react/LexicalTabIndentationPlugin
 import { ListPlugin } from "@lexical/react/LexicalListPlugin";
 import { ListNode, ListItemNode } from "@lexical/list";
 import ShortcutPlugin from "./plugins/shortcut";
+import FloatingPlugin from "./plugins/floating";
 
 const onError = (error) => {
   console.error(error);
@@ -63,6 +64,9 @@ const Editor = () => {
   return (
     isLoaded && (
       <LexicalComposer initialConfig={initialConfig}>
+        <div className={styles.layer}>
+          <FloatingPlugin />
+        </div>
         <div className={styles.container}>
           <EditorHeadline ref={headlineRef} />
           <RichTextPlugin

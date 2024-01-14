@@ -1,0 +1,58 @@
+@import "../../../../styles/variables";
+
+.floating {
+  background-color: $color-background;
+  border: 1px solid $color-border;
+  border-radius: 10px;
+  box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.08);
+
+  z-index: 1;
+  pointer-events: all;
+  position: absolute;
+  transition: opacity 0.1s;
+  height: 40px;
+  padding: 4px;
+
+  display: flex;
+
+  &.hidden {
+    transition: none;
+    opacity: 0;
+  }
+
+  .divider {
+    align-self: center;
+    margin: 0 6px;
+    width: 1px; height: 16px;
+    background-color: $color-text-passive-3;
+  }
+
+  .link {
+    column-gap: 6px;
+    padding: 0 8px;
+  }
+
+  button {
+    background-color: transparent;
+    padding: 0 6px;
+    border-radius: 6px;
+    border: 0;
+    outline: none;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition: background-color 0.1s;
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.1);
+    }
+
+    @include ui-2;
+  }
+
+  .icon {
+    width: 30px;
+  }
+};
