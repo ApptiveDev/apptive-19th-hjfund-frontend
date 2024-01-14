@@ -5,6 +5,7 @@
   border: 1px solid $color-primary;
   border-radius: 10px;
   padding: 24px 20px;
+  margin: 9px auto 17px auto !important;
 
   &:before, &:after {
     content: "";
