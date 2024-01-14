@@ -22,10 +22,9 @@ import {
   KEY_ARROW_DOWN_COMMAND,
 } from "lexical";
 import { $setBlocksType } from "@lexical/selection";
-import { $createHeadingNode } from "@lexical/rich-text";
+import { $createHeadingNode, $createQuoteNode } from "@lexical/rich-text";
 import { $createHorizontalRuleNode } from "@lexical/react/LexicalHorizontalRuleNode";
 import Icon from "@/components/icon";
-import { $createQuoteNode } from "../../nodes/quote";
 
 const DIVIDER = "DIVIDER";
 const EMPTY = "EMPTY";
@@ -329,7 +328,9 @@ export default function CommandPlugin() {
                       setHighlightedIndex(option.index);
                       selectOptionAndCleanUp(option.item);
                     }}
-                    onPointerEnter={() => !isPointerBlocked && setHighlightedIndex(option.index)}
+                    onPointerEnter={() =>
+                      !isPointerBlocked && setHighlightedIndex(option.index)
+                    }
                     info={option.item}
                   />
                 );

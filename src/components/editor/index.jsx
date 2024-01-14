@@ -11,13 +11,12 @@ import CommandPlugin from "./plugins/command";
 import LexicalErrorBoundary from "@lexical/react/LexicalErrorBoundary";
 import { useEffect, useRef, useState } from "react";
 import PlaceholderPlugin from "./plugins/placeholder";
-import { HeadingNode } from "@lexical/rich-text";
+import { HeadingNode, QuoteNode } from "@lexical/rich-text";
 import EditorHeadline from "./plugins/headline";
 import { HorizontalRuleNode } from "@lexical/react/LexicalHorizontalRuleNode";
 import { TabIndentationPlugin } from "@lexical/react/LexicalTabIndentationPlugin";
 import { ListPlugin } from "@lexical/react/LexicalListPlugin";
 import { ListNode, ListItemNode } from "@lexical/list";
-import CustomQuoteNode from "./nodes/quote";
 import ShortcutPlugin from "./plugins/shortcut";
 
 const onError = (error) => {
@@ -27,7 +26,13 @@ const onError = (error) => {
 const initialConfig = {
   namespace: "stocktree-editor",
   onError,
-  nodes: [HeadingNode, HorizontalRuleNode, ListNode, ListItemNode, CustomQuoteNode],
+  nodes: [
+    HeadingNode,
+    HorizontalRuleNode,
+    ListNode,
+    ListItemNode,
+    QuoteNode,
+  ],
 };
 
 const Editor = () => {
