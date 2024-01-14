@@ -2,17 +2,32 @@ import { forwardRef, useEffect, useRef, useState } from "react";
 import styles from "./styles.module.scss";
 import Icon from "@/components/icon";
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
-import { AutoLinkNode, LinkNode } from "@lexical/link";
+import { AutoLinkNode, $isAutoLinkNode, LinkNode } from "@lexical/link";
 import { computePosition, inline, offset } from "@floating-ui/react";
 import { classes } from "@/tools/classes";
 import { conditionalClass } from "@/tools/classes";
+import { $getNodeByKey } from "lexical";
 
 export const LinkHoverToolbar = forwardRef(
-  ({ pos, url, type, isOpen, setPointerState }, ref) => {
+  ({ pos, isOpen, setPointerState, nodeKey, editor }, ref) => {
     function copyLink() {
       navigator.clipboard.writeText(url);
       setPointerState({ reference: false, target: false });
     }
+
+    const [url, setURL] = useState(undefined);
+    const [isLinkNode, setIsLinkNode] = useState(false);
+
+    useEffect(() => {
+      editor.getEditorState().read(() => {
+        const node = $getNodeByKey(nodeKey);
+        if (!node) return;
+
+        const url = node.getURL();
+        setURL(url);
+        setIsLinkNode(!$isAutoLinkNode(node));
+      });
+    }, [isOpen]);
 
     return (
       <div
@@ -24,25 +39,32 @@ export const LinkHoverToolbar = forwardRef(
           setPointerState((prev) => ({ ...prev, target: false }))
         }
         className={classes(
-          styles.container,
+          styles.marginer,
           conditionalClass(!isOpen, styles.hidden)
         )}
         aria-hidden={!isOpen}
         style={isOpen && pos ? { top: pos.y, left: pos.x } : undefined}
       >
-        <a className={styles.url} href={url} target="_blank" rel="__noreferrer">
-          <Icon size={12} iconType="link-chain" />
-          <span>{url}</span>
-        </a>
-        <div className={styles.buttons}>
-          <button onClick={() => copyLink()}>
-            <Icon size={14} iconType="copy-paste" />
-          </button>
-          {type === "link" && (
-            <button>
-              <Icon size={14} iconType="pencil" />
+        <div className={styles.container}>
+          <a
+            className={styles.url}
+            href={url}
+            target="_blank"
+            rel="__noreferrer"
+          >
+            <Icon size={12} iconType="link-chain" className={styles.linkicon} />
+            <span>{url}</span>
+          </a>
+          <div className={styles.buttons}>
+            <button onClick={() => copyLink()}>
+              <Icon size={14} iconType="copy-paste" />
             </button>
-          )}
+            {isLinkNode && (
+              <button>
+                <Icon size={14} iconType="pencil" />
+              </button>
+            )}
+          </div>
         </div>
       </div>
     );
@@ -51,7 +73,6 @@ export const LinkHoverToolbar = forwardRef(
 
 export default function LinkHoverPlugin() {
   const linkHoverToolbarRef = useRef(null);
-  const timeoutRef = useRef(null);
 
   const [editor] = useLexicalComposerContext();
   const [isOpen, setIsOpen] = useState(false);
@@ -60,23 +81,24 @@ export default function LinkHoverPlugin() {
     reference: false,
     target: false,
   });
-  const [linkState, setLinkState] = useState({
-    url: undefined,
-    key: undefined,
-    type: undefined,
-  });
+  const [nodeKey, setNodeKey] = useState(undefined);
 
   useEffect(() => {
-    if (Object.values(pointerState).some((e) => e)) {
-      clearTimeout(timeoutRef.current);
-      setIsOpen(true);
-    } else {
-      timeoutRef.current = setTimeout(() => setIsOpen(false), 100);
+    if (Object.values(pointerState).every((e) => !e)) {
+      setIsOpen(false);
+      setPos(undefined);
     }
   }, [pointerState]);
 
   useEffect(() => {
-    function PointerEnterHandler(e, url, key, type) {
+    if (pos) {
+      setIsOpen(true);
+      setPointerState((prev) => ({ ...prev, reference: true }));
+    }
+  }, [pos]);
+
+  useEffect(() => {
+    function PointerEnterHandler(e, key) {
       const { anchorOffset, focusOffset } = getSelection();
       if (
         !e.target ||
@@ -86,14 +108,20 @@ export default function LinkHoverPlugin() {
         return;
 
       computePosition(e.target, linkHoverToolbarRef.current, {
-        placement: "bottom",
-        middleware: [offset(10), inline()],
+        placement: "bottom-start",
+        middleware: [
+          offset({
+            crossAxis: -10,
+          }),
+          inline(),
+        ],
       })
-        .then((pos) => {
-          setPos(pos);
-          setLinkState({ url, key, type });
-          setPointerState((prev) => ({ ...prev, reference: true }));
-        })
+        .then((pos) =>
+          setTimeout(() => {
+            setPos(pos);
+            setNodeKey(key);
+          }, 200)
+        )
         .catch(() => setPos(undefined));
     }
 
@@ -104,44 +132,33 @@ export default function LinkHoverPlugin() {
       );
     }
 
-    function nodeHandler(node) {
-      const key = node.getKey();
-      const url = node.getURL();
-      const type = node.getType();
+    function mutatedNodesHandler(mutatedNodes) {
+      for (const [nodeKey, mutation] of mutatedNodes) {
+        if (mutation === "created") {
+          const element = editor.getElementByKey(nodeKey);
+          if (!element) return;
 
-      const element = editor.getElementByKey(key);
-      if (!element) return;
+          element.addEventListener("pointerleave", PointerLeaveHandler);
+          element.addEventListener("pointerenter", (e) =>
+            PointerEnterHandler(e, nodeKey)
+          );
+        } else if (mutation === "destroyed") {
+          const element = editor.getElementByKey(nodeKey);
+          if (!element) return;
 
-      setLinkState({
-        key,
-        url: node.getURL(),
-        type: node.getType(),
-      });
-
-      element.removeEventListener("pointerleave", PointerLeaveHandler);
-      element.removeEventListener("pointerenter", (e) =>
-        PointerEnterHandler(e, url, key, type)
-      );
-
-      element.addEventListener("pointerleave", PointerLeaveHandler);
-      element.addEventListener("pointerenter", (e) =>
-        PointerEnterHandler(e, url, key, type)
-      );
+          element.removeEventListener("pointerleave", PointerLeaveHandler);
+          element.removeEventListener("pointerenter", (e) =>
+            PointerEnterHandler(e, nodeKey)
+          );
+        }
+      }
     }
 
-    const removeAutoLinkTransform = editor.registerNodeTransform(
-      AutoLinkNode,
-      nodeHandler
-    );
-    const removeLinkTransform = editor.registerNodeTransform(
-      LinkNode,
-      nodeHandler
+    const removeListeners = [LinkNode, AutoLinkNode].map((node) =>
+      editor.registerMutationListener(node, mutatedNodesHandler)
     );
 
-    return () => {
-      removeAutoLinkTransform();
-      removeLinkTransform();
-    };
+    return () => removeListeners.forEach((fn) => fn());
   }, []);
 
   return (
@@ -151,9 +168,7 @@ export default function LinkHoverPlugin() {
       pos={pos}
       isOpen={isOpen}
       setPointerState={setPointerState}
-      url={linkState.url}
-      nodeKey={linkState.key}
-      type={linkState.type}
+      nodeKey={nodeKey}
     />
   );
 }

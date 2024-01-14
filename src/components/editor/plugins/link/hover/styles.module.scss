@@ -1,5 +1,17 @@
 @import "../../../../../styles/variables";
 
+.marginer {
+  pointer-events: all;
+  position: absolute;
+  padding-top: 10px;
+  transition: opacity 0.1s;
+
+  &.hidden {
+    opacity: 0;
+    transition: none;
+  }
+}
+
 .container {
   background-color: $color-background;
   border: 1px solid $color-border;
@@ -7,20 +19,12 @@
   box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.08);
 
   z-index: 1;
-  pointer-events: all;
-  position: absolute;
-  transition: opacity 0.1s;
   height: 32px;
 
   @include ui-3;
 
   display: flex;
   align-items: center;
-
-  &.hidden {
-    opacity: 0;
-    transition: none;
-  }
 
   & > .url, & > .button {
     display: flex;
