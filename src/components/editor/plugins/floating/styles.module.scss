@@ -14,6 +14,7 @@
   padding: 4px;
 
   display: flex;
+  column-gap: 4px;
 
   &.hidden {
     transition: none;
@@ -22,7 +23,7 @@
 
   .divider {
     align-self: center;
-    margin: 0 6px;
+    margin: 0 4px;
     width: 1px; height: 16px;
     background-color: $color-text-passive-3;
   }
@@ -34,7 +35,7 @@
 
   button {
     background-color: transparent;
-    padding: 0 6px;
+    padding: 0 4px;
     border-radius: 6px;
     border: 0;
     outline: none;
@@ -46,13 +47,21 @@
     transition: background-color 0.1s;
 
     &:hover {
-      background-color: rgba(0, 0, 0, 0.1);
+      background-color: rgba(black, 0.05);
+    }
+
+    &.active {
+      background-color: rgba($color-primary, 0.1);
+
+      & > svg path {
+        fill: $color-primary;
+      }
     }
 
     @include ui-2;
   }
 
   .icon {
-    width: 30px;
+    width: 28px;
   }
 };

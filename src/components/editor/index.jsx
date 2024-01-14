@@ -77,6 +77,7 @@ const Editor = () => {
             contentEditable={
               <ContentEditable
                 className={styles.editor}
+                spellCheck={false}
                 style={{
                   "--headline-height": headlineHeight + "px",
                 }}
