@@ -69,24 +69,41 @@ export default function LinkHoverPlugin() {
   }
 
   function mutatedNodesHandler(mutatedNodes) {
+    function addListeners(nodeKey) {
+      const element = editor.getElementByKey(nodeKey);
+      if (!element) return;
+
+      element.pointerEnterHandler = (e) => PointerEnterHandler(e, nodeKey);
+      element.addEventListener("pointerleave", PointerLeaveHandler);
+      element.addEventListener("pointerenter", element.pointerEnterHandler);
+    }
+
+    function removeListeners(nodeKey) {
+      const element = editor.getElementByKey(nodeKey);
+      if (keyRef.current === nodeKey) setPos(undefined);
+      if (!element) return;
+
+      element.removeEventListener("pointerleave", PointerLeaveHandler);
+      if (element.pointerEnterHandler) {
+        element.removeEventListener(
+          "pointerenter",
+          element.pointerEnterHandler
+        );
+      }
+    }
+
     for (const [nodeKey, mutation] of mutatedNodes) {
-      if (mutation === "created") {
-        const element = editor.getElementByKey(nodeKey);
-        if (!element) return;
-
-        element.addEventListener("pointerleave", PointerLeaveHandler);
-        element.addEventListener("pointerenter", (e) =>
-          PointerEnterHandler(e, nodeKey)
-        );
-      } else if (mutation === "destroyed") {
-        const element = editor.getElementByKey(nodeKey);
-        if (keyRef.current === nodeKey) setPos(undefined);
-        if (!element) return;
-
-        element.removeEventListener("pointerleave", PointerLeaveHandler);
-        element.removeEventListener("pointerenter", (e) =>
-          PointerEnterHandler(e, nodeKey)
-        );
+      switch (mutation) {
+        case "created":
+          addListeners(nodeKey);
+          break;
+        case "updated":
+          removeListeners(nodeKey);
+          addListeners(nodeKey);
+          break;
+        case "deleted":
+          removeListeners(nodeKey);
+          break;
       }
     }
   }

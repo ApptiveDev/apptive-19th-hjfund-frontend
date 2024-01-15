@@ -9,6 +9,7 @@ import { getSelectedNode } from "@/components/editor/tools/getSelectedNode";
 import { $isLinkNode, TOGGLE_LINK_COMMAND } from "@lexical/link";
 import Checkbox from "@/components/checkbox";
 import openLink from "@/components/editor/tools/openLink";
+import Icon from "@/components/icon";
 
 const LinkInsertToolbar = forwardRef(({ editor, pos }, ref) => {
   const [link, setLink] = useState("");
@@ -52,6 +53,16 @@ const LinkInsertToolbar = forwardRef(({ editor, pos }, ref) => {
         textfieldSize="small"
         value={link}
         onChange={(e) => setLink(e.target.value)}
+        textfieldRight={
+          <Icon
+            button
+            size={16}
+            buttonSize={28}
+            className={styles.unlink}
+            iconType="broken-link-2"
+            onClick={() => editor.dispatchCommand(TOGGLE_LINK_COMMAND, null)}
+          />
+        }
         onKeyUp={(e) => {
           if (e.key === "Enter") enableLink();
         }}
@@ -71,7 +82,7 @@ const LinkInsertToolbar = forwardRef(({ editor, pos }, ref) => {
           buttonStyle="outlined"
           onClick={() => openLink(link)}
         >
-          링크 열기
+          열기
         </Button>
         <Button buttonSize="small" buttonStyle="filled" onClick={enableLink}>
           적용

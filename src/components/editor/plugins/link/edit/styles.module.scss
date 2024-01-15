@@ -14,6 +14,11 @@
   position: absolute;
   transition: opacity 0.1s;
 
+  .unlink {
+    margin-right: 4px;
+    align-self: center;
+  }
+
   &.hidden {
     opacity: 0;
     pointer-events: none;
