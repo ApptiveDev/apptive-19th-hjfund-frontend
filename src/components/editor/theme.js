@@ -1,7 +1,6 @@
 import styles from "./styles.module.scss";
 
 const editorTheme = {
-  paragraph: styles.paragraph,
   quote: styles.quote,
   heading: {
     h1: styles["heading-1"],

@@ -21,6 +21,8 @@
   padding-bottom: 200px;
   flex: 1;
 
+  @include paragraph-1;
+
   & > * {
     max-width: $max-article-editor-width;
     margin: 0 auto;
@@ -45,10 +47,6 @@
 }
 
 /* Editor Themes */
-
-.paragraph {
-  @include paragraph-1;
-}
 
 .heading-1 {
   @include editor-title-1;

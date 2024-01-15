@@ -31,12 +31,13 @@ export const FloatingMenu = forwardRef(({ editor, coords }, ref) => {
           const selection = $getSelection();
           if (!$isRangeSelection(selection)) return;
 
-          const anchorNode = selection.anchor.getNode();
-          const focusNode = selection.focus.getNode();
+          const anchorNode = selection.anchor.getNode().getTopLevelElement();
+          const focusNode = selection.focus.getNode().getTopLevelElement();
 
           const isSameNode =
-            anchorNode.getTopLevelElement().getKey() ===
-            focusNode.getTopLevelElement().getKey();
+            anchorNode &&
+            focusNode &&
+            anchorNode.getKey() === focusNode.getKey();
 
           setIsSameNode(isSameNode);
 
