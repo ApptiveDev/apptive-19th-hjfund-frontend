@@ -25,13 +25,13 @@ import LinkPlugin from "./plugins/link";
 import editorTheme from "./theme";
 import DebugPlugin from "./plugins/debug";
 import LinkEditPlugin from "./plugins/link/edit";
+import HeaderPlugin from "./plugins/header";
 
 const onError = (error) => {
   console.error(error);
 };
 
 const initialConfig = {
-  namespace: "stocktree-editor",
   onError,
   nodes: [
     HeadingNode,
@@ -45,7 +45,7 @@ const initialConfig = {
   theme: editorTheme,
 };
 
-const Editor = () => {
+const Editor = ({ editable, id, editorState }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [headlineHeight, setHeadlineHeight] = useState(0);
 
@@ -72,7 +72,18 @@ const Editor = () => {
 
   return (
     isLoaded && (
-      <LexicalComposer initialConfig={initialConfig}>
+      <LexicalComposer
+        initialConfig={{
+          ...initialConfig,
+          namespace: editable ? (id ? `edit-${id}` : "add") : "view",
+          editorState,
+          editable,
+        }}
+      >
+        {editable && <HeaderPlugin id={id} />}
+        <div className={styles.modal}>
+          
+        </div>
         <div className={styles.layer}>
           <FloatingPlugin />
           <LinkHoverPlugin />
