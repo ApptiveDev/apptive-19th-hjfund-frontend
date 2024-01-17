@@ -1,4 +1,4 @@
-import { $applyNodeReplacement, DecoratorNode } from "lexical";
+import { $applyNodeReplacement, DecoratorNode, LexicalEditor, createEditor } from "lexical";
 import styles from "./styles.module.scss";
 import ImageComponent from "./component";
 
@@ -25,7 +25,7 @@ export class ImageNode extends DecoratorNode {
     this.__imageURL = imageURL;
 
     if (options) {
-      this.__imageCaption = options?.caption;
+      this.__imageCaption = options?.caption || createEditor();
       this.__imageWidth = options?.width;
       this.__imageHeight = options?.height;
       this.__imageMaxWidth = options?.maxWidth;
@@ -89,7 +89,7 @@ export class ImageNode extends DecoratorNode {
   setCaption(caption) {
     const writable = this.getWritable();
 
-    if (typeof caption === "string") {
+    if (caption instanceof LexicalEditor) {
       writable.__imageCaption = caption;
     }
   }
@@ -108,7 +108,7 @@ export class ImageNode extends DecoratorNode {
       version: 1,
       imageType: this.__imageType,
       imageURL: this.__imageURL,
-      imageCaption: this.__imageCaption,
+      imageCaption: this.__imageCaption.toJSON(),
       imageWidth: this.__imageWidth,
       imageHeight: this.__imageHeight,
       imageMaxWidth: this.__imageMaxWidth,
@@ -116,17 +116,24 @@ export class ImageNode extends DecoratorNode {
   }
 
   static importJSON(json) {
-    return new ImageNode(
+    const node = new ImageNode(
       json.imageType,
       json.imageURL,
       {
-        caption: json.imageCaption,
         width: json.imageWidth,
         height: json.imageHeight,
         maxWidth: json.imageMaxWidth,
       },
       json.key
     );
+
+    const nestedEditor = node.__imageCaption;
+    const editorState = nestedEditor.parseEditorState(json.caption.editorState);
+    if (!editorState.isEmpty()) {
+      nestedEditor.setEditorState(editorState);
+    }
+
+    return node;
   }
 
   exportDOM() {

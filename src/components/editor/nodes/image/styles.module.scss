@@ -2,6 +2,24 @@
 
 .figure {
   margin-bottom: 30px;
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+
+  &:after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; bottom: 0; top: 0;
+    background-color: rgba($color-blue, 0.1);
+    z-index: 2;
+    opacity: 0;
+    transition: opacity 0.1s;
+    pointer-events: none;
+  }
+
+  &.selected:after {
+    opacity: 1;
+  }
 }
 
 .imgcontainer {
@@ -53,16 +71,21 @@
 }
 
 .caption {
+  position: relative;
   margin-top: 20px;
   text-align: center;
   color: $color-text-passive-1;
   @include paragraph-2;
 
-  outline: none;
+  .text {
+    outline: none;
+  }
 
-  &:empty:not(:focus):before {
+  .placeholder {
     pointer-events: none;
-    content: attr(placeholder);
+    position: absolute;
+    top: 0; left: 50%;
+    transform: translateX(-50%);
     color: $color-text-passive-2;
- }
+  }
 }

@@ -1,6 +1,7 @@
 import {
   EditorConfig,
   ElementNode,
+  LexicalEditor,
   LexicalNode,
   NodeKey,
   SerializedLexicalNode,
@@ -32,7 +33,7 @@ export declare class ImageNode extends ElementNode {
   __imageType: ImageType;
   __imageURL: string;
   __imageAlt: string;
-  __imageCaption: string;
+  __imageCaption: LexicalEditor;
   __imageWidth: number;
   __imageHeight: number;
   __imageMaxWidth: number;
@@ -55,7 +56,7 @@ export declare class ImageNode extends ElementNode {
   getImageOptions(): NodeOptions;
 
   setImageSize(width: number, height: number): void;
-  setCaption(caption: string): void;
+  setCaption(caption: LexicalEditor): void;
   setImageMaxWidth(maxWidth: number): void;
 
   exportJSON(): SerializedImageNode;

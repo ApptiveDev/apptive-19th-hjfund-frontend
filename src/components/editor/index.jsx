@@ -28,6 +28,7 @@ import LinkEditPlugin from "./plugins/link/edit";
 import HeaderPlugin from "./plugins/header";
 import { ImagePlugin } from "./plugins/image";
 import { ImageNode } from "./nodes/image";
+import { useSharedHistoryContext } from "./context/sharedHistoryContext";
 
 const onError = (error) => {
   console.error(error);
@@ -82,6 +83,8 @@ const Editor = ({ editable, id, editorState }) => {
     [editable, id]
   );
 
+  const { historyState } = useSharedHistoryContext();
+
   return (
     isLoaded && (
       <LexicalComposer
@@ -116,7 +119,7 @@ const Editor = ({ editable, id, editorState }) => {
             ErrorBoundary={LexicalErrorBoundary}
           />
           <CommandPlugin />
-          <HistoryPlugin />
+          <HistoryPlugin externalHistoryState={historyState} />
           <OnChangePlugin />
           <PlaceholderPlugin />
           <TabIndentationPlugin />

@@ -35,9 +35,20 @@
     background-color: $color-border;
     transition: background-color 0.1s;
     margin: 24px auto;
+    position: relative;
+    overflow: visible;
+
+    &:before {
+      content: "";
+      top: -12px; left: 0; right: 0;
+      height: 24px;
+      position: absolute;
+      transition: background-color 0.1s;
+      border-radius: 8px;
+    }
     
-    &:global(.selected) {
-      background-color: $color-primary;
+    &:global(.selected):before {
+      background-color: rgba($color-blue, 0.1);
     }
   }
 
