@@ -12,11 +12,10 @@ import Icon from "@/components/icon";
 import {
   $createParagraphNode,
   $createTextNode,
+  $getRoot,
   $getSelection,
-  $isNodeSelection,
   $isRangeSelection,
   $isRootNode,
-  $isTextNode,
   $setSelection,
   COMMAND_PRIORITY_CRITICAL,
   KEY_ENTER_COMMAND,
@@ -24,8 +23,6 @@ import {
 import { useSharedHistoryContext } from "../../context/sharedHistoryContext";
 import { useLexicalNodeSelection } from "@lexical/react/useLexicalNodeSelection";
 import { ContentEditable } from "@lexical/react/LexicalContentEditable";
-import { OnChangePlugin } from "@lexical/react/LexicalOnChangePlugin";
-import mergeRegister from "../../tools/mergeRegister";
 import { classes } from "@/tools/classes";
 import { conditionalClass } from "@/tools/classes";
 
@@ -33,18 +30,41 @@ export default function ImageComponent({ editor, config, node }) {
   const { historyState } = useSharedHistoryContext();
 
   const imageRef = useRef(null);
+  const imageContainerRef = useRef(null);
+  const figureRef = useRef(null);
+
+  const leftHandleRef = useRef(null);
+  const rightHandleRef = useRef(null);
 
   const [src, setSrc] = useState(undefined);
 
-  const [isSelected] = useLexicalNodeSelection(
-    node.__key
-  );
+  const [isSelected] = useLexicalNodeSelection(node.__key);
 
   const [options, setOptions] = useState({
     width: node.__imageWidth,
     height: node.__imageHeight,
     maxWidth: node.__imageMaxWidth,
   });
+
+  const downloadImage = useCallback(() => {
+    const link = document.createElement("a");
+    link.href = src;
+
+    link.download =
+      node.getImageType() === "local" ? node.getImageURL() : "downloaded_image";
+    document.body.appendChild(link);
+    link.click();
+
+    document.body.removeChild(link);
+  }, [src]);
+
+  const removeHandler = useCallback(() => {
+    editor.update(() => {
+      const root = $getRoot();
+      root.getChildrenSize() === 1 && root.append($createParagraphNode());
+      node.remove();
+    });
+  }, []);
 
   const insertNewLine = useCallback((e, text) => {
     $setSelection(null);
@@ -96,7 +116,9 @@ export default function ImageComponent({ editor, config, node }) {
   }, []);
 
   const handleMaxWidthChange = useCallback((maxWidth) => {
-    node.setMaxWidth(maxWidth);
+    editor.update(() => {
+      node.setImageMaxWidth(maxWidth);
+    });
 
     setOptions((prev) => ({
       ...prev,
@@ -109,7 +131,14 @@ export default function ImageComponent({ editor, config, node }) {
 
     if (imageRef.current) {
       imageRef.current.onload = () => {
-        handleImageSizeChange(imageRef.current.width, imageRef.current.height);
+        const { height, width, naturalHeight, naturalWidth } = imageRef.current;
+
+        handleImageSizeChange(naturalWidth, naturalHeight);
+
+        // 이미지가 화면보다 크면 최대 너비를 조정한다.
+        if (height > window.innerHeight * 0.8) {
+          handleMaxWidthChange((width * window.innerHeight * 0.8) / height);
+        }
       };
     }
 
@@ -143,19 +172,73 @@ export default function ImageComponent({ editor, config, node }) {
     }
   }, [node.__imageCaption]);
 
+  useEffect(() => {
+    const onPointerMove = (e) => {
+      window.requestAnimationFrame(() => {
+        const { width, left } = figureRef.current.getBoundingClientRect();
+        const center = left + width / 2;
+        const nowWidth = Math.max(
+          Math.min(2 * Math.abs(e.clientX - center)),
+          100
+        );
+
+        if (imageContainerRef.current) {
+          imageContainerRef.current.style.maxWidth = `${nowWidth}px`;
+        }
+      });
+    };
+
+    const onPointerCancel = () => {
+      const containerWidth = figureRef.current.clientWidth;
+      const maxWidth = imageContainerRef.current.style.maxWidth;
+
+      handleMaxWidthChange(maxWidth >= containerWidth ? undefined : maxWidth);
+
+      document.removeEventListener("pointermove", onPointerMove);
+    };
+
+    const onPointerDown = (e) => {
+      if (
+        (leftHandleRef.current && e.target === leftHandleRef.current) ||
+        (rightHandleRef.current && e.target === rightHandleRef.current)
+      ) {
+        document.addEventListener("pointermove", onPointerMove);
+      }
+    };
+
+    document.addEventListener("pointercancel", onPointerCancel);
+    document.addEventListener("pointerup", onPointerCancel);
+    document.addEventListener("pointerdown", onPointerDown);
+
+    return () => {
+      document.removeEventListener("pointerdown", onPointerDown);
+      document.removeEventListener("pointerup", onPointerCancel);
+      document.removeEventListener("pointercancel", onPointerCancel);
+    };
+  }, []);
+
   return (
     <figure
+      ref={figureRef}
       className={classes(
         styles.figure,
         conditionalClass(isSelected, styles.selected)
       )}
     >
-      <div className={styles.imgcontainer}>
+      <div
+        ref={imageContainerRef}
+        className={styles.imgcontainer}
+        style={{ maxWidth: options.maxWidth }}
+      >
+        <div className={styles.handles}>
+          <span ref={leftHandleRef} className={styles.left} />
+          <span ref={rightHandleRef} className={styles.right} />
+        </div>
         <div className={styles.tools}>
-          <button>
+          <button onClick={() => downloadImage()}>
             <Icon size={18} iconType="download-file" />
           </button>
-          <button>
+          <button onClick={removeHandler}>
             <Icon size={14} iconType="delete-1" />
           </button>
         </div>

@@ -2,10 +2,8 @@ import { useState } from "react";
 import styles from "./styles.module.scss";
 import Tab from "@/components/tab";
 import Button from "@/components/button";
-import { saveLocalImage } from "../../tools/localImage";
-import { $createParagraphNode, $getSelection, $isRangeSelection } from "lexical";
-import { $createImageNode } from "../../nodes/image";
 import Modal from "@/components/modal";
+import { handleUpload } from "./tools";
 
 function ImageFileModal({ editor, id, onClose }) {
   function uploadAction() {
@@ -18,27 +16,9 @@ function ImageFileModal({ editor, id, onClose }) {
       const file = e.currentTarget.files[0];
       if (!file) return;
   
-      const imageId = await saveLocalImage(id, file);
-      editor.update(() => {
-        const selection = $getSelection();
-        if (!$isRangeSelection(selection)) return;
-  
-        const anchorNode = selection.anchor.getNode()?.getTopLevelElement();
-        if (!anchorNode) return;
-  
-        const imageNode = $createImageNode("local", imageId);
-  
-        anchorNode.isEmpty()
-          ? anchorNode.replace(imageNode)
-          : anchorNode.insertAfter(imageNode);
-
-        const newParagraph = $createParagraphNode();
-        imageNode.insertAfter(newParagraph);
-        newParagraph.select();
-  
-        onClose();
-        fileInput.removeEventListener("change", handleFileChange);
-      });
+      await handleUpload(editor, id, file).catch(() => {});
+      onClose();
+      fileInput.removeEventListener("change", handleFileChange);
     }
 
     fileInput.addEventListener("change", handleFileChange);

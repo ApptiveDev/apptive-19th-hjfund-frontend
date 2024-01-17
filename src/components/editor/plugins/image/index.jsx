@@ -1,10 +1,18 @@
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import { useCallback, useEffect, useState } from "react";
 import { $isImageNode, $isRemoteImageNode, ImageNode } from "../../nodes/image";
-import { $getNodeByKey, COMMAND_PRIORITY_EDITOR, createCommand } from "lexical";
+import {
+  $getNodeByKey,
+  COMMAND_PRIORITY_EDITOR,
+  COMMAND_PRIORITY_NORMAL,
+  PASTE_COMMAND,
+  createCommand,
+} from "lexical";
 import localforage from "localforage";
 import { $isLocalImageNode } from "../../nodes/image";
 import ImageModal from "./modal";
+import mergeRegister from "../../tools/mergeRegister";
+import { handleUpload } from "./tools";
 
 export function getLocalImageTreeStore(articleId) {
   return localforage.createInstance({
@@ -51,9 +59,8 @@ export function ImagePlugin({ editable, id }) {
   }, []);
 
   useEffect(() => {
-    const unregisterMutation = editor.registerMutationListener(
-      ImageNode,
-      (nodes) => {
+    const unregister = mergeRegister(
+      editor.registerMutationListener(ImageNode, (nodes) => {
         for (const [mutation, nodeKey] of nodes) {
           if (mutation === "created") {
             editor.getEditorState().read(() => {
@@ -71,18 +78,34 @@ export function ImagePlugin({ editable, id }) {
             });
           }
         }
-      }
-    );
+      }),
+      editor.registerCommand(
+        PASTE_COMMAND,
+        (event) => {
+          if (!event.clipboardData) return;
 
-    const unregisterAddCommand = editor.registerCommand(
-      INSERT_IMAGE_COMMAND,
-      () => setIsModalOpen(true),
-      COMMAND_PRIORITY_EDITOR
+          const items = (
+            event.clipboardData || event.originalEvent.clipboardData
+          ).items;
+
+          for (const item of items) {
+            if (item.kind === "file" && item.type.startsWith("image/")) {
+              const blob = item.getAsFile();
+              handleUpload(editor, id, blob).catch(() => {});
+            }
+          }
+        },
+        COMMAND_PRIORITY_NORMAL
+      ),
+      editor.registerCommand(
+        INSERT_IMAGE_COMMAND,
+        () => setIsModalOpen(true),
+        COMMAND_PRIORITY_EDITOR
+      )
     );
 
     return () => {
-      unregisterMutation();
-      unregisterAddCommand();
+      unregister();
     };
   });
 
