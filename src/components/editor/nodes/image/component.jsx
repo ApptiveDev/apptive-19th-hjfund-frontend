@@ -139,6 +139,11 @@ export default function ImageComponent({ editor, config, node }) {
         if (height > window.innerHeight * 0.8) {
           handleMaxWidthChange((width * window.innerHeight * 0.8) / height);
         }
+
+        // 화질이 좀 많이 구지면 최대 너비 꽉 맞추기
+        if (naturalWidth < 860) {
+          handleMaxWidthChange(naturalWidth);
+        }
       };
     }
 
