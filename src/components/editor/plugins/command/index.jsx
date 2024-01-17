@@ -121,7 +121,7 @@ const getOptions = (editor) => [
     title: "사진",
     description: "파일 또는 링크",
     icon: <Icon size={18} iconType="landscape-2" />,
-    keywords: ["image", "photo", "사진", "이미지"],
+    keywords: ["image", "img", "photo", "사진", "이미지"],
     onSelect: () => {
       editor.dispatchCommand(INSERT_IMAGE_COMMAND);
     },

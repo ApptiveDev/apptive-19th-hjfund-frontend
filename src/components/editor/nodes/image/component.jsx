@@ -36,7 +36,7 @@ export default function ImageComponent({ editor, config, node }) {
 
   const [src, setSrc] = useState(undefined);
 
-  const [isSelected, setSelected, clearSelection] = useLexicalNodeSelection(
+  const [isSelected] = useLexicalNodeSelection(
     node.__key
   );
 
@@ -142,16 +142,6 @@ export default function ImageComponent({ editor, config, node }) {
       return unregister;
     }
   }, [node.__imageCaption]);
-
-  useEffect(() => {
-    const unregister = mergeRegister(
-
-    );
-
-    return () => {
-      unregister();
-    }
-  }, [node.__imageCaption, isSelected]);
 
   return (
     <figure
