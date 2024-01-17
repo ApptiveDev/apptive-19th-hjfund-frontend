@@ -191,8 +191,9 @@ export default function ImageComponent({ editor, config, node }) {
     const onPointerCancel = () => {
       const containerWidth = figureRef.current.clientWidth;
       const maxWidth = imageContainerRef.current.style.maxWidth;
-
-      handleMaxWidthChange(maxWidth >= containerWidth ? undefined : maxWidth);
+      handleMaxWidthChange(
+        maxWidth >= containerWidth ? undefined : Number(maxWidth.slice(0, -2))
+      );
 
       document.removeEventListener("pointermove", onPointerMove);
     };

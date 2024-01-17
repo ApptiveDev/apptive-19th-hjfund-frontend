@@ -28,7 +28,7 @@
   margin: 0 auto;
   cursor: pointer;
 
-  transition: max-width 0.1s;
+  transition: max-width 0.08s;
 
   &:hover .tools {
     opacity: 1;
@@ -88,7 +88,7 @@
   @include paragraph-2;
   
   .text {
-    min-width: 28px;
+    min-height: 28px;
     outline: none;
   }
 

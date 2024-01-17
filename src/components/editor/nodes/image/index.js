@@ -98,6 +98,7 @@ export class ImageNode extends DecoratorNode {
     const writable = this.getWritable();
 
     if (typeof maxWidth === "number") {
+      console.log(maxWidth);
       writable.__imageMaxWidth = maxWidth;
     }
   }
@@ -128,7 +129,7 @@ export class ImageNode extends DecoratorNode {
     );
 
     const nestedEditor = node.__imageCaption;
-    const editorState = nestedEditor.parseEditorState(json.caption.editorState);
+    const editorState = nestedEditor.parseEditorState(json.imageCaption.editorState);
     if (!editorState.isEmpty()) {
       nestedEditor.setEditorState(editorState);
     }

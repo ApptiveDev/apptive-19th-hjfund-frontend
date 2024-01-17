@@ -30,6 +30,10 @@ import { ImagePlugin } from "./plugins/image";
 import { ImageNode } from "./nodes/image";
 import { useSharedHistoryContext } from "./context/sharedHistoryContext";
 import { CustomHeadingNode } from "./nodes/heading";
+import { getEditorState } from "./tools/saveEditorState";
+import AutoSavePlugin from "./plugins/autosave";
+import { classes } from "@/tools/classes";
+import { conditionalClass } from "@/tools/classes";
 
 const onError = (error) => {
   console.error(error);
@@ -61,6 +65,7 @@ const Editor = ({ editable, id, editorState }) => {
     console.error("invalid arguments");
   }
 
+  const [isMounted, setIsMounted] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
   const [headlineHeight, setHeadlineHeight] = useState(0);
 
@@ -82,7 +87,9 @@ const Editor = ({ editable, id, editorState }) => {
   });
 
   useEffect(() => {
-    setIsLoaded(true);
+    if (!isMounted) {
+      setIsMounted(true);
+    }
   }, []);
 
   const namespace = useMemo(
@@ -93,7 +100,7 @@ const Editor = ({ editable, id, editorState }) => {
   const { historyState } = useSharedHistoryContext();
 
   return (
-    isLoaded && (
+    isMounted && (
       <LexicalComposer
         initialConfig={{
           ...initialConfig,
@@ -102,6 +109,9 @@ const Editor = ({ editable, id, editorState }) => {
           editable,
         }}
       >
+        {namespace === "add" && (
+          <AutoSavePlugin onLoad={() => setIsLoaded(true)} />
+        )}
         {editable && <HeaderPlugin id={id} />}
         <div className={styles.modal}>
           <ImagePlugin id={namespace} />
@@ -111,7 +121,12 @@ const Editor = ({ editable, id, editorState }) => {
           <LinkHoverPlugin />
           <LinkEditPlugin />
         </div>
-        <div className={styles.container}>
+        <div
+          className={classes(
+            styles.container,
+            conditionalClass(isLoaded, styles.blocking)
+          )}
+        >
           <EditorHeadline ref={headlineRef} />
           <RichTextPlugin
             contentEditable={

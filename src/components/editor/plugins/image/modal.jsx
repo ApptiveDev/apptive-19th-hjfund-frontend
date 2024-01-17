@@ -4,6 +4,7 @@ import Tab from "@/components/tab";
 import Button from "@/components/button";
 import Modal from "@/components/modal";
 import { handleUpload } from "./tools";
+import { classes } from "@/tools/classes";
 
 function ImageFileModal({ editor, id, onClose }) {
   function uploadAction() {
@@ -27,7 +28,7 @@ function ImageFileModal({ editor, id, onClose }) {
 
   return (
     <div className={styles.tabbody}>
-      <div className={styles.body}>
+      <div className={classes(styles.body, styles.upload)}>
         <Button className={styles.localupload} onClick={() => uploadAction()}>
           파일 업로드
         </Button>

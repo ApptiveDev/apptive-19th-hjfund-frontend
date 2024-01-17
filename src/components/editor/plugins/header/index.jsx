@@ -19,7 +19,7 @@ const HeaderPlugin = ({ id }) => {
     <div className={styles.container}>
       <p className={styles.title}>{textWithMode[mode]?.title}</p>
       <div className={styles.buttons}>
-        <p className={styles.save}>변경사항이 저장됨</p>
+        {mode === "add" && <p className={styles.save}>변경사항이 저장됨</p>}
         <Button buttonSize="small">{textWithMode[mode]?.button}</Button>
       </div>
     </div>

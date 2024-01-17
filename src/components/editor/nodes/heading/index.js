@@ -11,7 +11,7 @@ export class CustomHeadingNode extends HeadingNode {
   }
 
   static clone(node) {
-    return new CustomHeadingNode(node.tag, node.key);
+    return new CustomHeadingNode(node.__tag, node.__key);
   }
 
   createDOM(config) {
@@ -46,7 +46,7 @@ export class CustomHeadingNode extends HeadingNode {
   exportJSON() {
     return {
       ...super.exportJSON(),
-      tag: this.getTag(),
+      tag: this.__tag,
       type: "custom-heading",
       version: 1,
     };
