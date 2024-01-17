@@ -1,22 +1,21 @@
 import {
   EditorConfig,
   ElementNode,
+  LexicalNode,
   NodeKey,
   SerializedLexicalNode,
   Spread,
 } from "lexical";
 
 type ImageType = "local" | "remote" | "external";
-type ImageSize = { width: number; height: number };
-type ImageAlignment = "left" | "center" | "right";
 
 export type SerializedImageNode = Spread<
   {
     imageType: ImageType;
     imageURL: string;
     imageCaption?: string;
-    imageSize?: ImageSize;
-    imageAlignment?: ImageAlignment;
+    imageWidth?: number;
+    imageHeight?: number;
     imageMaxWidth?: number;
   },
   SerializedLexicalNode
@@ -24,26 +23,29 @@ export type SerializedImageNode = Spread<
 
 interface NodeOptions {
   caption?: string;
-  size?: ImageSize;
-  alignment?: ImageAlignment;
+  width?: number;
+  height?: number;
   imageMaxWidth?: number;
 }
 
-declare class ImageNode extends ElementNode {
+export declare class ImageNode extends ElementNode {
   __imageType: ImageType;
   __imageURL: string;
   __imageAlt: string;
   __imageCaption: string;
-  __imageSize: ImageSize;
-  __imageAlignment: ImageAlignment;
+  __imageWidth: number;
+  __imageHeight: number;
   __imageMaxWidth: number;
 
   constructor(
     imageType: ImageType,
     imageURL: string,
-    key?: NodeKey,
-    options?: NodeOptions
+    options?: NodeOptions,
+    key?: NodeKey
   ): ImageNode;
+
+  static getType(): string;
+  static clone(node: ImageNode): ImageNode;
 
   createDOM(_config: EditorConfig): HTMLDivElement;
   updateDOM(prevNode: ImageNode, dom: HTMLDivElement): boolean;
@@ -52,10 +54,21 @@ declare class ImageNode extends ElementNode {
   getImageURL(): string;
   getImageOptions(): NodeOptions;
 
+  setImageSize(width: number, height: number): void;
   setCaption(caption: string): void;
-  setImageAlignment(alignment: ImageAlignment): void;
   setImageMaxWidth(maxWidth: number): void;
 
   exportJSON(): SerializedImageNode;
   static importJSON(serializedNode: SerializedImageNode): ImageNode;
 }
+
+export declare function $createImageNode(
+  imageType: ImageType,
+  imageURL: string,
+  options?: NodeOptions
+): ImageNode;
+
+export declare function $isImageNode(node: LexicalNode): boolean;
+export declare function $isLoaclImaageNode(node: ImageNode): boolean;
+export declare function $isRemoteImageNode(node: ImageNode): boolean;
+export declare function $isExternalImageNode(node: ImageNode): boolean;

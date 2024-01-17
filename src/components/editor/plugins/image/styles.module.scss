@@ -1,0 +1,55 @@
+@import "../../../../styles/variables.scss";
+
+.modal {
+  max-width: 540px;
+  height: 360px;
+  display: flex;
+  flex-direction: column;
+  
+  & > header {
+    display: flex;
+    padding: 20px;
+    padding-top: 50px;
+    column-gap: 24px;
+    align-items: center;
+    border-bottom: 1px solid $color-border;
+
+    .tabs {
+      cursor: pointer;
+      display: flex;
+      column-gap: 20px;
+      flex: 1;
+    }
+  }
+
+  footer {
+    align-self: stretch;
+    height: 54px;
+    display: flex;
+    border-top: 1px solid $color-border;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0 16px;
+  }
+
+  .tabbody {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .body {
+    flex: 1;
+    padding: 20px;
+    padding-top: 30px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .localupload {
+    width: 100%;
+    max-width: 400px;
+  }
+}

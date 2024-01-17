@@ -25,6 +25,7 @@ import { $setBlocksType } from "@lexical/selection";
 import { $createHeadingNode, $createQuoteNode } from "@lexical/rich-text";
 import { $createHorizontalRuleNode } from "@lexical/react/LexicalHorizontalRuleNode";
 import Icon from "@/components/icon";
+import { INSERT_IMAGE_COMMAND } from "../image";
 
 const DIVIDER = "DIVIDER";
 const EMPTY = "EMPTY";
@@ -121,7 +122,9 @@ const getOptions = (editor) => [
     description: "파일 또는 링크",
     icon: <Icon size={18} iconType="landscape-2" />,
     keywords: ["image", "photo", "사진", "이미지"],
-    onSelect: () => {},
+    onSelect: () => {
+      editor.dispatchCommand(INSERT_IMAGE_COMMAND);
+    },
   }),
   // new CommandInfo("file", {
   //   title: "파일",
@@ -144,7 +147,7 @@ const getOptions = (editor) => [
     icon: <Icon size={18} iconType="bullet-list" />,
     keywords: ["순서없는목록", "ul", "리스트", "unoredredlist"],
     onSelect: () => {
-      editor.dispatchCommand(INSERT_UNORDERED_LIST_COMMAND, undefined);
+      editor.dispatchCommand(INSERT_UNORDERED_LIST_COMMAND);
     },
   }),
   new CommandInfo("ol", {
@@ -153,7 +156,7 @@ const getOptions = (editor) => [
     icon: <Icon size={18} iconType="ascending-number-order" />,
     keywords: ["순서있는목록", "ol", "리스트", "orderedlist"],
     onSelect: () => {
-      editor.dispatchCommand(INSERT_ORDERED_LIST_COMMAND, undefined);
+      editor.dispatchCommand(INSERT_ORDERED_LIST_COMMAND);
     },
   }),
   DIVIDER,
@@ -214,16 +217,6 @@ export default function CommandPlugin() {
     minLength: 0,
   });
 
-  const onSelectOption = useCallback(
-    (selectedOption, nodeToRemove, closeMenu, matchingString) => {
-      editor.update(() => {
-        nodeToRemove?.remove();
-        selectedOption.onSelect(matchingString);
-        closeMenu();
-      });
-    },
-    [editor]
-  );
 
   const options = useMemo(() => {
     const defaultOptions = getOptions(editor);
@@ -239,6 +232,21 @@ export default function CommandPlugin() {
 
     return matchingOptions.length > 0 ? matchingOptions : [EMPTY];
   }, [editor, queryString]);
+
+  const onSelectOption = useCallback(
+    (selectedOption, nodeToRemove, closeMenu, matchingString) => {
+      if (options.length === 1 && selectedOption === EMPTY) {
+        return;
+      }
+
+      editor.update(() => {
+        nodeToRemove?.remove();
+        selectedOption.onSelect(matchingString);
+        closeMenu();
+      });
+    },
+    [editor, options]
+  );
 
   const filteredOptions = options.filter((option) => option !== DIVIDER);
   const optionsWithIndex = useMemo(

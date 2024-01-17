@@ -1,4 +1,4 @@
-import { DecoratorNode } from "lexical";
+import { $applyNodeReplacement, DecoratorNode } from "lexical";
 import styles from "./styles.module.scss";
 import ImageComponent from "./component";
 
@@ -6,15 +6,15 @@ export class ImageNode extends DecoratorNode {
   __imageType;
   __imageURL;
   __imageCaption;
-  __imageSize;
-  __imageAlignment;
+  __imageWidth;
+  __imageHeight;
   __imageMaxWidth;
 
   static getType() {
     return "image";
   }
 
-  constructor(imageType, imageURL, key, options) {
+  constructor(imageType, imageURL, options, key) {
     super(key);
 
     if (typeof imageType !== "string" || typeof imageURL !== "string") {
@@ -26,10 +26,24 @@ export class ImageNode extends DecoratorNode {
 
     if (options) {
       this.__imageCaption = options?.caption;
-      this.__imageSize = options?.size;
-      this.__imageAlignment = options?.alignment ?? "center";
+      this.__imageWidth = options?.width;
+      this.__imageHeight = options?.height;
       this.__imageMaxWidth = options?.maxWidth;
     }
+  }
+
+  static clone(node) {
+    return new ImageNode(
+      node.__imageType,
+      node.__imageURL,
+      {
+        caption: node.__imageCaption,
+        width: node.__imageWidth,
+        height: node.__imageHeight,
+        maxWidth: node.__imageMaxWidth,
+      },
+      node.key
+    );
   }
 
   createDOM(_config) {
@@ -55,36 +69,36 @@ export class ImageNode extends DecoratorNode {
     return {
       caption: this.__imageCaption,
       size: this.__imageSize,
-      alignment: this.__imageAlignment,
       maxWidth: this.__imageMaxWidth,
     };
   }
 
-  setImageSize(size) {
-    if (size && size.width && size.height) {
-      this.__imageSize = size;
+  getCaption() {
+    return this.__imageCaption;
+  }
+
+  setImageSize(width, height) {
+    const writable = this.getWritable();
+
+    if (typeof width === "number" && typeof height === "number") {
+      writable.__imageWidth = width;
+      writable.__imageHeight = height;
     }
   }
 
   setCaption(caption) {
-    if (typeof caption === "string") {
-      this.__imageCaption = caption;
-    }
-  }
+    const writable = this.getWritable();
 
-  setImageAlignment(alignment) {
-    if (
-      alignment === "left" ||
-      alignment === "center" ||
-      alignment === "right"
-    ) {
-      this.__imageAlignment = alignment;
+    if (typeof caption === "string") {
+      writable.__imageCaption = caption;
     }
   }
 
   setImageMaxWidth(maxWidth) {
+    const writable = this.getWritable();
+
     if (typeof maxWidth === "number") {
-      this.__imageMaxWidth = maxWidth;
+      writable.__imageMaxWidth = maxWidth;
     }
   }
 
@@ -95,19 +109,24 @@ export class ImageNode extends DecoratorNode {
       imageType: this.__imageType,
       imageURL: this.__imageURL,
       imageCaption: this.__imageCaption,
-      imageSize: this.__imageSize,
-      imageAlignment: this.__imageAlignment,
+      imageWidth: this.__imageWidth,
+      imageHeight: this.__imageHeight,
       imageMaxWidth: this.__imageMaxWidth,
     };
   }
 
   static importJSON(json) {
-    return new ImageNode(json.imageType, json.imageURL, json.key, {
-      caption: json.imageCaption,
-      size: json.imageSize,
-      alignment: json.imageAlignment,
-      maxWidth: json.imageMaxWidth,
-    });
+    return new ImageNode(
+      json.imageType,
+      json.imageURL,
+      {
+        caption: json.imageCaption,
+        width: json.imageWidth,
+        height: json.imageHeight,
+        maxWidth: json.imageMaxWidth,
+      },
+      json.key
+    );
   }
 
   exportDOM() {
@@ -118,4 +137,24 @@ export class ImageNode extends DecoratorNode {
   decorate(editor, config) {
     return <ImageComponent editor={editor} config={config} node={this} />;
   }
+}
+
+export function $createImageNode(imageType, imageURL, options) {
+  return $applyNodeReplacement(new ImageNode(imageType, imageURL, options));
+}
+
+export function $isImageNode(node) {
+  return node instanceof ImageNode;
+}
+
+export function $isLocalImageNode(node) {
+  return node instanceof ImageNode && node.__imageType === "local";
+}
+
+export function $isRemoteImageNode(node) {
+  return node instanceof ImageNode && node.__imageType === "remote";
+}
+
+export function $isExternalImageNode(node) {
+  return node instanceof ImageNode && node.__imageType === "external";
 }

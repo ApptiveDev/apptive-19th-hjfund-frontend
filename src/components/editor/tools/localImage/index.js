@@ -11,6 +11,7 @@ export function getLocalImageStore(articleId) {
 export async function saveLocalImage(articleId, file) {
   if (articleId === undefined || file === undefined || !(file instanceof File))
     return;
+
   const store = getLocalImageStore(articleId);
   let id = crypto.randomUUID();
 
@@ -29,13 +30,12 @@ export async function getLocalImage(articleId, id) {
   if (item instanceof File) return item;
 }
 
-export async function getLocalImages(articleId) {
+export async function getLocalImages(articleId, ids) {
   if (articleId === undefined) return;
   const store = getLocalImageStore(articleId);
-  const keys = await store.keys();
   const images = {};
 
-  for (const key of keys) {
+  for (const key of ids || (await store.keys())) {
     const item = await store.getItem(key);
     if (item instanceof File) images[key] = item;
   }
@@ -49,8 +49,13 @@ export async function deleteLocalImage(articleId, id) {
   await store.removeItem(id);
 }
 
-export async function clearLocalImages(articleId) {
+export async function deleteLocalImages(articleId, ids) {
   if (articleId === undefined) return;
   const store = getLocalImageStore(articleId);
-  await store.clear();
+
+  if (ids) for (const key of ids) {
+    await store.removeItem(key);
+  } else {
+    await store.clear();
+  }
 }

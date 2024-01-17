@@ -9,7 +9,7 @@ import { HistoryPlugin } from "@lexical/react/LexicalHistoryPlugin";
 import { OnChangePlugin } from "@lexical/react/LexicalOnChangePlugin";
 import CommandPlugin from "./plugins/command";
 import LexicalErrorBoundary from "@lexical/react/LexicalErrorBoundary";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import PlaceholderPlugin from "./plugins/placeholder";
 import { HeadingNode, QuoteNode } from "@lexical/rich-text";
 import EditorHeadline from "./plugins/headline";
@@ -26,6 +26,8 @@ import editorTheme from "./theme";
 import DebugPlugin from "./plugins/debug";
 import LinkEditPlugin from "./plugins/link/edit";
 import HeaderPlugin from "./plugins/header";
+import { ImagePlugin } from "./plugins/image";
+import { ImageNode } from "./nodes/image";
 
 const onError = (error) => {
   console.error(error);
@@ -41,11 +43,16 @@ const initialConfig = {
     QuoteNode,
     LinkNode,
     AutoLinkNode,
+    ImageNode,
   ],
   theme: editorTheme,
 };
 
 const Editor = ({ editable, id, editorState }) => {
+  if (!editable && !editorState) {
+    console.error("invalid arguments");
+  }
+
   const [isLoaded, setIsLoaded] = useState(false);
   const [headlineHeight, setHeadlineHeight] = useState(0);
 
@@ -70,19 +77,24 @@ const Editor = ({ editable, id, editorState }) => {
     setIsLoaded(true);
   }, []);
 
+  const namespace = useMemo(
+    () => (editable ? (id ? `edit-${id}` : "add") : "view"),
+    [editable, id]
+  );
+
   return (
     isLoaded && (
       <LexicalComposer
         initialConfig={{
           ...initialConfig,
-          namespace: editable ? (id ? `edit-${id}` : "add") : "view",
+          namespace: namespace,
           editorState,
           editable,
         }}
       >
         {editable && <HeaderPlugin id={id} />}
         <div className={styles.modal}>
-          
+          <ImagePlugin id={namespace} />
         </div>
         <div className={styles.layer}>
           <FloatingPlugin />
