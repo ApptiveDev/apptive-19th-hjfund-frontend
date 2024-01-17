@@ -4,11 +4,8 @@ const editorTheme = {
   quote: styles.quote,
   heading: {
     h1: styles["heading-1"],
-    h2: styles["heading-1"],
-    h3: styles["heading-2"],
-    h4: styles["heading-3"],
-    h5: styles["heading-3"],
-    h6: styles["heading-3"],
+    h2: styles["heading-2"],
+    h3: styles["heading-3"],
   },
   list: {
     nested: {

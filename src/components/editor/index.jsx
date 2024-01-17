@@ -29,6 +29,7 @@ import HeaderPlugin from "./plugins/header";
 import { ImagePlugin } from "./plugins/image";
 import { ImageNode } from "./nodes/image";
 import { useSharedHistoryContext } from "./context/sharedHistoryContext";
+import { CustomHeadingNode } from "./nodes/heading";
 
 const onError = (error) => {
   console.error(error);
@@ -37,7 +38,6 @@ const onError = (error) => {
 const initialConfig = {
   onError,
   nodes: [
-    HeadingNode,
     HorizontalRuleNode,
     ListNode,
     ListItemNode,
@@ -45,6 +45,13 @@ const initialConfig = {
     LinkNode,
     AutoLinkNode,
     ImageNode,
+    CustomHeadingNode,
+    {
+      replace: HeadingNode,
+      with: (node) => {
+        return new CustomHeadingNode(node.getTag());
+      },
+    },
   ],
   theme: editorTheme,
 };

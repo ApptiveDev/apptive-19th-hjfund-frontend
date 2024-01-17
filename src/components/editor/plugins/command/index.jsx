@@ -22,10 +22,11 @@ import {
   KEY_ARROW_DOWN_COMMAND,
 } from "lexical";
 import { $setBlocksType } from "@lexical/selection";
-import { $createHeadingNode, $createQuoteNode } from "@lexical/rich-text";
+import { $createQuoteNode } from "@lexical/rich-text";
 import { $createHorizontalRuleNode } from "@lexical/react/LexicalHorizontalRuleNode";
 import Icon from "@/components/icon";
 import { INSERT_IMAGE_COMMAND } from "../image";
+import { $createHeadingNode } from "../../nodes/heading";
 
 const DIVIDER = "DIVIDER";
 const EMPTY = "EMPTY";
@@ -109,7 +110,7 @@ const getOptions = (editor) => [
             const selection = $getSelection();
             if ($isRangeSelection(selection)) {
               $setBlocksType(selection, () =>
-                $createHeadingNode("h" + (item.type + 1))
+                $createHeadingNode("h" + item.type)
               );
             }
           });

@@ -1,14 +1,15 @@
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
-import { $getRoot, $getSelection, $isRangeSelection } from "lexical";
+import { $getRoot, $getSelection, $isParagraphNode, $isRangeSelection } from "lexical";
 import { useEffect, useRef } from "react";
 
 import styles from "./styles.module.scss";
+import { $isHeadingNode } from "@lexical/rich-text";
 
 const placeholders = {
   paragraph: "'/'를 입력하여 명령어를 사용하세요.",
-  h2: "제목 1",
-  h3: "제목 2",
-  h4: "제목 3",
+  h1: "제목 1",
+  h2: "제목 2",
+  h3: "제목 3",
 };
 
 function initialize(editor) {
@@ -24,7 +25,7 @@ function initialize(editor) {
 
       if (
         children.length === 1 &&
-        node.getType() === "paragraph" &&
+        $isParagraphNode(node) &&
         child.getTextContentSize() === 0
       ) {
         element.classList.add(styles.empty);
@@ -36,7 +37,7 @@ function initialize(editor) {
 function addPlaceholder(element, node) {
   let type = node.getType();
 
-  if (type === "heading" && node.getTag) {
+  if ($isHeadingNode(node)) {
     type = node.getTag();
   }
 
