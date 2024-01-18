@@ -98,7 +98,6 @@ export class ImageNode extends DecoratorNode {
     const writable = this.getWritable();
 
     if (typeof maxWidth === "number") {
-      console.log(maxWidth);
       writable.__imageMaxWidth = maxWidth;
     }
   }

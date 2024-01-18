@@ -179,6 +179,7 @@ export default function ImageComponent({ editor, config, node }) {
 
   useEffect(() => {
     const onPointerMove = (e) => {
+      e.stopPropagation();
       window.requestAnimationFrame(() => {
         const { width, left } = figureRef.current.getBoundingClientRect();
         const center = left + width / 2;
@@ -193,13 +194,16 @@ export default function ImageComponent({ editor, config, node }) {
       });
     };
 
-    const onPointerCancel = () => {
+    const onPointerCancel = (e) => {
+      e.stopPropagation();
       const containerWidth = figureRef.current.clientWidth;
       const maxWidth = imageContainerRef.current.style.maxWidth;
       handleMaxWidthChange(
         maxWidth >= containerWidth ? undefined : Number(maxWidth.slice(0, -2))
       );
 
+      document.removeEventListener("pointerup", onPointerCancel);
+      document.removeEventListener("pointercancel", onPointerCancel);
       document.removeEventListener("pointermove", onPointerMove);
     };
 
@@ -209,17 +213,16 @@ export default function ImageComponent({ editor, config, node }) {
         (rightHandleRef.current && e.target === rightHandleRef.current)
       ) {
         document.addEventListener("pointermove", onPointerMove);
+        document.addEventListener("pointerup", onPointerCancel);
+        document.addEventListener("pointercancel", onPointerCancel);
+        e.stopPropagation();
       }
     };
 
-    document.addEventListener("pointercancel", onPointerCancel);
-    document.addEventListener("pointerup", onPointerCancel);
     document.addEventListener("pointerdown", onPointerDown);
 
     return () => {
       document.removeEventListener("pointerdown", onPointerDown);
-      document.removeEventListener("pointerup", onPointerCancel);
-      document.removeEventListener("pointercancel", onPointerCancel);
     };
   }, []);
 
@@ -241,7 +244,7 @@ export default function ImageComponent({ editor, config, node }) {
           <span ref={rightHandleRef} className={styles.right} />
         </div>
         <div className={styles.tools}>
-          <button onClick={() => downloadImage()}>
+          <button onClick={downloadImage}>
             <Icon size={18} iconType="download-file" />
           </button>
           <button onClick={removeHandler}>
