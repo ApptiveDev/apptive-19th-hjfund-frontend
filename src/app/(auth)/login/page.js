@@ -20,7 +20,7 @@ export default function LoginPage() {
       <More />
       <div className={styles.lost}>
         <span>비밀번호를 잊으셨나요?</span>
-        <Link className="link" href="/find">비밀번호 찾기</Link>
+        <Link replace className="link" href="/find">비밀번호 찾기</Link>
       </div>
     </Container>
   );

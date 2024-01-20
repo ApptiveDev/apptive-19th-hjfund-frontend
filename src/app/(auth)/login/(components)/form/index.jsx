@@ -2,12 +2,12 @@
 
 import Textfield from "@/components/textfield";
 import styles from "./styles.module.scss";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import Checkbox from "@/components/checkbox";
 import Button from "@/components/button";
 import { isEmailInvalid, isPasswordInvalid } from "@/tools/auth-form-checkes";
-import { classes } from "@/tools/classes";
-import { conditionalClass } from "@/tools/classes";
+import { LoginErrors, POST } from "@/requests/user/auth/login";
+import { useRouter } from "next/navigation";
 
 const formItems = [
   {
@@ -27,7 +27,9 @@ const formStateItem = {
   error: true,
 };
 
-const Form = () => {
+const Form = ({ redirect }) => {
+  const router = useRouter();
+
   const [formState, setFormState] = useState({
     email: formStateItem,
     password: formStateItem,
@@ -38,6 +40,48 @@ const Form = () => {
     message: "",
     visible: false,
   });
+
+  const [isLoading, setIsLoading] = useState(false);
+
+  const sendRequest = useCallback(async (e) => {
+    const { email, password } = formState;
+
+    e.preventDefault();
+    setIsLoading(true);
+
+    const errorCode = await POST({
+      email: email.value,
+      password: password.value,
+    });
+
+    // if (!errorCode) {
+    //   router.replace(redirect ?? "/");
+    //   return;
+    // }
+
+    setIsLoading(false);
+
+    let errorMessage;
+
+    switch (errorCode) {
+      case LoginErrors.INVALID_ARGUMENTS:
+        errorMessage = "이메일 또는 비밀번호를 잘못 입력하셨습니다.";
+        break;
+      case LoginErrors.INVALID_CREDENTIALS:
+        errorMessage = "이메일 또는 비밀번호를 잘못 입력하셨습니다.";
+        break;
+      case LoginErrors.UNKNOWN:
+        errorMessage = "알 수 없는 오류가 발생했습니다.";
+        break;
+    }
+
+    setFormError({
+      message: errorMessage,
+      visible: true,
+    });
+
+    setIsLoading(false);
+  }, [formState, redirect]);
 
   const handleOnChange = (name, e) => {
     setFormState((prev) => ({
@@ -84,7 +128,7 @@ const Form = () => {
   };
 
   return (
-    <form className={styles.form}>
+    <form className={styles.form} onSubmit={sendRequest}>
       <div className={styles.texts}>
         {formItems.map((item) => {
           const borderColor =
