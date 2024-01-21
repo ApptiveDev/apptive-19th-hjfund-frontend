@@ -113,9 +113,7 @@ const Editor = ({ editable, id, editorState }) => {
           <AutoSavePlugin onLoad={() => setIsLoaded(true)} />
         )}
         {editable && <HeaderPlugin id={id} />}
-        <div className={styles.modal}>
-          <ImagePlugin id={namespace} />
-        </div>
+        <ImagePlugin id={namespace} />
         <div className={styles.layer}>
           <FloatingPlugin />
           <LinkHoverPlugin />
