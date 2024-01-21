@@ -58,12 +58,20 @@ const Form = () => {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const sendRequest = useCallback(async (e, { email, name, password }) => {
+  const sendRequest = useCallback(async (e) => {
+    const { email, name, password } = formState;
+
     e.preventDefault();
     setIsLoading(true);
-    const res = await POST({ email, name, password });
+
+    const res = await POST({
+      email: email.value,
+      name: name.value,
+      password: password.value,
+    });
+    
     console.log(res);
-  }, []);
+  }, [formState]);
 
   const handleOnChange = (name, e) => {
     setFormState((prev) => ({
@@ -115,13 +123,7 @@ const Form = () => {
   return (
     <form
       className={styles.form}
-      onSubmit={(e) =>
-        sendRequest(e, {
-          email: formState.email.value,
-          name: formState.name.value,
-          password: formState.password.value,
-        })
-      }
+      onSubmit={sendRequest}
     >
       <div className={styles.texts}>
         {formItems.map((item) => {
