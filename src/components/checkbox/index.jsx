@@ -50,10 +50,7 @@ const Checkbox = forwardRef(
           conditionalClass(isChecked, styles.checked),
           className
         )}
-        onClick={(e) => {
-          e.stopPropagation();
-          setIsChecked(!isChecked);
-        }}
+        onClick={() => setIsChecked(!isChecked)}
       >
         <input
           type="checkbox"
