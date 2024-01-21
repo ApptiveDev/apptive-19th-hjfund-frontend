@@ -4,6 +4,7 @@ import Button from "@/components/button";
 import styles from "./styles.module.scss";
 import Icon from "@/components/icon";
 import { forwardRef } from "react";
+import { useTickerModal } from "@/components/modal/hooks/ticker";
 
 const TransparentButton = ({ children, ...props }) => {
   return (
@@ -24,8 +25,16 @@ const TransparentButton = ({ children, ...props }) => {
 };
 
 const EditorHeadline = forwardRef((_, ref) => {
+  const [tickerModalComponent, openTickerModal] = useTickerModal({
+    initialCodes: [],
+    onConfirm: (codes) => {
+      console.log(codes);
+    },
+  });
+
   return (
     <div ref={ref} className={styles.container}>
+      {tickerModalComponent}
       <div className={styles.headline}>
         <div className={styles["thumbnail-handler"]}>
           <TransparentButton>
@@ -38,7 +47,9 @@ const EditorHeadline = forwardRef((_, ref) => {
           </TransparentButton>
         </div>
         <div className={styles.title}>
-          <TransparentButton>종목코드 등록</TransparentButton>
+          <TransparentButton onClick={() => openTickerModal()}>
+            종목코드 등록
+          </TransparentButton>
           <h1
             contentEditable
             onKeyDown={(e) => {
