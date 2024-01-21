@@ -1,4 +1,4 @@
-@import "../../../../styles/variables";
+@import "../../../../../../styles/variables";
 
 .container {
   margin-bottom: 120px;
@@ -10,7 +10,7 @@
 .card-list {
   @include max-width-container;
 
-  margin-top: 350px;
+  margin-top: 62px;
   display: grid;
   grid-template-columns: repeat(auto-fill, 310px);
   justify-content: center;

@@ -1,3 +1,5 @@
+@import "../../../../styles/variables.scss";
+
 .article {
   display: flex;
   flex-direction: column;
@@ -5,139 +7,108 @@
 }
 
 .header {
-  padding-bottom: 68px;
-  border-bottom: 1px solid var(--border-color);
-  padding-top: 100px;
+  margin-top: 129px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  align-items: start;
 
   & > section {
     max-width: var(--content-width);
-    margin: 0 auto;
     display: flex;
     flex-direction: row;
   }
+}
+
+.editorProfile {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 300px;
+  height: 105px;
+  border-right: 1px solid #d9d9d9;
+  margin-right: 30px;
+  margin-left: 69px;
 }
 
 .profilePic {
-  width: 160px;
-  height: 160px;
+  width: 70px;
+  height: 70px;
   border-radius: 50%;
-  margin-right: 64px;
+  margin-right: 24px;
 }
 
-.creator {
-  height: 160px;
+.editor {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
-.creatorName {
-  font-size: 40px;
-  font-weight: 700;
-  font-family: Pretendard;
-  margin-bottom: 28px;
-}
-
-.greenCheck {
-  width: 30px;
-  height: 30px;
-}
-
-.describe {
-  font-family: Pretendard;
-  font-size: 24px;
+.text {
+  @include ui-1;
   font-weight: 400;
-  line-height: 29px;
-  text-align: left;
+  color: $color-text-passive-2;
 }
 
-.sector {
-  border-radius: 20px;
-  border-style: solid;
-  border-width: 1px;
-  border-color: #b8b8b8;
-  background-color: transparent;
-  text-align: start;
-
-  width: max-content;
-  height: 400px;
-  justify-content: space-between;
-  margin: 15px;
-
-  & .reportImg {
-    width: 380px;
-    height: 207px;
-    border-radius: 20px 20px 0px 0px;
-  }
-  & .reportTextbox {
-    width: 318px;
-    height: 165px;
-    margin: 10px 25px 0px 25px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
+.name {
+  @include title-1;
 }
 
-.reportCompany {
-  font-size: 25px;
-  font-weight: 800;
+.rowSetting {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.introduce {
+  @include ui-1;
+  height: 104px;
+  font-weight: 400;
   color: #454545;
+  white-space: pre-line;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
-.reportTitle {
-  font-size: 17px;
-  font-weight: 700;
-  color: #6c6c6c;
+.buttons {
+  display: flex;
+  flex-direction: row;
+  width: 179px;
+  justify-content: space-between;
+  margin-top: 16px;
 }
 
-.reportInfo {
-  color: #9a9a9a;
-  font-size: 20px;
+.subButton {
+  @include ui-2;
+  width: 78px;
+  height: 32px;
+  background-color: white;
+  border: 1px solid $color-border;
+  border-radius: 8px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  padding: 7px 14px 7px 14px;
+}
 
-  & .reportCreator {
-    font-size: 20px;
-    font-weight: 700;
-    background-color: transparent;
-    border-style: none;
-    color: #9a9a9a;
-  }
-  & .buttons {
-    display: flex;
-    flex-direction: row;
-
-    justify-content: space-between;
-  }
-  & .reportLike {
-    display: flex;
-    flex-direction: row;
-    font-size: 20px;
-    font-weight: 600;
-    align-items: center;
-    border-style: none;
-    background-color: transparent;
-    margin-right: 20px;
-    color: #9a9a9a;
-  }
-  & .reportComment {
-    display: flex;
-    flex-direction: row;
-    font-size: 20px;
-    font-weight: 600;
-    align-items: center;
-    border-style: none;
-    background-color: transparent;
-    color: #9a9a9a;
-  }
+.writeButton {
+  @include ui-2;
+  width: 91px;
+  height: 32px;
+  background-color: $color-primary;
+  border-style: none;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 7px 14px 7px 14px;
+  color: white;
 }
 
 .section {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 50px 0px 40px 0px;
 }
 
 .body {
