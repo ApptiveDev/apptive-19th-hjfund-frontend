@@ -8,27 +8,26 @@ import {
   useState,
 } from "react";
 
-import CheckIcon from "./icon.svg";
 import styles from "./styles.module.scss";
 import { classes } from "@/tools/classes";
 import { conditionalClass } from "@/tools/classes";
 
-const Checkbox = forwardRef(
+const Radio = forwardRef(
   (
     {
       onChange,
       className,
       style,
       checked,
-      checkboxBackgroundColor,
-      checkboxBorderColor,
-      checkboxIconColor,
-      checkboxHoverBackgroundColor,
-      checkboxHoverBorderColor,
-      checkboxHoverIconColor,
-      checkboxCheckedBackgroundColor,
-      checkboxCheckedBorderColor,
-      checkboxCheckedIconColor,
+      radioBackgroundColor,
+      radioBorderColor,
+      radioIconColor,
+      radioHoverBackgroundColor,
+      radioHoverBorderColor,
+      radioHoverIconColor,
+      radioCheckedBackgroundColor,
+      radioCheckedBorderColor,
+      radioCheckedIconColor,
       ...props
     },
     ref
@@ -44,16 +43,16 @@ const Checkbox = forwardRef(
 
     return (
       <span
-        role="checkbox"
+        role="radio"
         className={classes(
-          styles.checkbox,
+          styles.radio,
           conditionalClass(isChecked, styles.checked),
           className
         )}
         onClick={() => setIsChecked(!isChecked)}
       >
         <input
-          type="checkbox"
+          type="radio"
           className={styles.input}
           checked={isChecked}
           onChange={(e) =>
@@ -61,25 +60,24 @@ const Checkbox = forwardRef(
           }
           onClick={(e) => e.stopPropagation()}
           style={{
-            "--checkbox-background-color": checkboxBackgroundColor,
-            "--checkbox-border-color": checkboxBorderColor,
-            "--checkbox-icon-color": checkboxIconColor,
-            "--checkbox-hover-background-color": checkboxHoverBackgroundColor,
-            "--checkbox-hover-border-color": checkboxHoverBorderColor,
-            "--checkbox-hover-icon-color": checkboxHoverIconColor,
-            "--checkbox-checked-background-color":
-              checkboxCheckedBackgroundColor,
-            "--checkbox-checked-border-color": checkboxCheckedBorderColor,
-            "--checkbox-checked-icon-color": checkboxCheckedIconColor,
+            "--radio-background-color": radioBackgroundColor,
+            "--radio-border-color": radioBorderColor,
+            "--radio-icon-color": radioIconColor,
+            "--radio-hover-background-color": radioHoverBackgroundColor,
+            "--radio-hover-border-color": radioHoverBorderColor,
+            "--radio-hover-icon-color": radioHoverIconColor,
+            "--radio-checked-background-color":
+              radioCheckedBackgroundColor,
+            "--radio-checked-border-color": radioCheckedBorderColor,
+            "--radio-checked-icon-color": radioCheckedIconColor,
             ...style,
           }}
           ref={inputRef}
           {...props}
         />
-        <CheckIcon />
       </span>
     );
   }
 );
 
-export default Checkbox;
+export default Radio;

@@ -2,6 +2,9 @@ import { classes } from "@/tools/classes";
 
 import styles from "./styles.module.scss";
 import { conditionalClass } from "@/tools/classes";
+import { FixedLayerId } from "../layer";
+import { createPortal } from "react-dom";
+import { useEffect } from "react";
 
 export default function Modal({
   isOpen,
@@ -11,6 +14,18 @@ export default function Modal({
   clickOutsideToClose = true,
   anchorRef,
 }) {
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isOpen]);
+
   const element = (
     <div
       className={classes(
@@ -28,7 +43,8 @@ export default function Modal({
     </div>
   );
 
-  return anchorRef && anchorRef.current
-    ? createPortal(element, anchorRef.current)
-    : element;
+  return createPortal(
+    element,
+    (anchorRef && anchorRef.current) ?? document.getElementById(FixedLayerId)
+  );
 }
