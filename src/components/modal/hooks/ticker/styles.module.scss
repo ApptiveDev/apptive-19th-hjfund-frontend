@@ -1,0 +1,68 @@
+@import "../../../../styles/variables";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  height: 70vh;
+  min-height: 300px;
+  max-height: calc(100% - 80px);
+}
+
+.header {
+  padding: 20px;
+  padding-top: 50px;
+  border-bottom: 1px solid $color-border;
+
+  & > h2 {
+    padding: 0 4px;
+    margin-bottom: 20px;
+  }
+}
+
+.footer {
+  height: 54px;
+  display: flex;
+  align-items: center;
+  border-top: 1px solid $color-border;
+  padding: 0 16px;
+}
+
+.list {
+  flex: 1;
+  flex-direction: column;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.item {
+  @include ui-2;
+
+  height: 68px;
+  display: flex;
+  padding: 0 20px;
+
+  align-items: center;
+  column-gap: 16px;
+  border-bottom: 1px solid $color-border;
+  transition: background-color 0.1s;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+
+  .texts {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1;
+
+    .name {
+      margin-bottom: 4px;
+    }
+  
+    .code {
+      color: $color-text-passive-2;
+    }
+  }
+}
