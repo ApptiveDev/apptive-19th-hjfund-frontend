@@ -2,7 +2,7 @@
 
 import Textfield from "@/components/textfield";
 import styles from "./styles.module.scss";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import Checkbox from "@/components/checkbox";
 import Button from "@/components/button";
 import {
@@ -12,6 +12,7 @@ import {
   isPasswordInvalid,
 } from "@/tools/auth-form-checkes";
 import Link from "next/link";
+import { POST } from "@/requests/user/auth/register";
 
 const formItems = [
   {
@@ -54,6 +55,23 @@ const Form = () => {
     message: "",
     visible: false,
   });
+
+  const [isLoading, setIsLoading] = useState(false);
+
+  const sendRequest = useCallback(async (e) => {
+    const { email, name, password } = formState;
+
+    e.preventDefault();
+    setIsLoading(true);
+
+    const res = await POST({
+      email: email.value,
+      name: name.value,
+      password: password.value,
+    });
+    
+    console.log(res);
+  }, [formState]);
 
   const handleOnChange = (name, e) => {
     setFormState((prev) => ({
@@ -103,7 +121,10 @@ const Form = () => {
   };
 
   return (
-    <form className={styles.form}>
+    <form
+      className={styles.form}
+      onSubmit={sendRequest}
+    >
       <div className={styles.texts}>
         {formItems.map((item) => {
           const borderColor =
