@@ -1,0 +1,36 @@
+@import "../../../../../../../styles/variables.scss";
+
+.form {
+  .texts {
+    display: flex;
+    flex-direction: column;
+    row-gap: 12px;
+
+    margin-bottom: 18px;
+  }
+
+  .button {
+    width: 100%;
+  }
+
+  .textfield {
+    display: flex;
+    flex-direction: column;
+    row-gap: 6px;
+
+    label {
+      margin: 0 6px;
+      @include ui-2;
+      color: $color-text-passive-1;
+    }
+  }
+
+  .error {
+    @include ui-2;
+    color: red;
+    margin-top: 12px;
+    height: 18px;
+    text-align: center;
+    margin-bottom: 16px;
+  }
+}

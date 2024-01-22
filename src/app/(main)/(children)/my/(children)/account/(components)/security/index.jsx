@@ -4,6 +4,7 @@ import { classes } from "@/tools/classes";
 import styles from "./styles.module.scss";
 import Button from "@/components/button";
 import { conditionalClass } from "@/tools/classes";
+import { useRouter } from "next/navigation";
 
 function SecurityItem({ label, description, button, disabled, onClick }) {
   return (
@@ -25,6 +26,8 @@ function SecurityItem({ label, description, button, disabled, onClick }) {
 }
 
 export default function Security({ isMobile }) {
+  const router = useRouter();
+
   return (
     <div
       className={classes(
@@ -36,6 +39,7 @@ export default function Security({ isMobile }) {
         label="비밀번호"
         description="보안을 위해 주기적으로 비밀번호를 변경하는 것이 좋습니다."
         button="변경"
+        onClick={() => router.push("/my/account/password")}
       />
       <SecurityItem
         label="2단계 인증"
