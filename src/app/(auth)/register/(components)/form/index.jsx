@@ -3,7 +3,7 @@
 import Textfield from "@/components/textfield";
 import styles from "./styles.module.scss";
 import { useCallback, useState } from "react";
-import Checkbox from "@/components/checkbox";
+import Boolean from "@/components/boolean";
 import Button from "@/components/button";
 import {
   isEmailInvalid,
@@ -154,7 +154,7 @@ const Form = () => {
         {formError.visible ? formError.message : ""}
       </p>
       <label className={styles.terms}>
-        <Checkbox className={styles.checkbox} />
+        <Boolean className={styles.checkbox} />
         <div>
           <Link className="link" href="/terms">
             이용약관

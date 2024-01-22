@@ -23,6 +23,8 @@ export async function getStock({ key = "", count = 20, index = 0 }) {
   params.append("count", count);
   params.append("index", index);
 
+  console.log(ENDPOINT + "?" + params.toString());
+
   const res = await axios
     .get(ENDPOINT + "?" + params.toString())
     .catch((e) => e.response ?? { status: 500 });

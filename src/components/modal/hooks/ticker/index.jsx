@@ -71,7 +71,6 @@ function TickerModalComponent({
 
       if (data) {
         setData(data.content);
-        console.log(data);
         if (data.last) return true;
       }
 

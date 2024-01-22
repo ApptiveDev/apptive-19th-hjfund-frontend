@@ -1,0 +1,77 @@
+@import "../../styles/variables.scss";
+
+.checkbox, .radio {
+  appearance: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  
+  border: 1px solid var(--boolean-border-color, $color-border);
+  background-color: var(--boolean-background-color, $color-background);
+  transition: background-color 0.15s, border-color 0.15s;
+
+  &:before {
+    content: "";
+    transition: background-color 0.15s;
+  }
+}
+
+.radio {
+  &:before {
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    background-color: var(--boolean-icon-color, transparent);
+  }
+
+  @media (hover:hover) and (pointer: fine) {
+    &:hover {
+      border-color: var(--boolean-hover-border-color, $color-text-passive-2);
+
+      &:before {
+        background-color: var(--boolean-hover-icon-color, rgba($color-text-passive-2, 0.5));
+      
+      }
+    }
+  }
+
+  &:checked {
+    background-color: var(--boolean-checked-background-color, transparent);
+
+    &:before {
+      background-color: var(--boolean-checked-icon-color, $color-primary);
+    }
+  }
+}
+
+.checkbox {
+  &:before {
+    width: 100%; height: 100%;
+    background-color: var(--boolean-icon-color, $color-text-passive-2);
+    mask-image: url("/images/icon/checkbox.svg");
+    mask-repeat: no-repeat;
+    mask-position: center;
+  }
+
+  @media (hover:hover) and (pointer: fine) {
+    &:hover {
+      background-color: var(--boolean-hover-background-color, $color-hover);
+      border-color: var(--boolean-hover-border-color, $color-text-passive-2);
+
+      &:before {
+        background-color: var(--boolean-hover-icon-color, $color-text-passive-1);
+      
+      }
+    }
+  }
+
+  &:checked {
+    background-color: var(--boolean-checked-background-color, $color-primary);
+    border-color: var(--boolean-checked-border-color, $color-primary);
+
+    &:before {
+      background-color: var(--boolean-checked-icon-color, $color-background);
+    }
+  }
+}
