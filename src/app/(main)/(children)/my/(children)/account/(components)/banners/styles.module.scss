@@ -39,3 +39,11 @@
     margin-top: 12px;
   }
 }
+
+.password {
+  border-color: $color-primary;
+
+  .title {
+    color: $color-primary;
+  }
+}

@@ -1,7 +1,7 @@
 import Header from "@/components/header";
 import styles from "./styles.module.scss";
 import Navigation from "../../(components)/navigation";
-import { EmailVerificationBanner, HelloBanner } from "./(components)/banners";
+import { EmailVerificationBanner, HelloBanner, PasswordChangeConfirmBanner } from "./(components)/banners";
 import Profile from "./(components)/profile";
 import Security from "./(components)/security";
 import Link from "next/link";
@@ -11,7 +11,7 @@ import { conditionalClass } from "@/tools/classes";
 
 export default function AccountPage({ searchParams }) {
   const { isMobile } = useUserAgent();
-  const { new: newUser } = searchParams;
+  const { new: newUser, password } = searchParams;
 
   return (
     <main className={styles.main}>
@@ -25,6 +25,7 @@ export default function AccountPage({ searchParams }) {
       >
         <div className={styles.banners}>
           {newUser && <HelloBanner />}
+          {password && <PasswordChangeConfirmBanner />}
           <EmailVerificationBanner />
         </div>
         <Profile isMobile={isMobile} />

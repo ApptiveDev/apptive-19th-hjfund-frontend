@@ -34,3 +34,14 @@ export function EmailVerificationBanner() {
     </div>
   );
 }
+
+export function PasswordChangeConfirmBanner() {
+  return (
+    <div className={classes(styles.password, styles.banner)}>
+      <h2 className={styles.title}>비밀번호 변경이 완료되었습니다.</h2>
+      <p className={styles.description}>
+        이제 새로운 비밀번호로 로그인하실 수 있습니다.
+      </p>
+    </div>
+  );
+}
