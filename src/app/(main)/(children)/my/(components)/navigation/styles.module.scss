@@ -7,6 +7,10 @@
   padding: 0 40px;
   margin-top: $header-height;
 
+  &.mobile {
+    padding: 0 24px;
+  }
+
   .title {
     max-width: $max-article-width;
     width: 100%;
@@ -23,6 +27,16 @@
   display: flex;
   justify-content: center;
   border-bottom: 1px solid $color-border;
+  background-color: $color-background;
+  z-index: 300;
+  padding: 0 40px;
+
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+
+  &.mobile {
+    padding: 0 24px;
+  }
 
   .items {
     max-width: $max-article-width;

@@ -6,33 +6,43 @@ import { useEffect } from "react";
 import styles from "./styles.module.scss";
 import Tab from "@/components/tab";
 import Link from "next/link";
+import { classes } from "@/tools/classes";
+import { conditionalClass } from "@/tools/classes";
 
 const myPageTabs = [
   {
-    name: "프로필",
-    href: "/my/profile",
+    name: "계정",
+    href: "/my/account",
   },
   {
-    name: "에디터 설정",
-    href: "/my/editor",
+    name: "크리에이터",
+    href: "/my/creator",
   },
   {
-    name: "좋아한 목록",
+    name: "좋아요 목록",
     href: "/my/likes",
   },
 ];
 
-export default function Navigation() {
+export default function Navigation({ isMobile }) {
   const pathname = usePathname();
-
-  useEffect(() => {});
 
   return (
     <>
-      <div className={styles.container}>
+      <div
+        className={classes(
+          styles.container,
+          conditionalClass(isMobile, styles.mobile)
+        )}
+      >
         <h2 className={styles.title}>마이페이지</h2>
       </div>
-      <nav className={styles.nav}>
+      <nav
+        className={classes(
+          styles.nav,
+          conditionalClass(isMobile, styles.mobile)
+        )}
+      >
         <div className={styles.items}>
           {myPageTabs.map((tab) => (
             <Link key={tab.href} href={tab.href}>

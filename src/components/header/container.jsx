@@ -143,7 +143,7 @@ export const MobileHeader = ({
       className={classes(
         mobileStyles.header,
         conditionalClass(isInvert, mobileStyles.invert),
-        conditionalClass(absolute, desktopStyles.absolute),
+        conditionalClass(absolute, mobileStyles.absolute),
         className
       )}
     >

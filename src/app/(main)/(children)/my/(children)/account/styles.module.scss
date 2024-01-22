@@ -1,0 +1,32 @@
+@import "../../../../../../styles/variables.scss";
+
+.body {
+  max-width: calc($max-article-width + 80px);
+  padding: 0 40px;
+  margin: 0 auto;
+  margin-bottom: 120px;
+
+  &.mobile {
+    padding: 0 16px;
+  }
+}
+
+.banners {
+  margin-top: 50px;
+}
+
+.hr {
+  background: $color-border;
+  height: 1px; border: 0;
+  margin-bottom: 50px;
+}
+
+.remove {
+  @include ui-2;
+  float: right;
+  color: $color-text-passive-2;
+
+  &.mobile {
+    margin-right: 8px;
+  }
+}
