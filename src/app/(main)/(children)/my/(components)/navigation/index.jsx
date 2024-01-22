@@ -1,7 +1,6 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { useEffect } from "react";
 
 import styles from "./styles.module.scss";
 import Tab from "@/components/tab";

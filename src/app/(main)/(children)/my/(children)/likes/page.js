@@ -1,12 +1,15 @@
 import Header from "@/components/header";
 import styles from "./styles.module.scss";
 import Navigation from "../../(components)/navigation";
+import { useUserAgent } from "@/tools/user-agent";
 
 export default function LikesPage() {
+  const { isMobile } = useUserAgent();
+
   return (
     <main className={styles.main}>
       <Header absolute />
-      <Navigation />
+      <Navigation isMobile={isMobile} />
     </main>
   );
 }
