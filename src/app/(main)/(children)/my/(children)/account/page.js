@@ -9,8 +9,9 @@ import { classes } from "@/tools/classes";
 import { useUserAgent } from "@/tools/user-agent";
 import { conditionalClass } from "@/tools/classes";
 
-export default function AccountPage() {
+export default function AccountPage({ searchParams }) {
   const { isMobile } = useUserAgent();
+  const { new: newUser } = searchParams;
 
   return (
     <main className={styles.main}>
@@ -23,7 +24,7 @@ export default function AccountPage() {
         )}
       >
         <div className={styles.banners}>
-          <HelloBanner />
+          {newUser && <HelloBanner />}
           <EmailVerificationBanner />
         </div>
         <Profile isMobile={isMobile} />
