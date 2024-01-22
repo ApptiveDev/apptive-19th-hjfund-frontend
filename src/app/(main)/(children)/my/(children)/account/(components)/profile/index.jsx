@@ -5,6 +5,7 @@ import styles from "./styles.module.scss";
 import Button from "@/components/button";
 import { classes } from "@/tools/classes";
 import { conditionalClass } from "@/tools/classes";
+import { useChangeEmailModal, useChangeNameModal } from "../modals";
 
 function ProfileImage() {
   return (
@@ -32,6 +33,9 @@ function ProfileItem({ label, value, onClick }) {
 }
 
 export default function Profile({ isMobile }) {
+  const [changeNameModal, openChangeNameModal] = useChangeNameModal();
+  const [changeEmailModal, openChangeEmailModal] = useChangeEmailModal();
+
   return (
     <div
       className={classes(
@@ -39,10 +43,12 @@ export default function Profile({ isMobile }) {
         conditionalClass(isMobile, styles.mobile)
       )}
     >
+      {changeNameModal}
+      {changeEmailModal}
       <ProfileImage />
       <div className={styles.list}>
-        <ProfileItem label="이름" value="John Doe" />
-        <ProfileItem label="이메일" value="someone@example.com" />
+        <ProfileItem label="이름" value="John Doe" onClick={() => openChangeNameModal()} />
+        <ProfileItem label="이메일" value="someone@example.com" onClick={() => openChangeEmailModal()} />
       </div>
     </div>
   );
