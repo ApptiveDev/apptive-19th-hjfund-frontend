@@ -36,7 +36,7 @@ export default function AccountPage({ searchParams }) {
             styles.remove,
             conditionalClass(isMobile, styles.mobile)
           )}
-          href="/my/delete"
+          href="/my/account/remove"
         >
           회원탈퇴
         </Link>

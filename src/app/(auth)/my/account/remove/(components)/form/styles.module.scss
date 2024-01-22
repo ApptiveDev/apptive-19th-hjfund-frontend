@@ -1,0 +1,25 @@
+@import "../../../../../../../styles/variables.scss";
+
+.form {
+  & > p {
+    @include paragraph-2;
+    word-break: keep-all;
+    color: $color-text-passive-1;
+    margin-bottom: 40px;
+  }
+
+  .textfield {
+    margin-bottom: 20px;
+  }
+}
+
+.checkbox {
+  display: flex;
+  align-items: center;
+  column-gap: 6px;
+  margin-bottom: 20px;
+}
+
+.button {
+  float: right;
+}
