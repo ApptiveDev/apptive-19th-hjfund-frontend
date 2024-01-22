@@ -1,0 +1,32 @@
+@import "../../../styles/variables.scss";
+
+.container {
+  text-align: center;
+  margin-top: calc($header-height + 120px);
+
+  img {
+    max-width: 400px;
+    width: 100%;
+    height: auto;
+    margin-bottom: 80px;
+  }
+
+  h1 {
+    @include title-2;
+    margin-bottom: 24px;
+  }
+
+  p {
+    @include paragraph-2;
+    color: $color-text-passive-2;
+    margin-bottom: 30px;
+  }
+
+  margin-bottom: 200px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  column-gap: 16px;
+}
