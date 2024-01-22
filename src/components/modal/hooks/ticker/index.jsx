@@ -6,14 +6,14 @@ import Button from "@/components/button";
 import { getStock } from "@/requests/stock";
 import useInfiniteScroll from "@/tools/use-infinite-scroll";
 import Modal from "../..";
-import Checkbox from "@/components/checkbox";
+import Boolean from "@/components/boolean";
 import Radio from "@/components/radio";
 
 function TickerItemComponent({ code, name, isSelected, onChange, multiple }) {
   return (
     <div className={styles.item} onClick={() => onChange(!isSelected)}>
       {multiple ? (
-        <Checkbox
+        <Boolean
           checked={isSelected}
           onChange={() => onChange(!isSelected)}
           name="ticker"

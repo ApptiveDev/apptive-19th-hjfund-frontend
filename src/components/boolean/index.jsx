@@ -7,10 +7,8 @@ import { classes } from "@/tools/classes";
 const Boolean = forwardRef(
   (
     {
-      onChange,
       className,
       style,
-      checked,
       booleanType = "checkbox",
       booleanBackgroundColor,
       booleanBorderColor,

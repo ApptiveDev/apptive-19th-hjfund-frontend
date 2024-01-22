@@ -1,5 +1,6 @@
 interface HeaderProps extends React.HTMLAttributes<HTMLHeaderElement> {
   invert?: boolean;
+  absolute?: boolean;
   progress?: boolean;
   progressStart?: number;
   progressEnd?: number;

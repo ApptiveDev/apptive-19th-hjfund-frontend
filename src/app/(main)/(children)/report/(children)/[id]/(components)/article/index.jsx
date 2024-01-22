@@ -4,7 +4,7 @@ import Icon from "@/components/icon";
 import styles from "./styles.module.scss";
 import { useEffect, useRef } from "react";
 import { useRecoilState } from "recoil";
-import { reportScrollProgressState } from "@/store";
+import { reportScrollProgressState } from "@/store/report";
 
 const Article = ({ children, readtime }) => {
   const articleRef = useRef(null);
@@ -17,7 +17,11 @@ const Article = ({ children, readtime }) => {
 
     setReportScrollProgress({
       start: articleRef.current.offsetTop - 60,
-      end: articleRef.current.offsetTop + articleRef.current.offsetHeight - window.innerHeight + 100,
+      end:
+        articleRef.current.offsetTop +
+        articleRef.current.offsetHeight -
+        window.innerHeight +
+        100,
     });
   }, [children]);
 
