@@ -5,62 +5,49 @@ import { useState } from "react";
 
 export default function Request2() {
   return (
-    <main className={styles.page}>
-      <section className={styles.banner}>
-        <section className={styles.contents}>
-          <div className={styles.title}>종목요청</div>
-          <div className={styles.category}>
-            <div className={styles.categorybox}>
-              <span className={styles.number}>1</span>
-              <span className={styles.text}>기업선택</span>
-            </div>
-            <div className={styles.selectedcategorybox}>
-              <span className={styles.number}>2</span>
-              <span className={styles.text}>세부요청</span>
-            </div>
-            <div className={styles.categorybox}>
-              <span className={styles.number}>3</span>
-              <span className={styles.text}>요청완료</span>
-            </div>
-          </div>
-          <div style={{ flex: "1", width: "100%" }}>
-            <div className={styles.email}>
-              이메일 입력
-              <div className={styles.inputEmail}>
-                <input
-                  className={styles.inputBar}
-                  placeholder="연락 가능한 이메일을 입력해주세요"
-                ></input>
-                <p type="button" className={styles.callEmail}>
-                  이메일 불러오기
-                </p>
-              </div>
-            </div>
-            <div className={styles.detailRequest}>
-              세부 요청사항
-              <div className={styles.inputBox}>
-                <textarea
-                  type="text"
-                  className={styles.detailBox}
-                  placeholder="Ex) 산업 전반에 대해 디테일하게 다뤄주세요 / 2021년 매출액 변동폭이 큰 이유가 궁금해요. 경쟁사 OOO와 비교해서 다뤄주세요..."
-                ></textarea>
-              </div>
-            </div>
-          </div>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              width: "100%",
-            }}
-          >
-            <span style={{ flex: "1" }} />
-            <Link href="/request/3">
-              <button className={styles.nextbutton}>요청하기</button>
-            </Link>
-          </div>
-        </section>
-      </section>
-    </main>
+    <div className={styles.container}>
+      <div className={styles.requestbox}>
+        <div className={styles.requestboxheader}>
+          <span>➊ 종목 선택</span>
+          <span className={styles.selected}>➋ 세부정보 입력</span>
+          <span>------------------------------</span>
+          <span>➌ 요청 완료</span>
+        </div>
+        <div className={styles.requestboxbody}>
+          <span className={styles.textbox}>
+            <span className={styles.boxtitle}>세부정보 입력</span>
+            <span className={styles.boxsubtitle}>
+              추가적인 설명, 연락받을 이메일 등을 입력해 주세요.
+            </span>
+          </span>
+          <span className={styles.sized_box}>
+            <input
+              className={styles.description_input}
+              multiline={true}
+              type="text"
+              placeholder="설명을 입력하세요"
+            />
+            <input
+              className={styles.email_input}
+              type="email"
+              placeholder="이메일 주소 (선택)"
+            />
+            <p className={styles.email_footer}>
+              이메일 주소를 기재하지 않으면 계정에 등록된 이메일 주소로 결과가
+              통지됩니다.
+            </p>
+          </span>
+        </div>
+        <div className={styles.requestboxfooter}>
+          <Link href="/request">
+            <button className={styles.tomainbutton}>이전</button>
+          </Link>
+
+          <Link href="/request/3">
+            <button className={styles.nextbutton}>다음</button>
+          </Link>
+        </div>
+      </div>
+    </div>
   );
 }

@@ -1,0 +1,17 @@
+.button {
+  min-width: 0 !important;
+  padding: 0 !important;
+  width: 42px;
+
+  & svg > * {
+    stroke: none !important;
+  }
+}
+
+.kakao {
+  background: #FEE500 !important;
+}
+
+.naver {
+  background: #03C75A !important;
+}

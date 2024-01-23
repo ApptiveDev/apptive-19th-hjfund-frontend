@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@floating-ui/react": "^0.26.5",
     "@lexical/react": "^0.12.4",
     "@lexical/rich-text": "^0.12.4",
     "@lexical/utils": "^0.12.4",
@@ -16,9 +17,11 @@
     "eslint": "8.49.0",
     "eslint-config-next": "13.4.19",
     "lexical": "^0.12.4",
+    "localforage": "^1.10.0",
     "next": "^14.0.4",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-icons": "^5.0.1",
     "recoil": "^0.7.7",
     "sass": "^1.68.0"
   },

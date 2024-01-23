@@ -10,7 +10,7 @@ const Floatbar = ({ authorName, authorProfile, authorDescription }) => {
           alt="author-profile"
           src={authorProfile}
         />
-        <p className={styles.caption}>에디터</p>
+        <p className={styles.caption}>크리에이터</p>
         <p className={styles.name}>{authorName}</p>
         <p className={styles.description}>{authorDescription}</p>
       </div>
