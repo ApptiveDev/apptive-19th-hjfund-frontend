@@ -47,7 +47,23 @@
 
   & > .searchbox {
     height: 44px;
+    width: 490px;
+    border-radius: 10px;
+    border: 2px solid $color-border;
+    padding-left: 16px;
+    padding-right: 16px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    :focus {
+      outline: none;
+    }
   }
+}
+
+.searchbox_input {
+  border: none;
+  flex: 1;
 }
 
 .boxtitle {

@@ -1,5 +1,8 @@
 import Link from "next/link";
 import styles from "./styles.module.scss";
+// import { searchIcon } from "../../../../public/images/icon/search.png";
+import { Search } from "@/components/header/components";
+import Icon from "@/components/icon";
 
 export default function Request() {
   return (
@@ -18,8 +21,19 @@ export default function Request() {
               요청하려는 종목을 입력하세요.
             </span>
           </p>
-
-          <p className={styles.searchbox}>검색창</p>
+          <p className={styles.searchbox}>
+            <input
+              className={styles.searchbox_input}
+              type="text"
+              placeholder="종목 코드 검색"
+            />
+            <Icon
+              className={styles["button-invert-icon"]}
+              button
+              iconType="magnifying-glass"
+              // onClick={() => console.log("search")}
+            />
+          </p>
         </div>
         <div className={styles.requestboxfooter}>
           <button className={styles.tomainbutton}>메인 화면으로</button>
