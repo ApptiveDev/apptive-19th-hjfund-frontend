@@ -18,13 +18,13 @@ export default function Request() {
           <span>➌ 요청 완료</span>
         </div>
         <div className={styles.requestboxbody}>
-          <p className={styles.textbox}>
+          <span className={styles.textbox}>
             <span className={styles.boxtitle}>종목 선택</span>
             <span className={styles.boxsubtitle}>
               요청하려는 종목을 입력하세요.
             </span>
-          </p>
-          <p className={styles.searchbox}>
+          </span>
+          <span className={styles.searchbox}>
             <input
               className={styles.searchbox_input}
               type="text"
@@ -36,7 +36,7 @@ export default function Request() {
               iconType="magnifying-glass"
               // onClick={() => console.log("search")}
             />
-          </p>
+          </span>
         </div>
         <div className={styles.requestboxfooter}>
           <Link href="/">
