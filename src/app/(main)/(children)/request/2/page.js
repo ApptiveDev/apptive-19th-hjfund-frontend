@@ -14,12 +14,12 @@ export default function Request2() {
           <span>➌ 요청 완료</span>
         </div>
         <div className={styles.requestboxbody}>
-          <span className={styles.textbox}>
+          <p className={styles.textbox}>
             <span className={styles.boxtitle}>세부정보 입력</span>
             <span className={styles.boxsubtitle}>
               추가적인 설명, 연락받을 이메일 등을 입력해 주세요.
             </span>
-          </span>
+          </p>
           <span className={styles.sized_box}>
             <input
               className={styles.description_input}

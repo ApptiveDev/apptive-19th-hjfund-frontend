@@ -2,10 +2,6 @@
 
 .container {
   display: grid;
-@import "../../../../../styles/variables.scss";
-
-.container {
-  display: grid;
   justify-content: center;
 }
 
@@ -57,7 +53,7 @@
   border: 2px solid $color-border;
   padding-left: 16px;
   padding-right: 16px;
-
+  text-align: top;
   &:focus {
     outline: none;
   }
@@ -98,49 +94,10 @@
   border-top: 2px solid $color-border;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
-.boxtitle {
-  @include title-2;
-  color: $color-text;
-  margin-top: 60px;
-  margin-bottom: 12px;
-}
-
-.boxsubtitle {
-  @include ui-1;
-  color: $color-text-passive-2;
-  margin-bottom: 30px;
-}
-
-.requestboxfooter {
-  height: 54px;
-  border-top: 2px solid $color-border;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
   display: flex;
   flex-direction: row;
   align-items: center;
-  align-items: center;
   justify-content: space-between;
-  background-color: $color-foreground;
-  padding-left: 16px;
-  padding-right: 16px;
-}
-
-.tomainbutton {
-  height: 32px;
-  padding-left: 17px;
-  padding-right: 17px;
-  border-radius: 8px;
-  border-style: solid;
-  border-color: $color-border;
-  background-color: white;
-}
-
-.nextbutton {
-  height: 32px;
-  padding-left: 17px;
-  padding-right: 17px;
-  border-radius: 8px;
   background-color: $color-foreground;
   padding-left: 16px;
   padding-right: 16px;
@@ -163,18 +120,12 @@
   border-radius: 8px;
   border-style: none;
   background-color: $color-primary;
-  background-color: $color-primary;
   color: white;
-}
-
-.sized_box {
-  height: 312px;
 }
 
 .sized_box {
   height: 312px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   justify-content: space-between;
 }
