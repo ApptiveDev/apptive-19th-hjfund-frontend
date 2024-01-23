@@ -7,12 +7,9 @@ export const useUserAgent = () => {
   const isMobile = /Mobile/.test(userAgent);
 
   return { userAgent, isMobile };
-}
+};
 
-export const UserAgentComponent = ({
-  desktop,
-  mobile,
-}) => {
+export const UserAgentComponent = ({ desktop, mobile }) => {
   const { isMobile } = useUserAgent();
   return isMobile ? mobile : desktop;
-}
+};
