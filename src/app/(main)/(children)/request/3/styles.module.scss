@@ -1,0 +1,114 @@
+@import "../../../../../styles/variables.scss";
+
+.container {
+  display: grid;
+  justify-content: center;
+}
+
+.requestbox {
+  margin-top: 150px;
+  margin-bottom: 150px;
+  height: 600px;
+  width: 600px;
+  border: 2px solid $color-border;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.requestboxheader {
+  height: 50px;
+  border-bottom: 2px solid $color-border;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  color: $color-text-passive-2;
+  padding-left: 20px;
+  padding-right: 20px;
+
+  & > .selected {
+    color: $color-primary;
+  }
+}
+.requestboxbody {
+  height: 495px;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+
+  & > .textbox {
+    width: 490px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+.searchbox {
+  margin-top: 120px;
+  height: 110px;
+  width: 110px;
+  border-radius: 50%;
+  background-color: $color-primary;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+
+.Check {
+  height: 48px;
+  width: 48px;
+  color: white;
+  display: flex;
+  z-index: 2;
+  border-style: solid;
+}
+
+.boxtitle {
+  @include title-2;
+  color: $color-text;
+  margin-top: 40px;
+  margin-bottom: 12px;
+}
+
+.boxsubtitle {
+  @include ui-1;
+  color: $color-text-passive-2;
+  margin-bottom: 40px;
+}
+
+.requestboxfooter {
+  height: 54px;
+  border-top: 2px solid $color-border;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: end;
+  background-color: $color-foreground;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.tomainbutton {
+  height: 32px;
+  padding-left: 17px;
+  padding-right: 17px;
+  border-radius: 8px;
+  border-style: solid;
+  border-color: $color-border;
+  background-color: white;
+}
+
+.nextbutton {
+  height: 32px;
+  padding-left: 17px;
+  padding-right: 17px;
+  border-radius: 8px;
+  border-style: none;
+  background-color: $color-primary;
+  color: white;
+}

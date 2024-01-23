@@ -8,6 +8,7 @@ const Footer = () => {
   const pathname = usePathname();
 
   return (
+
     pathname !== "/creator/add" && (
       <footer className={styles.footer}>
         <div className={styles.container}>
@@ -27,6 +28,7 @@ const Footer = () => {
         </div>
       </footer>
     )
+
   );
 };
 
