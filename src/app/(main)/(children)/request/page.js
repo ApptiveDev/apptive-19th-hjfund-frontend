@@ -39,7 +39,9 @@ export default function Request() {
           </p>
         </div>
         <div className={styles.requestboxfooter}>
-          <button className={styles.tomainbutton}>메인 화면으로</button>
+          <Link href="/">
+            <button className={styles.tomainbutton}>메인 화면으로</button>
+          </Link>
           <Link href="/request/2">
             <button className={styles.nextbutton}>다음</button>
           </Link>
