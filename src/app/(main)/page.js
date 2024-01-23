@@ -5,11 +5,11 @@ import Indexes from "./(components)/indexes";
 
 export default function MainPage() {
   return (
-    <div>
+    <main>
       <Header invert/>
       <Banner />
       <CardList />
       <Indexes />
-    </div>
+    </main>
   );
 }
