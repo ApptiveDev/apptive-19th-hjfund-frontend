@@ -44,10 +44,36 @@
     flex-direction: column;
     align-items: start;
   }
+}
 
-  & > .searchbox {
-    height: 44px;
+.description_input {
+  height: 224px;
+  width: 490px;
+  border-radius: 10px;
+  border: 2px solid $color-border;
+  padding-left: 16px;
+  padding-right: 16px;
+  text-align: top;
+  &:focus {
+    outline: none;
   }
+}
+
+.email_input {
+  height: 44px;
+  width: 490px;
+  border-radius: 10px;
+  border: 2px solid $color-border;
+  padding-left: 16px;
+  padding-right: 16px;
+  &:focus {
+    outline: none;
+  }
+}
+
+.email_footer {
+  @include ui-2;
+  color: $color-text-passive-2;
 }
 
 .boxtitle {
@@ -60,7 +86,7 @@
 .boxsubtitle {
   @include ui-1;
   color: $color-text-passive-2;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
 }
 
 .requestboxfooter {
@@ -95,4 +121,11 @@
   border-style: none;
   background-color: $color-primary;
   color: white;
+}
+
+.sized_box {
+  height: 312px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }

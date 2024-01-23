@@ -20,8 +20,23 @@ export default function Request2() {
               추가적인 설명, 연락받을 이메일 등을 입력해 주세요.
             </span>
           </p>
-
-          <p className={styles.searchbox}>검색창</p>
+          <span className={styles.sized_box}>
+            <input
+              className={styles.description_input}
+              multiline={true}
+              type="text"
+              placeholder="설명을 입력하세요"
+            />
+            <input
+              className={styles.email_input}
+              type="email"
+              placeholder="이메일 주소 (선택)"
+            />
+            <p className={styles.email_footer}>
+              이메일 주소를 기재하지 않으면 계정에 등록된 이메일 주소로 결과가
+              통지됩니다.
+            </p>
+          </span>
         </div>
         <div className={styles.requestboxfooter}>
           <Link href="/request">
