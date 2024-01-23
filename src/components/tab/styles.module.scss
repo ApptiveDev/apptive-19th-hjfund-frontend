@@ -1,0 +1,27 @@
+@import "../../styles/variables.scss";
+
+.tab {
+  padding: 6px 0;
+  position: relative;
+  color: $color-text-passive-2;
+  @include ui-2;
+
+  &:after {
+    content: "";
+    position: absolute;
+    bottom: 0; left: 50%;
+    transform: translateX(-50%);
+    height: 1px;
+    width: min(100%, 12px);
+    background-color: transparent;
+    transition: background-color 0.1s;
+  }
+
+  &.active {
+    color: $color-text;
+
+    &:after {
+      background-color: $color-primary;
+    }
+  }
+}

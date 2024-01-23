@@ -67,6 +67,8 @@ export const DesktopHeader = ({
   progressStart,
   progressEnd,
   progressDesktopOverride,
+  className,
+  ...props
 }) => {
   const { isInvert, isProgress, progressState } = useHeaderScroll({
     invert,
@@ -79,8 +81,10 @@ export const DesktopHeader = ({
     <header
       className={classes(
         desktopStyles.header,
-        conditionalClass(isInvert, desktopStyles.invert)
+        conditionalClass(isInvert, desktopStyles.invert),
+        className
       )}
+      {...props}
     >
       <nav>
         <Link href="/">

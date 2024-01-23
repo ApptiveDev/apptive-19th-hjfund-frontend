@@ -18,7 +18,7 @@ export default function RegisterPage() {
       <Form />
       <div className={styles.lost}>
         <span>이미 계정이 있으신가요?</span>
-        <Link className="link" href="/login">로그인</Link>
+        <Link replace className="link" href="/login">로그인</Link>
       </div>
     </Container>
   );

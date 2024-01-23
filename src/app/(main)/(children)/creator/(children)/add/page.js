@@ -1,18 +1,12 @@
-"use client";
-
-import Headline from "@/components/pages/creator/editor/headline";
-import Editor from "@/components/pages/creator/editor";
+import Header from "@/components/header";
 import styles from "./styles.module.scss";
-import { Button } from "@/components/common";
+import Editor from "@/components/editor";
 
 export default function Page() {
   return (
     <main className={styles.main}>
-      <Headline>
-        <Button color="gray">임시 저장</Button>
-        <Button>등록</Button>
-      </Headline>
-      <Editor />
+      <Header className={styles.header} />
+      <Editor editable />
     </main>
   );
 }

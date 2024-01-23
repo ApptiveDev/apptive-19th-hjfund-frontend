@@ -1,0 +1,101 @@
+@import "../../../../styles/variables.scss";
+
+@keyframes FadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.container {
+  background-color: $color-background;
+  border: 1px solid $color-border;
+  border-radius: 10px;
+  box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.08);
+  animation: FadeIn 0.1s;
+  
+  width: 300px;
+  max-height: 40vh;
+
+  overflow-y: auto;
+
+  .divider {
+    height: 1px;
+    background-color: $color-border;
+    margin: 2px 0;
+  }
+
+  .empty {
+    @include ui-2;
+    color: $color-text-passive-2;
+    padding: 10px 0;
+    text-align: center;
+  }
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  padding: 0 14px;
+  height: 62px;
+  column-gap: 10px;
+
+  transition: background-color 0.1s;
+
+  &.selected {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+
+  .icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    border: 1px solid $color-border;
+    background-color: $color-background;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .texts {
+    flex: 1;
+    @include ui-2;
+
+    .description {
+      color: $color-text-passive-2;
+    }
+  }
+}
+
+.icon.quote > span {
+  width: 16px; height: 16px;
+  border-radius: 3px;
+  border: calc(18 / 24 * 1px) solid $color-text;
+  position: relative;
+
+  &:before {
+    content: "";
+    position: absolute;
+    width: 10px; height: 6px;
+    background-color: $color-background;
+    left: 50%; transform: translateX(-50%);
+    top: -2px;
+    z-index: 2;
+  }
+
+  &:after {
+    content: "\"";
+    position: absolute;
+    left: 50%; transform: translateX(-50%);
+    top: -6px;
+    z-index: 3;
+  }
+}
+
+.icon.divider > span {
+  width: 14px; height: calc(18 / 24 * 1px);
+  background-color: $color-text;
+}
