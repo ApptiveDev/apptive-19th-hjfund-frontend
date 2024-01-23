@@ -18,14 +18,31 @@
     padding-right: 10px;
     color: $color-text-passive-2;
 
-    .selected {
+    &.selected {
       color: $color-primary;
     }
   }
 }
 
-.search {
+.searchbox {
   margin-top: 20px;
   margin-left: 70px;
   display: absolute;
+  height: 44px;
+  width: 360px;
+  border-radius: 10px;
+  border: 2px solid $color-border;
+  padding-left: 16px;
+  padding-right: 16px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  :focus {
+    outline: none;
+  }
+}
+
+.searchbox_input {
+  border: none;
+  flex: 1;
 }
