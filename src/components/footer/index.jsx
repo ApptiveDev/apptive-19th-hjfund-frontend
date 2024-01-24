@@ -24,7 +24,7 @@ const Footer = () => {
               <Link href="/licenses">오픈소스 라이선스</Link>
             </li>
           </ul>
-          <p>문의: {process.env.NEXT_PUBLIC_CONTACT_EMAIL_ADDRESS}</p>
+          <p>문의: stocktree@insd.dev</p>
         </div>
       </footer>
     )
