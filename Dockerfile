@@ -3,6 +3,7 @@ WORKDIR /app
 
 COPY . .
 RUN yarn install && yarn build
+RUN mkdir -p /app/.next/standalone
 
 FROM node:20-alpine as runner
 WORKDIR /app

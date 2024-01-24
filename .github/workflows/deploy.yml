@@ -35,15 +35,20 @@ jobs:
           docker build -t $DOCKERHUB_USERNAME/$DOCKERHUB_REPO:$DOCKERHUB_REPO_TAG .
           docker push $DOCKERHUB_USERNAME/$DOCKERHUB_REPO:$DOCKERHUB_REPO_TAG
 
-      - name: Setting up SSH
-        uses: webfactory/ssh-agent@v0.8.0
-        with:
-          ssh-private-key: ${{ secrets.EC2_SSH_KEY }}
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
 
-      - name: Deploy Service
-        run: |
-          ssh -o StrictHostKeyChecking=no -T $EC2_USERNAME@$EC2_INSTANCE_IP << EOF
-            cd $COMPOSE_DIRECTORY
-            sudo docker compose pull $COMPOSE_SERVICE
-            sudo doppler run -- docker compose up -d $COMPOSE_SERVICE
-          EOF
+    steps:
+    - name: Setting up SSH
+      uses: webfactory/ssh-agent@v0.8.0
+      with:
+        ssh-private-key: ${{ secrets.EC2_SSH_KEY }}
+
+    - name: Deploy Service
+      run: |
+        ssh -o StrictHostKeyChecking=no -T $EC2_USERNAME@$EC2_INSTANCE_IP << EOF
+          cd $COMPOSE_DIRECTORY
+          sudo docker compose pull $COMPOSE_SERVICE
+          sudo doppler run -- docker compose up -d $COMPOSE_SERVICE
+        EOF
