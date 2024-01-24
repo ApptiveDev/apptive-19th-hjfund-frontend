@@ -30,13 +30,6 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-
-      - name: Install Dependencies
-        run: yarn install
-
       - name: Build Next.js App
         run: |
           docker build -t $DOCKERHUB_USERNAME/$DOCKERHUB_REPO:$DOCKERHUB_REPO_TAG .
