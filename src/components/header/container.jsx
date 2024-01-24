@@ -63,6 +63,7 @@ const useHeaderScroll = ({
 
 export const DesktopHeader = ({
   invert = false,
+  absolute = false,
   progress = false,
   progressStart,
   progressEnd,
@@ -82,6 +83,7 @@ export const DesktopHeader = ({
       className={classes(
         desktopStyles.header,
         conditionalClass(isInvert, desktopStyles.invert),
+        conditionalClass(absolute, desktopStyles.absolute),
         className
       )}
       {...props}
@@ -122,10 +124,12 @@ export const DesktopHeader = ({
 
 export const MobileHeader = ({
   invert = false,
+  absolute = false,
   progress = false,
   progressStart,
   progressEnd,
   progressMobileOverride,
+  className,
 }) => {
   const { isInvert, isProgress, progressState } = useHeaderScroll({
     invert,
@@ -138,7 +142,9 @@ export const MobileHeader = ({
     <header
       className={classes(
         mobileStyles.header,
-        conditionalClass(isInvert, mobileStyles.invert)
+        conditionalClass(isInvert, mobileStyles.invert),
+        conditionalClass(absolute, mobileStyles.absolute),
+        className
       )}
     >
       <nav>

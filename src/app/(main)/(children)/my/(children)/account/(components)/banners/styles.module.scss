@@ -1,0 +1,49 @@
+@import "../../../../../../../../styles/variables.scss";
+
+.banner {
+  padding: 18px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+
+  .title {
+    @include ui-1(700);
+    margin-bottom: 8px;
+  }
+
+  .description {
+    @include ui-2;
+    color: $color-text-passive-1;
+  }
+
+  margin-bottom: 24px;
+}
+
+.hello {
+  border-color: $color-blue;
+
+  .title {
+    color: $color-blue;
+  }
+}
+
+.verification {
+  border-color: $color-yellow;
+
+  .title {
+    color: $color-yellow;
+  }
+
+  .buttons {
+    display: flex;
+    column-gap: 12px;
+    margin-top: 12px;
+  }
+}
+
+.password {
+  border-color: $color-primary;
+
+  .title {
+    color: $color-primary;
+  }
+}

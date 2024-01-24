@@ -7,7 +7,7 @@ import { conditionalClass } from "@/tools/classes";
 import { $getSelection, $isRangeSelection } from "lexical";
 import { getSelectedNode } from "@/components/editor/tools/getSelectedNode";
 import { $isLinkNode, TOGGLE_LINK_COMMAND } from "@lexical/link";
-import Checkbox from "@/components/checkbox";
+import Boolean from "@/components/boolean";
 import openLink from "@/components/editor/tools/openLink";
 import Icon from "@/components/icon";
 
@@ -69,7 +69,7 @@ const LinkInsertToolbar = forwardRef(({ editor, pos }, ref) => {
       />
       <div className={styles.bottom}>
         <label className={styles.newTab}>
-          <Checkbox
+          <Boolean
             name="open-new-tab"
             value="true"
             checked={newTab}

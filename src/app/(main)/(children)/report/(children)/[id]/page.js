@@ -21,7 +21,7 @@ export default function ReportViewerPage({}) {
 
   return (
     <main>
-      <Header title="K-웹툰 OSMU 성공할 수 있을까? 🙋‍♂️" />
+      <Header title="K-웹툰 OSMU 성공할 수 있을까? 🙋‍♂️"/>
       <Headline
         title="K-웹툰 OSMU 성공할 수 있을까? 🙋‍♂️"
         itemName="디앤씨미디어"

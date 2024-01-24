@@ -1,0 +1,41 @@
+@import "../../../../../../styles/variables.scss";
+
+.body {
+  max-width: calc($max-article-width + 80px);
+  padding: 0 40px;
+
+  &.mobile {
+    padding: 0 24px;
+  }
+
+  margin: 0 auto;
+  padding-top: 100px !important;
+  text-align: center;
+
+
+  img {
+    max-width: 400px;
+    width: 100%;
+    height: auto;
+    margin-bottom: 60px;
+  }
+
+  h1 {
+    @include title-2;
+    margin-bottom: 20px;
+  }
+
+  p {
+    @include paragraph-2;
+    color: $color-text-passive-1;
+    margin-bottom: 40px;
+  }
+
+  button {
+    margin: 0 auto;
+    max-width: 220px;
+    width: 100%;
+  }
+
+  margin-bottom: 120px;
+}

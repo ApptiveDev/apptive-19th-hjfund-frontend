@@ -18,11 +18,16 @@ export async function POST({ email, name, password }) {
     .post(ENDPOINT, {
       email,
       name,
-      password,
-      role: "admin"
+      password
     })
     .catch((e) => e.response ?? { status: 500 });
 
-  console.log(res);
-  return res.status;
+  switch (res.status) {
+    case 200:
+      return false;
+    case 409:
+      return RegisterErrors.EMAIL_ALREADY_EXISTS;
+    default:
+      return RegisterErrors.UNKNOWN;
+  }
 }

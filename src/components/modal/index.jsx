@@ -4,7 +4,32 @@ import styles from "./styles.module.scss";
 import { conditionalClass } from "@/tools/classes";
 import { FixedLayerId } from "../layer";
 import { createPortal } from "react-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+
+export function ModalTitle({ title, children, ...props }) {
+  return (
+    <div className={styles.title} {...props}>
+      <h2>{title}</h2>
+      {children}
+    </div>
+  );
+}
+
+export function ModalContent({ children, ...props }) {
+  return (
+    <div className={styles.content} {...props}>
+      {children}
+    </div>
+  );
+}
+
+export function ModalFooter({ children, ...props }) {
+  return (
+    <div className={styles.footer} {...props}>
+      {children}
+    </div>
+  );
+}
 
 export default function Modal({
   isOpen,
@@ -14,6 +39,8 @@ export default function Modal({
   clickOutsideToClose = true,
   anchorRef,
 }) {
+  const [isMountable, setIsMountable] = useState(false);
+
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
@@ -25,6 +52,10 @@ export default function Modal({
       document.body.style.overflow = "";
     };
   }, [isOpen]);
+
+  useEffect(() => {
+    setIsMountable(true);
+  }, []);
 
   const element = (
     <div
@@ -43,8 +74,11 @@ export default function Modal({
     </div>
   );
 
-  return createPortal(
-    element,
-    (anchorRef && anchorRef.current) ?? document.getElementById(FixedLayerId)
+  return (
+    isMountable &&
+    createPortal(
+      element,
+      (anchorRef && anchorRef.current) ?? document.getElementById(FixedLayerId)
+    )
   );
 }

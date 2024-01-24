@@ -1,7 +1,7 @@
 "use client";
 
 import Icon from "@/components/icon";
-import { reportScrollProgressState } from "@/store";
+import { reportScrollProgressState } from "@/store/report";
 import { useRecoilState } from "recoil";
 import { DesktopHeader, MobileHeader } from "@/components/header/container";
 

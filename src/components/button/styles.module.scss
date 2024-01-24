@@ -31,6 +31,11 @@
     column-gap: 8px;
   }
 
+  &:disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
   &.filled {
     border: 0;
     background-color: var(--button-background-color, $color-primary);
@@ -46,10 +51,6 @@
 
     &:active {
       opacity: 0.8;
-    }
-
-    &:disabled {
-      opacity: 0.5;
     }
   }
 

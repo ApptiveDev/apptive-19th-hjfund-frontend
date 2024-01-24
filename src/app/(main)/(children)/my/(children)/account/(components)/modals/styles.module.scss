@@ -1,0 +1,15 @@
+@import "../../../../../../../../styles/variables.scss";
+
+.namechange {
+  max-width: 480px;
+
+  .body {
+    padding: 30px 20px;
+  }
+
+  .desc {
+    @include ui-2;
+    color: $color-text-passive-2;
+    margin: 10px 6px 0 6px;
+  }
+}

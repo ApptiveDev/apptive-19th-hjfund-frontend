@@ -1,0 +1,10 @@
+@import "../../../../../styles/variables.scss";
+
+.title {
+  h1 {
+    @include title-2;
+    margin-bottom: 12px;
+  }
+
+  margin-bottom: 50px;
+}

@@ -3,7 +3,7 @@
 import Textfield from "@/components/textfield";
 import styles from "./styles.module.scss";
 import { useCallback, useState } from "react";
-import Checkbox from "@/components/checkbox";
+import Boolean from "@/components/boolean";
 import Button from "@/components/button";
 import {
   isEmailInvalid,
@@ -56,22 +56,26 @@ const Form = () => {
     visible: false,
   });
 
+  const [isAgreed, setIsAgreed] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  const sendRequest = useCallback(async (e) => {
-    const { email, name, password } = formState;
+  const sendRequest = useCallback(
+    async (e) => {
+      const { email, name, password } = formState;
 
-    e.preventDefault();
-    setIsLoading(true);
+      e.preventDefault();
+      setIsLoading(true);
 
-    const res = await POST({
-      email: email.value,
-      name: name.value,
-      password: password.value,
-    });
-    
-    console.log(res);
-  }, [formState]);
+      const res = await POST({
+        email: email.value,
+        name: name.value,
+        password: password.value,
+      });
+
+      console.log(res);
+    },
+    [formState]
+  );
 
   const handleOnChange = (name, e) => {
     setFormState((prev) => ({
@@ -121,10 +125,7 @@ const Form = () => {
   };
 
   return (
-    <form
-      className={styles.form}
-      onSubmit={sendRequest}
-    >
+    <form className={styles.form} onSubmit={sendRequest}>
       <div className={styles.texts}>
         {formItems.map((item) => {
           const borderColor =
@@ -154,7 +155,11 @@ const Form = () => {
         {formError.visible ? formError.message : ""}
       </p>
       <label className={styles.terms}>
-        <Checkbox className={styles.checkbox} />
+        <Boolean
+          className={styles.checkbox}
+          checked={isAgreed}
+          onChange={(e) => setIsAgreed(e.target.checked)}
+        />
         <div>
           <Link className="link" href="/terms">
             이용약관
@@ -168,7 +173,7 @@ const Form = () => {
       </label>
       <Button
         className={styles.button}
-        disabled={Object.values(formState).some((e) => e.error)}
+        disabled={!isAgreed || Object.values(formState).some((e) => e.error)}
         buttonStyle="filled"
       >
         회원가입

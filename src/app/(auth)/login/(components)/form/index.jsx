@@ -3,7 +3,7 @@
 import Textfield from "@/components/textfield";
 import styles from "./styles.module.scss";
 import { useCallback, useState } from "react";
-import Checkbox from "@/components/checkbox";
+import Boolean from "@/components/boolean";
 import Button from "@/components/button";
 import { isEmailInvalid, isPasswordInvalid } from "@/tools/auth-form-checkes";
 import { LoginErrors, POST } from "@/requests/user/auth/login";
@@ -155,7 +155,7 @@ const Form = ({ redirect }) => {
         })}
       </div>
       <label className={styles.keep}>
-        <Checkbox
+        <Boolean
           name="keep"
           checked={formState.keep}
           onChange={(e) =>
