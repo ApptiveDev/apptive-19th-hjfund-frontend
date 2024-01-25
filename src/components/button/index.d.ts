@@ -4,6 +4,7 @@ type ButtonSize = "small" | "medium" | "big";
 type ButtonStyle = "filled" | "outlined";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  buttonLoading?: boolean;
   buttonSize?: ButtonSize;
   buttonStyle?: ButtonStyle;
   buttonBackgroundColor?: string;
@@ -11,7 +12,8 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   buttonTextColor?: string;
   buttonHoverBackgroundColor?: string;
   buttonHoverBorderColor?: string;
-  ButtonHoverTextColor?: string;
+  buttonHoverTextColor?: string;
+  buttonLoadingIndicatorColor?: string;
 }
 
 declare const Button: React.FC<ButtonProps>;

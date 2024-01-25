@@ -44,7 +44,7 @@ const formStateItem = {
   error: true,
 };
 
-const Form = ({ redirect }) => {
+const Form = () => {
   const router = useRouter();
 
   const [formState, setFormState] = useState({
@@ -65,6 +65,7 @@ const Form = ({ redirect }) => {
 
   const sendRequest = useCallback(
     (e) => {
+      if (isLoading) return;
       const { email, name, password } = formState;
 
       e.preventDefault();
@@ -75,22 +76,7 @@ const Form = ({ redirect }) => {
         name: name.value,
         password: password.value,
       })
-        .then(() => 
-          postLogin({
-            email: email.value,
-            password: password.value,
-          }).then(() => {
-            router.replace(redirect ?? "/");
-            return;
-          }).catch(() => {
-            setFormError({
-              message: "",
-              visible: true,
-            })
-
-            setIsLoading(false);
-          })
-        )
+        .then(() => router.replace("/my/account?new=true"))
         .catch((errorCode) => {
           let errorMessage;
 
@@ -122,7 +108,7 @@ const Form = ({ redirect }) => {
           setIsLoading(false);
         });
     },
-    [formState]
+    [formState, isLoading]
   );
 
   const handleOnChange = (name, e) => {
@@ -220,6 +206,7 @@ const Form = ({ redirect }) => {
         </div>
       </label>
       <Button
+        buttonLoading={isLoading}
         className={styles.button}
         disabled={!isAgreed || Object.values(formState).some((e) => e.error)}
         buttonStyle="filled"

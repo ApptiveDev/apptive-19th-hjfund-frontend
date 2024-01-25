@@ -8,6 +8,7 @@ import { forwardRef, useEffect, useRef, useState } from "react";
 import { classes } from "@/tools/classes";
 import { useAuth } from "@/tools/auth-provider";
 import Avatar from "@/components/avatar";
+import { postLogout } from "@/requests/user/auth/logout";
 
 const UserProfileButton = forwardRef(
   ({ onClick, isLoggedIn = false, user, ...props }, ref) => {
@@ -51,7 +52,9 @@ const UserProfileSheet = forwardRef((props, ref) => {
           <Link href="/my">마이페이지</Link>
         </li>
         <li>
-          <button>로그아웃</button>
+          <button onClick={() => postLogout().then(() => location.reload())}>
+            로그아웃
+          </button>
         </li>
       </ul>
     </li>

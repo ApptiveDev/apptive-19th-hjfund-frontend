@@ -7,6 +7,8 @@ import styles from "../mobile.module.scss";
 import Link from "next/link";
 import { useAuth } from "@/tools/auth-provider";
 import Avatar from "@/components/avatar";
+import { postLogout } from "@/requests/user/auth/logout";
+
 
 const MenuButton = ({ onClick, props }) => {
   return (
@@ -25,8 +27,8 @@ const MenuProfile = ({ user }) => {
         <p className={styles.email}>{user.uid}</p>
       </div>
     </div>
-  )
-}
+  );
+};
 
 const Navigation = ({ isLoggedIn }) => {
   return (
@@ -36,17 +38,19 @@ const Navigation = ({ isLoggedIn }) => {
       {isLoggedIn && <Link href="/request">종목 요청하기</Link>}
       {/* <Link href="/notification">알림</Link> */}
     </nav>
-  )
-}
+  );
+};
 
 const UserMenu = () => {
   return (
-    <div className={styles.navigation} style={{marginBottom: 30}}>
+    <div className={styles.navigation} style={{ marginBottom: 30 }}>
       <Link href="/my">마이페이지</Link>
-      <button>로그아웃</button>
+      <button onClick={() => postLogout().then(() => location.reload())}>
+        로그아웃
+      </button>
     </div>
-  )
-}
+  );
+};
 
 const MenuSheet = ({ setIsOpened }) => {
   const { user, isLoggedIn } = useAuth();

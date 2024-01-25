@@ -2,7 +2,6 @@
 
 import { getUser } from "@/requests/user";
 import { postLogout } from "@/requests/user/auth/logout";
-import { usePathname, useRouter } from "next/navigation";
 
 import React, {
   createContext,
@@ -17,11 +16,9 @@ const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
-  const router = useRouter();
-  const pathname = usePathname();
 
   const logout = useCallback(() => {
-    postLogout().then(() => router.replace(pathname));
+    postLogout().then(() => location.reload());
   }, []);
 
   const refresh = useCallback(() => {

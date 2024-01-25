@@ -1,11 +1,14 @@
 import { classes } from "@/tools/classes";
 import styles from "./styles.module.scss";
-import PropTypes from "prop-types";
+import LoadingLayer from "../loading";
+import { conditionalClass } from "@/tools/classes";
 
 const Button = ({
   children,
   className,
   style,
+  disabled,
+  buttonLoading,
   buttonSize = "medium",
   buttonStyle = "filled",
   // overrides
@@ -15,11 +18,19 @@ const Button = ({
   buttonHoverBackgroundColor,
   buttonHoverBorderColor,
   buttonHoverTextColor,
+  buttonLoadingIndicatorColor,
   ...props
 }) => {
   return (
     <button
-      className={classes(styles.button, styles[buttonSize], styles[buttonStyle], className)}
+      disabled={disabled || buttonLoading}
+      className={classes(
+        styles.button,
+        styles[buttonSize],
+        styles[buttonStyle],
+        conditionalClass(buttonLoading, styles.loading),
+        className
+      )}
       style={{
         "--button-background-color": buttonBackgroundColor,
         "--button-border-color": buttonBorderColor,
@@ -31,6 +42,15 @@ const Button = ({
       }}
       {...props}
     >
+      <LoadingLayer
+        className={classes(styles.loading, styles[buttonStyle])}
+        invert={buttonStyle === "filled"}
+        style={{
+          "--button-background-color": buttonBackgroundColor,
+          "--button-text-color": buttonLoadingIndicatorColor,
+          opacity: buttonLoading ? 1 : 0,
+        }}
+      />
       {children}
     </button>
   );

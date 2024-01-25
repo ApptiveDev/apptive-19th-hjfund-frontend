@@ -15,11 +15,15 @@ export async function postRegister({ email, name, password }) {
   }
 
   const res = await axios
-    .post(ENDPOINT, {
-      email,
-      name,
-      password
-    })
+    .post(
+      ENDPOINT,
+      {
+        email,
+        name,
+        password,
+      },
+      { withCredentials: true }
+    )
     .catch((e) => e.response ?? { status: 500 });
 
   return new Promise((resolve, reject) => {

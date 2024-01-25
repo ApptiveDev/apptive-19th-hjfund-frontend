@@ -8,6 +8,9 @@
   cursor: default;
   justify-content: center;
 
+  position: relative;
+  overflow: hidden;
+
   @include ui-2;
 
   &.small {
@@ -34,6 +37,10 @@
   &:disabled {
     opacity: 0.5;
     pointer-events: none;
+  }
+
+  &:disabled.loading {
+    opacity: 0.8;
   }
 
   &.filled {
@@ -76,5 +83,21 @@
       color: var(--button-hover-text-color, $color-text);
       @include icon-color(var(--button-hover-text-color, $color-text));
     }
+  }
+}
+
+.loading.filled {
+  background-color: var(--button-background-color, $color-primary);
+
+  span {
+    background-color: var(--button-text-color, white);
+  }
+}
+
+.loading.outlined {
+  background-color: var(--button-background-color, $color-background);
+
+  span {
+    background-color: var(--button-text-color, $color-text);
   }
 }

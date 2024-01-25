@@ -45,6 +45,7 @@ const Form = ({ redirect }) => {
 
   const sendRequest = useCallback(
     (e) => {
+      if (isLoading) return;
       const { email, password, keep } = formState;
 
       e.preventDefault();
@@ -81,7 +82,7 @@ const Form = ({ redirect }) => {
           setIsLoading(false);
         });
     },
-    [formState, redirect]
+    [formState, redirect, isLoading]
   );
 
   const handleOnChange = (name, e) => {
@@ -172,6 +173,7 @@ const Form = ({ redirect }) => {
         {formError.visible ? formError.message : ""}
       </p>
       <Button
+        buttonLoading={isLoading}
         className={styles.button}
         disabled={Object.values(formState).some((e) => e.error)}
         buttonStyle="filled"

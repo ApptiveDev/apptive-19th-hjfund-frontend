@@ -51,8 +51,8 @@ export default function Profile({ isMobile }) {
       {changeEmailModal}
       <ProfileImage />
       <div className={styles.list}>
-        <ProfileItem label="이름" value={user.nickName} onClick={() => openChangeNameModal()} />
-        <ProfileItem label="이메일" value={user.uid} onClick={() => openChangeEmailModal()} />
+        <ProfileItem label="이름" value={user && user.nickName} onClick={() => openChangeNameModal()} />
+        <ProfileItem label="이메일" value={user && user.uid} onClick={() => openChangeEmailModal()} />
       </div>
     </div>
   );
