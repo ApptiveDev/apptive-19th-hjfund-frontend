@@ -1,10 +1,9 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 import styles from "./styles.module.scss";
 import Textfield from "@/components/textfield";
 import Button from "@/components/button";
-import { getStock } from "@/requests/stock";
-import useInfiniteScroll from "@/tools/use-infinite-scroll";
+import { getStocks } from "@/requests/stock/stocks";
 import Modal from "../..";
 import Boolean from "@/components/boolean";
 import Radio from "@/components/radio";
@@ -37,8 +36,8 @@ function TickerItemComponent({ code, name, isSelected, onChange, multiple }) {
 
 function TickerModalComponent({
   initialCodes = [],
-  onConfirm = (_codes = []) => {},
   isOpen,
+  onConfirm = (_codes = []) => {},
   onDismiss = () => {},
   multiple = true,
   confirmButtonLabel = "선택",
@@ -48,41 +47,25 @@ function TickerModalComponent({
   const [selectedCodes, setSelectedCodes] = useState(initialCodes);
   const [keyword, setKeyword] = useState("");
   const [error, setError] = useState(false);
+  const [data, setData] = useState([]);
 
   useEffect(() => {
     if (isOpen) {
+      setSelectedCodes(initialCodes);
       setKeyword("");
       setError(false);
-      setSelectedCodes([]);
+      getStocks()
+        .then(setData)
+        .catch(() => setError(true));
     }
   }, [isOpen]);
 
-  // infinite scroll
-  const [data, isFetchable, clear] = useInfiniteScroll({
-    ref: listRef,
-    async fetch(index, setData) {
-      if (!isOpen) return false;
-
-      const data = await getStock({
-        key: keyword,
-        index,
-        count: 20,
-      }).catch(() => setError(true));
-
-      if (data) {
-        setData(data.content);
-        if (data.last) return true;
-      }
-
-      return false;
-    },
-    cooldown: 100,
-  });
-
-  // search
-  useEffect(() => {
-    clear();
-  }, [keyword, isOpen]);
+  const filteredData = useMemo(() => {
+    const keywordRegex = new RegExp(keyword, "i");
+    return data.filter(
+      (item) => keywordRegex.test(item.name) || keywordRegex.test(item.code)
+    );
+  }, [keyword, data]);
 
   return (
     <>
@@ -99,8 +82,7 @@ function TickerModalComponent({
       </header>
       <div ref={listRef} className={styles.list}>
         {!error &&
-          data &&
-          data.map((item) => (
+          (keyword.length > 0 ? filteredData : data).map((item) => (
             <TickerItemComponent
               key={item.code}
               code={item.code}
