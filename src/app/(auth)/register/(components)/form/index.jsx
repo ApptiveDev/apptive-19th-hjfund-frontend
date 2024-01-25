@@ -12,7 +12,9 @@ import {
   isPasswordInvalid,
 } from "@/tools/auth-form-checkes";
 import Link from "next/link";
-import { POST } from "@/requests/user/auth/register";
+import { RegisterErrors, postRegister } from "@/requests/user/auth/register";
+import { postLogin } from "@/requests/user/auth/login";
+import { useRouter } from "next/navigation";
 
 const formItems = [
   {
@@ -42,7 +44,9 @@ const formStateItem = {
   error: true,
 };
 
-const Form = () => {
+const Form = ({ redirect }) => {
+  const router = useRouter();
+
   const [formState, setFormState] = useState({
     email: formStateItem,
     name: formStateItem,
@@ -60,19 +64,63 @@ const Form = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const sendRequest = useCallback(
-    async (e) => {
+    (e) => {
       const { email, name, password } = formState;
 
       e.preventDefault();
       setIsLoading(true);
 
-      const res = await POST({
+      postRegister({
         email: email.value,
         name: name.value,
         password: password.value,
-      });
+      })
+        .then(() => 
+          postLogin({
+            email: email.value,
+            password: password.value,
+          }).then(() => {
+            router.replace(redirect ?? "/");
+            return;
+          }).catch(() => {
+            setFormError({
+              message: "",
+              visible: true,
+            })
 
-      console.log(res);
+            setIsLoading(false);
+          })
+        )
+        .catch((errorCode) => {
+          let errorMessage;
+
+          switch (errorCode) {
+            case RegisterErrors.INVALID_ARGUMENTS:
+              errorMessage =
+                "잘못된 값이 포함되어 있습니다. 각 항목을 다시 확인해 주십시오.";
+              break;
+            case RegisterErrors.EMAIL_ALREADY_EXISTS:
+              errorMessage = "이미 가입된 이메일입니다.";
+              setFormState((prev) => ({
+                ...prev,
+                email: {
+                  ...prev.email,
+                  error: true,
+                },
+              }));
+              break;
+            case RegisterErrors.UNKNOWN:
+              errorMessage = "알 수 없는 오류가 발생했습니다.";
+              break;
+          }
+
+          setFormError({
+            message: errorMessage,
+            visible: true,
+          });
+
+          setIsLoading(false);
+        });
     },
     [formState]
   );

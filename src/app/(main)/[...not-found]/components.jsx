@@ -5,6 +5,7 @@ import Link from "next/link";
 
 import styles from "./styles.module.scss";
 import { useRouter } from "next/navigation";
+import { getUser } from "@/requests/user";
 
 export default function Buttons() {
   const router = useRouter();
@@ -17,6 +18,7 @@ export default function Buttons() {
       <Link replace href="/">
         <Button buttonStyle="outlined">메인 페이지로</Button>
       </Link>
+      <Button onClick={() => getUser()}>Test</Button>
     </div>
   );
 }

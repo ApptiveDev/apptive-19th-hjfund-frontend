@@ -9,7 +9,7 @@ export const RegisterErrors = {
   UNKNOWN: "UNKNOWN",
 };
 
-export async function POST({ email, name, password }) {
+export async function postRegister({ email, name, password }) {
   if (!email || !name || !password) {
     return RegisterErrors.INVALID_ARGUMENTS;
   }
@@ -22,12 +22,17 @@ export async function POST({ email, name, password }) {
     })
     .catch((e) => e.response ?? { status: 500 });
 
-  switch (res.status) {
-    case 200:
-      return false;
-    case 409:
-      return RegisterErrors.EMAIL_ALREADY_EXISTS;
-    default:
-      return RegisterErrors.UNKNOWN;
-  }
+  return new Promise((resolve, reject) => {
+    switch (res.status) {
+      case 200:
+        resolve(false);
+        break;
+      case 409:
+        reject(RegisterErrors.EMAIL_ALREADY_EXISTS);
+        break;
+      default:
+        reject(RegisterErrors.UNKNOWN);
+        break;
+    }
+  });
 }

@@ -11,4 +11,4 @@ export declare const RegisterErrors: {
 }
 
 
-export declare async function POST(req: RegisterRequest): Promise<number>;
+export declare async function postRegister(req: RegisterRequest): Promise<number>;

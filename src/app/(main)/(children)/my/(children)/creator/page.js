@@ -5,8 +5,10 @@ import Button from "@/components/button";
 import { useUserAgent } from "@/tools/user-agent";
 import { classes } from "@/tools/classes";
 import { conditionalClass } from "@/tools/classes";
+import useAuthChecker from "@/tools/auth-checker";
 
 export default function CreatorPage() {
+  useAuthChecker();
   const { isMobile } = useUserAgent();
 
   return (

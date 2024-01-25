@@ -8,8 +8,11 @@ import Link from "next/link";
 import { classes } from "@/tools/classes";
 import { useUserAgent } from "@/tools/user-agent";
 import { conditionalClass } from "@/tools/classes";
+import useAuthChecker from "@/tools/auth-checker";
 
 export default function AccountPage({ searchParams }) {
+  useAuthChecker();
+
   const { isMobile } = useUserAgent();
   const { new: newUser, password } = searchParams;
 

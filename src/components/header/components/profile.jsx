@@ -6,13 +6,15 @@ import Button from "../../button";
 import styles from "../desktop.module.scss";
 import { forwardRef, useEffect, useRef, useState } from "react";
 import { classes } from "@/tools/classes";
+import { useAuth } from "@/tools/auth-provider";
+import Avatar from "@/components/avatar";
 
 const UserProfileButton = forwardRef(
-  ({ onClick, isLoggedIn = false, ...props }, ref) => {
+  ({ onClick, isLoggedIn = false, user, ...props }, ref) => {
     return isLoggedIn ? (
       <li ref={ref} {...props}>
         <button className={styles.profile} onClick={onClick}>
-          <img src="/examples/example-profile-1.jpg" alt="profile" />
+          <Avatar url={user.profile.photo} />
         </button>
       </li>
     ) : (
@@ -32,6 +34,8 @@ const UserProfileButton = forwardRef(
 );
 
 const UserProfileSheet = forwardRef((props, ref) => {
+  const { user } = useAuth();
+
   return (
     <li
       ref={ref}
@@ -40,8 +44,8 @@ const UserProfileSheet = forwardRef((props, ref) => {
     >
       <ul>
         <li className={styles.info}>
-          <p>사용자 이름</p>
-          <p className={styles.email}>someon@example.com</p>
+          <p>{user.nickName}</p>
+          <p className={styles.email}>{user.uid}</p>
         </li>
         <li>
           <Link href="/my">마이페이지</Link>
@@ -55,7 +59,7 @@ const UserProfileSheet = forwardRef((props, ref) => {
 });
 
 const UserProfile = () => {
-  const isLoggedIn = true;
+  const { user, isLoggedIn } = useAuth();
   const [isOpened, setIsOpened] = useState(false);
 
   const buttonRef = useRef();
@@ -82,6 +86,7 @@ const UserProfile = () => {
   return (
     <>
       <UserProfileButton
+        user={user}
         isLoggedIn={isLoggedIn}
         ref={buttonRef}
         onClick={() => setIsOpened(!isOpened)}

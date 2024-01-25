@@ -6,7 +6,7 @@ import { useCallback, useState } from "react";
 import Boolean from "@/components/boolean";
 import Button from "@/components/button";
 import { isEmailInvalid, isPasswordInvalid } from "@/tools/auth-form-checkes";
-import { LoginErrors, POST } from "@/requests/user/auth/login";
+import { LoginErrors, postLogin } from "@/requests/user/auth/login";
 import { useRouter } from "next/navigation";
 
 const formItems = [
@@ -43,45 +43,46 @@ const Form = ({ redirect }) => {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const sendRequest = useCallback(async (e) => {
-    const { email, password } = formState;
+  const sendRequest = useCallback(
+    (e) => {
+      const { email, password, keep } = formState;
 
-    e.preventDefault();
-    setIsLoading(true);
+      e.preventDefault();
+      setIsLoading(true);
 
-    const errorCode = await POST({
-      email: email.value,
-      password: password.value,
-    });
+      postLogin({
+        email: email.value,
+        password: password.value,
+        keep,
+      })
+        .then(() => {
+          router.replace(redirect ?? "/");
+        })
+        .catch((errorCode) => {
+          let errorMessage;
 
-    // if (!errorCode) {
-    //   router.replace(redirect ?? "/");
-    //   return;
-    // }
+          switch (errorCode) {
+            case LoginErrors.INVALID_ARGUMENTS:
+              errorMessage = "이메일 또는 비밀번호를 잘못 입력하셨습니다.";
+              break;
+            case LoginErrors.INVALID_CREDENTIALS:
+              errorMessage = "이메일 또는 비밀번호를 잘못 입력하셨습니다.";
+              break;
+            case LoginErrors.UNKNOWN:
+              errorMessage = "알 수 없는 오류가 발생했습니다.";
+              break;
+          }
 
-    setIsLoading(false);
+          setFormError({
+            message: errorMessage,
+            visible: true,
+          });
 
-    let errorMessage;
-
-    switch (errorCode) {
-      case LoginErrors.INVALID_ARGUMENTS:
-        errorMessage = "이메일 또는 비밀번호를 잘못 입력하셨습니다.";
-        break;
-      case LoginErrors.INVALID_CREDENTIALS:
-        errorMessage = "이메일 또는 비밀번호를 잘못 입력하셨습니다.";
-        break;
-      case LoginErrors.UNKNOWN:
-        errorMessage = "알 수 없는 오류가 발생했습니다.";
-        break;
-    }
-
-    setFormError({
-      message: errorMessage,
-      visible: true,
-    });
-
-    setIsLoading(false);
-  }, [formState, redirect]);
+          setIsLoading(false);
+        });
+    },
+    [formState, redirect]
+  );
 
   const handleOnChange = (name, e) => {
     setFormState((prev) => ({

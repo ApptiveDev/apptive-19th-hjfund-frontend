@@ -9,4 +9,4 @@ export declare const LoginErrors: {
   UNKNOWN: string;
 }
 
-export declare async function POST(req: LoginRequest): Promise<number>;
+export declare async function postLogin(req: LoginRequest): Promise<number>;

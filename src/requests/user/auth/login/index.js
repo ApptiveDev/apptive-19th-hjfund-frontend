@@ -7,24 +7,39 @@ export const LoginErrors = {
   INVALID_ARGUMENTS: "INVALID_ARGUMENTS",
   INVALID_CREDENTIALS: "INVALID_CREDENTIALS",
   UNKNOWN: "UNKNOWN",
-}
+};
 
-export async function POST({ email, password }) {
+export async function postLogin({ email, password, keep }) {
   if (!email || !password) {
     return LoginErrors.INVALID_ARGUMENTS;
   }
 
-  const res = await axios.post(ENDPOINT, {
-    email,
-    password,
-  }).catch((e) => e.response ?? { status: 500 });
+  const res = await axios
+    .post(
+      ENDPOINT,
+      {
+        email,
+        password,
+        keep,
+      },
+      {
+        withCredentials: true,
+      }
+    )
+    .catch((e) => e.response ?? { status: 500 });
+    
 
-  switch (res.status) {
-    case 200:
-      return false;
-    case 401:
-      return LoginErrors.INVALID_CREDENTIALS;
-    default:
-      return LoginErrors.UNKNOWN;
-  }
+  return new Promise((resolve, reject) => {
+    switch (res.status) {
+      case 200:
+        resolve(false);
+        break;
+      case 401:
+        reject(LoginErrors.INVALID_CREDENTIALS);
+        break;
+      default:
+        reject(LoginErrors.UNKNOWN);
+        break;
+    }
+  });
 }

@@ -16,6 +16,7 @@ import mobileStyles from "./mobile.module.scss";
 import { useEffect, useState } from "react";
 import { classes } from "@/tools/classes";
 import { conditionalClass } from "@/tools/classes";
+import { useAuth } from "@/tools/auth-provider";
 
 const useHeaderScroll = ({
   invert = false,
@@ -78,6 +79,8 @@ export const DesktopHeader = ({
     progressEnd,
   });
 
+  const { isLoggedIn } = useAuth();
+
   return (
     <header
       className={classes(
@@ -109,9 +112,9 @@ export const DesktopHeader = ({
         )}
       </nav>
       <ul role="menu">
-        <Request />
-        <Search />
-        <Notification />
+        {isLoggedIn && <Request />}
+        {/* <Search /> */}
+        {/* <Notification /> */}
         <UserProfile />
       </ul>
       <div className={desktopStyles.progress}>
@@ -154,7 +157,7 @@ export const MobileHeader = ({
         </Link>
       </nav>
       <ul role="menu">
-        <MobileSearch />
+        {/* <MobileSearch /> */}
         <Menu />
       </ul>
       {progress && progressMobileOverride && (

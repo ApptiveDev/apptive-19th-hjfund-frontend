@@ -6,14 +6,16 @@ import Button from "@/components/button";
 import { classes } from "@/tools/classes";
 import { conditionalClass } from "@/tools/classes";
 import { useChangeEmailModal, useChangeNameModal } from "../modals";
+import Avatar from "@/components/avatar";
+import { useAuth } from "@/tools/auth-provider";
 
-function ProfileImage() {
+function ProfileImage({ url }) {
   return (
     <div className={styles.profile}>
       <span className={styles.edit}>
         <Icon iconType="pencil" />
       </span>
-      <img src="/examples/example-profile-1.jpg" alt="프로필 사진" />
+      <Avatar className={styles.avatar} url={url} />
     </div>
   );
 }
@@ -33,6 +35,8 @@ function ProfileItem({ label, value, onClick }) {
 }
 
 export default function Profile({ isMobile }) {
+  const { user } = useAuth();
+
   const [changeNameModal, openChangeNameModal] = useChangeNameModal();
   const [changeEmailModal, openChangeEmailModal] = useChangeEmailModal();
 
@@ -47,8 +51,8 @@ export default function Profile({ isMobile }) {
       {changeEmailModal}
       <ProfileImage />
       <div className={styles.list}>
-        <ProfileItem label="이름" value="John Doe" onClick={() => openChangeNameModal()} />
-        <ProfileItem label="이메일" value="someone@example.com" onClick={() => openChangeEmailModal()} />
+        <ProfileItem label="이름" value={user.nickName} onClick={() => openChangeNameModal()} />
+        <ProfileItem label="이메일" value={user.uid} onClick={() => openChangeEmailModal()} />
       </div>
     </div>
   );

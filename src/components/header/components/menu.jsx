@@ -5,6 +5,8 @@ import Icon from "../../icon";
 
 import styles from "../mobile.module.scss";
 import Link from "next/link";
+import { useAuth } from "@/tools/auth-provider";
+import Avatar from "@/components/avatar";
 
 const MenuButton = ({ onClick, props }) => {
   return (
@@ -14,27 +16,25 @@ const MenuButton = ({ onClick, props }) => {
   );
 };
 
-const MenuProfile = () => {
+const MenuProfile = ({ user }) => {
   return (
     <div className={styles["menu-profile"]}>
-      <div className={styles.profile}>
-        <img alt="profile" src="/examples/example-profile-1.jpg" />
-      </div>
+      <Avatar url={user.profile.photo} />
       <div className={styles.info}>
-        <p>사용자 이름</p>
-        <p className={styles.email}>someone@example.com</p>
+        <p>{user.nickName}</p>
+        <p className={styles.email}>{user.uid}</p>
       </div>
     </div>
   )
 }
 
-const Navigation = () => {
+const Navigation = ({ isLoggedIn }) => {
   return (
     <nav className={styles.navigation}>
       <Link href="/report">리포트</Link>
       <Link href="/note">투자노트</Link>
-      <Link href="/request">종목 요청하기</Link>
-      <Link href="/notification">알림</Link>
+      {isLoggedIn && <Link href="/request">종목 요청하기</Link>}
+      {/* <Link href="/notification">알림</Link> */}
     </nav>
   )
 }
@@ -49,6 +49,8 @@ const UserMenu = () => {
 }
 
 const MenuSheet = ({ setIsOpened }) => {
+  const { user, isLoggedIn } = useAuth();
+
   return (
     <li className={styles["menu-sheet"]} onClick={() => setIsOpened(false)}>
       <div className={styles.container} onClick={(e) => e.stopPropagation()}>
@@ -58,10 +60,10 @@ const MenuSheet = ({ setIsOpened }) => {
           onClick={() => setIsOpened(false)}
           iconType="delete-1"
         />
-        <MenuProfile />
-        <Navigation />
+        {isLoggedIn && <MenuProfile user={user} />}
+        <Navigation isLoggedIn={isLoggedIn} />
         <div style={{ flex: 1 }} />
-        <UserMenu />
+        {isLoggedIn && <UserMenu />}
       </div>
     </li>
   );

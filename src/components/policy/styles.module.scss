@@ -1,0 +1,25 @@
+@import "../../styles/variables.scss";
+
+.block {
+  @include paragraph-2;
+
+  h2 {
+    @include title-2;
+  }
+
+  h3 {
+    @include title-3;
+  }
+
+  ol { 
+    list-style-type: decimal;
+
+    ol {
+      list-style-type: korean-hangul-formal;
+
+      ol {
+        list-style-type: decimal-leading-zero;
+      }
+    }
+  }
+}
