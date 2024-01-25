@@ -4,9 +4,18 @@
   padding: 8px 0;
   position: relative;
   color: $color-text-passive-2;
+  cursor: default;
 
   display: flex;
   align-items: center;
+
+  transition: color 0.1s;
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      color: $color-text-passive-1;
+    }
+  }
 
   &:after {
     content: "";

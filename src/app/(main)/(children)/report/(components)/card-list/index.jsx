@@ -1,9 +1,6 @@
-import Button from "@/components/button";
 import Card from "@/components/card";
-import Icon from "@/components/icon";
 
 import styles from "./styles.module.scss";
-import Link from "next/link";
 import { useUserAgent } from "@/tools/user-agent";
 import { classes } from "@/tools/classes";
 import { conditionalClass } from "@/tools/classes";

@@ -1,13 +1,17 @@
 import Header from "@/components/header";
+import Navigation from "./(components)/navigation";
 import CardList from "./(components)/card-list";
-import TitleBar from "./(components)/title-bar/index";
+import { useUserAgent } from "@/tools/user-agent";
 
-export default function ReportPage() {
+
+export default function ReportPage({ searchParams }) {
+  const { isMobile } = useUserAgent();
+
   return (
-    <div>
-      <Header />
-      <TitleBar />
+    <main>
+      <Header absolute />
+      <Navigation order={searchParams.order} isMobile={isMobile} />
       <CardList />
-    </div>
+    </main>
   );
 }

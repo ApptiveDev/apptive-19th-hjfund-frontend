@@ -20,6 +20,13 @@ $max-article-headline-width: 970px;
 $max-article-editor-width: 860px;
 $header-height: 60px;
 
+@mixin card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 310px);
+  grid-gap: 20px;
+  justify-content: center;
+}
+
 $font-family: "Pretendard", Arial, Helvetica, sans-serif;
 
 @mixin font-style($weight, $size, $line) {

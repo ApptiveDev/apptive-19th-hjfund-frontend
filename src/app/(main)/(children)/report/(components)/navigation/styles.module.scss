@@ -1,57 +1,77 @@
 @import "../../../../../../styles/variables.scss";
 
-.container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 0 40px;
+$point-1: 1394px;
+$point-2: 1065px;
+$point-3: 735px;
+
+.header {
+  padding: 40px 0 10px 0;
+  width: 1300px;
+  margin: 0 auto;
   margin-top: $header-height;
 
-  @media (max-width: calc(310px * 3 + 40px * 2)) {
+  @include title-2;
+
+  @media (max-width: $point-1) {
+    width: 970px;
+  }
+
+  @media (max-width: $point-2) {
+    width: 640px;
+  }
+
+  @media (max-width: $point-3) {
+    width: 310px;
   }
 
   &.mobile {
-    @include mobile-padding;
-  }
-
-  .title {
-    max-width: $max-content-width;
     width: 100%;
-
-    padding-top: 40px;
-    @include title-2;
-    margin-bottom: 10px;
+    padding: 40px 20px 10px 20px
   }
 }
 
 .nav {
-  position: sticky; top: 0;
+  height: 42px;
+  border-bottom: 1px solid $color-border;
 
   display: flex;
   justify-content: center;
-  border-bottom: 1px solid $color-border;
   background-color: $color-background;
-  z-index: 300;
-  padding: 0 40px;
+  z-index: 100;
 
-  overflow-x: auto;
-  overscroll-behavior-x: contain;
+  position: sticky; top: 0;
+}
 
-  &.mobile {
-    @include mobile-padding;
-  }
+.tabs {
+  display: flex;
+  column-gap: 24px;
 
-  .items {
-    max-width: $max-content-width;
-    width: 100%;
-
+  a {
     display: flex;
-    align-items: center;
-    column-gap: 20px;
 
     span {
-      cursor: default;
       height: 42px;
     }
+  }
+
+  width: 1300px;
+  margin: 0 auto;
+
+  @media (max-width: $point-1) {
+    width: 970px;
+  }
+
+  @media (max-width: $point-2) {
+    width: 640px;
+  }
+
+  @media (max-width: $point-3) {
+    width: 310px;
+  }
+
+
+  &.mobile {
+    width: 100%;
+    padding: 0 20px;
   }
 }

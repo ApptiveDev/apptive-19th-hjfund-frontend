@@ -10,11 +10,8 @@
 .card-list {
   @include max-width-container;
 
+  @include card-grid;
   margin-top: 350px;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, 310px);
-  justify-content: center;
-  grid-gap: 20px;
 
   &.mobile {
     margin-top: 330px;
