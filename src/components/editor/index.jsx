@@ -34,6 +34,8 @@ import { getEditorState } from "./tools/saveEditorState";
 import AutoSavePlugin from "./plugins/autosave";
 import { classes } from "@/tools/classes";
 import { conditionalClass } from "@/tools/classes";
+import { MetadataContextProvider } from "./context/metadataContext";
+import { ImageContextProvider } from "./context/imageContext";
 
 const onError = (error) => {
   console.error(error);
@@ -109,45 +111,49 @@ const Editor = ({ editable, id, editorState }) => {
           editable,
         }}
       >
-        {namespace === "add" && (
-          <AutoSavePlugin onLoad={() => setIsLoaded(true)} />
-        )}
-        {editable && <HeaderPlugin id={id} />}
-        <ImagePlugin id={namespace} />
-        <div className={styles.layer}>
-          <FloatingPlugin />
-          <LinkHoverPlugin />
-          <LinkEditPlugin />
-        </div>
-        <div
-          className={classes(
-            styles.container,
-            conditionalClass(isLoaded, styles.blocking)
+        <MetadataContextProvider>
+          {namespace === "add" && (
+            <AutoSavePlugin onLoad={() => setIsLoaded(true)} />
           )}
-        >
-          <EditorHeadline ref={headlineRef} />
-          <RichTextPlugin
-            contentEditable={
-              <ContentEditable
-                className={styles.editor}
-                spellCheck={false}
-                style={{
-                  "--headline-height": headlineHeight + "px",
-                }}
-              />
-            }
-            ErrorBoundary={LexicalErrorBoundary}
-          />
-          <CommandPlugin />
-          <HistoryPlugin externalHistoryState={historyState} />
-          <OnChangePlugin />
-          <PlaceholderPlugin />
-          <TabIndentationPlugin />
-          <ShortcutPlugin />
-          <ListPlugin />
-          <LinkPlugin />
-          {process.env.NODE_ENV === "development" && <DebugPlugin />}
-        </div>
+          <ImageContextProvider>
+            {editable && <HeaderPlugin id={id} />}
+            <ImagePlugin id={namespace} />
+          </ImageContextProvider>
+          <div className={styles.layer}>
+            <FloatingPlugin />
+            <LinkHoverPlugin />
+            <LinkEditPlugin />
+          </div>
+          <div
+            className={classes(
+              styles.container,
+              conditionalClass(isLoaded, styles.blocking)
+            )}
+          >
+            <EditorHeadline ref={headlineRef} />
+            <RichTextPlugin
+              contentEditable={
+                <ContentEditable
+                  className={styles.editor}
+                  spellCheck={false}
+                  style={{
+                    "--headline-height": headlineHeight + "px",
+                  }}
+                />
+              }
+              ErrorBoundary={LexicalErrorBoundary}
+            />
+            <CommandPlugin />
+            <HistoryPlugin externalHistoryState={historyState} />
+            <OnChangePlugin />
+            <PlaceholderPlugin />
+            <TabIndentationPlugin />
+            <ShortcutPlugin />
+            <ListPlugin />
+            <LinkPlugin />
+            {process.env.NODE_ENV === "development" && <DebugPlugin />}
+          </div>
+        </MetadataContextProvider>
       </LexicalComposer>
     )
   );

@@ -19,9 +19,21 @@ export function LoadingIndicator({ className, invert, ...props }) {
   );
 }
 
-export default function LoadingLayer({ className, invert, ...props }) {
+export default function LoadingLayer({
+  className,
+  invert,
+  blocking,
+  ...props
+}) {
   return (
-    <div className={classes(styles.layer, className)} {...props}>
+    <div
+      className={classes(
+        styles.layer,
+        conditionalClass(blocking, styles.blocking),
+        className
+      )}
+      {...props}
+    >
       <LoadingIndicator invert={invert} />
     </div>
   );

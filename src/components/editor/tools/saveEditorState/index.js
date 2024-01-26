@@ -1,6 +1,6 @@
 import localforage from "localforage";
 
-export function getLocalImageStore() {
+export function getEditorStateStore() {
   return localforage.createInstance({
     name: "stocktreeAutoSave",
     storeName: "add",
@@ -9,12 +9,12 @@ export function getLocalImageStore() {
 }
 
 export async function saveEditorState(state) {
-  const store = getLocalImageStore();
+  const store = getEditorStateStore();
   await store.setItem("editorState", state);
 }
 
 export async function getEditorState() {
-  const store = getLocalImageStore();
+  const store = getEditorStateStore();
   const state = await store.getItem("editorState");
   return state;
 }

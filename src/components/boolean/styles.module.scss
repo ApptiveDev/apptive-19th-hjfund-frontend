@@ -38,6 +38,7 @@
 
   &:checked {
     background-color: var(--boolean-checked-background-color, transparent);
+    border-color: var(--boolean-checked-border-color, $color-primary);  
 
     &:before {
       background-color: var(--boolean-checked-icon-color, $color-primary);

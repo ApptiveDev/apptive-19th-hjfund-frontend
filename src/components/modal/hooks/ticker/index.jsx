@@ -6,26 +6,20 @@ import Button from "@/components/button";
 import { getStocks } from "@/requests/stock/stocks";
 import Modal from "../..";
 import Boolean from "@/components/boolean";
-import Radio from "@/components/radio";
+import LoadingLayer from "@/components/loading";
 
 function TickerItemComponent({ code, name, isSelected, onChange, multiple }) {
   return (
     <div className={styles.item} onClick={() => onChange(!isSelected)}>
-      {multiple ? (
+      {
         <Boolean
+          booleanType={multiple ? "checkbox" : "radio"}
           checked={isSelected}
           onChange={() => onChange(!isSelected)}
           name="ticker"
           value={code}
         />
-      ) : (
-        <Radio
-          checked={isSelected}
-          onChange={() => onChange(!isSelected)}
-          name="ticker"
-          value={code}
-        />
-      )}
+      }
       <div className={styles.texts}>
         <div className={styles.name}>{name}</div>
         <div className={styles.code}>{code}</div>
@@ -48,15 +42,22 @@ function TickerModalComponent({
   const [keyword, setKeyword] = useState("");
   const [error, setError] = useState(false);
   const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    getStocks()
+      .then((data) => {
+        setData(data);
+        setIsLoading(false);
+      })
+      .catch(() => setError(true));
+  }, []);
 
   useEffect(() => {
     if (isOpen) {
       setSelectedCodes(initialCodes);
       setKeyword("");
       setError(false);
-      getStocks()
-        .then(setData)
-        .catch(() => setError(true));
     }
   }, [isOpen]);
 
@@ -69,6 +70,9 @@ function TickerModalComponent({
 
   return (
     <>
+      <LoadingLayer
+        style={{ opacity: isLoading ? 1 : 0, backgroundColor: "white" }}
+      />
       <header className={styles.header}>
         <h2>종목 선택</h2>
         <Textfield

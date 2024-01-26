@@ -1,10 +1,16 @@
-import { $applyNodeReplacement, DecoratorNode, LexicalEditor, createEditor } from "lexical";
+import {
+  $applyNodeReplacement,
+  DecoratorNode,
+  LexicalEditor,
+  createEditor,
+} from "lexical";
 import styles from "./styles.module.scss";
 import ImageComponent from "./component";
 
 export class ImageNode extends DecoratorNode {
   __imageType;
   __imageURL;
+  __imageHasCaption;
   __imageCaption;
   __imageWidth;
   __imageHeight;
@@ -25,6 +31,7 @@ export class ImageNode extends DecoratorNode {
     this.__imageURL = imageURL;
 
     if (options) {
+      this.__imageHasCaption = !!options?.caption;
       this.__imageCaption = options?.caption || createEditor();
       this.__imageWidth = options?.width;
       this.__imageHeight = options?.height;
@@ -86,6 +93,14 @@ export class ImageNode extends DecoratorNode {
     }
   }
 
+  setHasCaption(hasCaption) {
+    const writable = this.getWritable();
+
+    if (typeof hasCaption === "boolean") {
+      writable.__hasCaption = hasCaption;
+    }
+  }
+
   setCaption(caption) {
     const writable = this.getWritable();
 
@@ -108,7 +123,7 @@ export class ImageNode extends DecoratorNode {
       version: 1,
       imageType: this.__imageType,
       imageURL: this.__imageURL,
-      imageCaption: this.__imageCaption.toJSON(),
+      imageCaption: this.__imageHasCaption ? this.__imageCaption?.toJSON() : undefined,
       imageWidth: this.__imageWidth,
       imageHeight: this.__imageHeight,
       imageMaxWidth: this.__imageMaxWidth,
@@ -128,13 +143,18 @@ export class ImageNode extends DecoratorNode {
     );
 
     const nestedEditor = node.__imageCaption;
-    const editorState = nestedEditor.parseEditorState(json.imageCaption.editorState);
-    if (!editorState.isEmpty()) {
-      nestedEditor.setEditorState(editorState);
+    if (nestedEditor) {
+      const editorState = nestedEditor.parseEditorState(
+        json.imageCaption.editorState
+      );
+      if (!editorState.isEmpty()) {
+        nestedEditor.setEditorState(editorState);
+      }
     }
 
     return node;
   }
+
 
   exportDOM() {
     const element = document.createElement("img");
@@ -154,12 +174,8 @@ export function $isImageNode(node) {
   return node instanceof ImageNode;
 }
 
-export function $isLocalImageNode(node) {
-  return node instanceof ImageNode && node.__imageType === "local";
-}
-
-export function $isRemoteImageNode(node) {
-  return node instanceof ImageNode && node.__imageType === "remote";
+export function $isInternalImageNode(node) {
+  return node instanceof ImageNode && node.__imageType === "internal";
 }
 
 export function $isExternalImageNode(node) {

@@ -25,6 +25,21 @@ import { useLexicalNodeSelection } from "@lexical/react/useLexicalNodeSelection"
 import { ContentEditable } from "@lexical/react/LexicalContentEditable";
 import { classes } from "@/tools/classes";
 import { conditionalClass } from "@/tools/classes";
+import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
+
+function EnterPlugin({ onEnter }) {
+  const [editor] = useLexicalComposerContext();
+
+  useEffect(() => {
+    const unregister = editor.registerCommand(
+      KEY_ENTER_COMMAND,
+      onEnter,
+      COMMAND_PRIORITY_CRITICAL
+    );
+
+    return unregister;
+  });
+}
 
 export default function ImageComponent({ editor, config, node }) {
   const { historyState } = useSharedHistoryContext();
@@ -37,8 +52,8 @@ export default function ImageComponent({ editor, config, node }) {
   const rightHandleRef = useRef(null);
 
   const [src, setSrc] = useState(undefined);
-
   const [isSelected] = useLexicalNodeSelection(node.__key);
+  const [hasCaption, setHasCaption] = useState(!!node.__imageCaption);
 
   const [options, setOptions] = useState({
     width: node.__imageWidth,
@@ -84,7 +99,7 @@ export default function ImageComponent({ editor, config, node }) {
     });
   }, []);
 
-  const onCapttionEnter = useCallback((e) => {
+  const onCaptionEnter = useCallback((e) => {
     if (e.shiftKey) return false;
 
     const selection = $getSelection();
@@ -164,20 +179,6 @@ export default function ImageComponent({ editor, config, node }) {
   }, []);
 
   useEffect(() => {
-    if (node.__imageCaption) {
-      const captionEditor = node.__imageCaption;
-
-      const unregister = captionEditor.registerCommand(
-        KEY_ENTER_COMMAND,
-        onCapttionEnter,
-        COMMAND_PRIORITY_CRITICAL
-      );
-
-      return unregister;
-    }
-  }, [node.__imageCaption]);
-
-  useEffect(() => {
     const onPointerMove = (e) => {
       e.stopPropagation();
       window.requestAnimationFrame(() => {
@@ -247,6 +248,17 @@ export default function ImageComponent({ editor, config, node }) {
           <button onClick={downloadImage}>
             <Icon size={18} iconType="download-file" />
           </button>
+          <button
+            onClick={() => {
+              setHasCaption(!hasCaption);
+              
+              editor.update(() => {
+                node.setHasCaption(!hasCaption);
+              });
+            }}
+          >
+            <Icon size={18} iconType="align-center" />
+          </button>
           <button onClick={removeHandler}>
             <Icon size={14} iconType="delete-1" />
           </button>
@@ -264,18 +276,17 @@ export default function ImageComponent({ editor, config, node }) {
           <img className={styles.image} ref={imageRef} alt="이미지" src={src} />
         )}
       </div>
-      {(options.caption || config.namespace !== "view") && (
+      {hasCaption && (
         <figcaption className={styles.caption}>
-          {node.__imageCaption && (
-            <LexicalNestedComposer initialEditor={node.__imageCaption}>
-              <HistoryPlugin externalHistoryState={historyState} />
-              <PlainTextPlugin
-                contentEditable={<ContentEditable className={styles.text} />}
-                placeholder={<p className={styles.placeholder}>이미지 설명</p>}
-                ErrorBoundary={LexicalErrorBoundary}
-              />
-            </LexicalNestedComposer>
-          )}
+          <LexicalNestedComposer initialEditor={node.__imageCaption}>
+            <HistoryPlugin externalHistoryState={historyState} />
+            <PlainTextPlugin
+              contentEditable={<ContentEditable className={styles.text} />}
+              placeholder={<p className={styles.placeholder}>이미지 설명</p>}
+              ErrorBoundary={LexicalErrorBoundary}
+            />
+            <EnterPlugin onEnter={onCaptionEnter} />
+          </LexicalNestedComposer>
         </figcaption>
       )}
     </figure>

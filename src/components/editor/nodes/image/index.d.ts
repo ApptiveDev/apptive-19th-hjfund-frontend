@@ -8,7 +8,7 @@ import {
   Spread,
 } from "lexical";
 
-type ImageType = "local" | "remote" | "external";
+type ImageType = "internal" | "external";
 
 export type SerializedImageNode = Spread<
   {
@@ -70,6 +70,5 @@ export declare function $createImageNode(
 ): ImageNode;
 
 export declare function $isImageNode(node: LexicalNode): boolean;
-export declare function $isLoaclImaageNode(node: ImageNode): boolean;
-export declare function $isRemoteImageNode(node: ImageNode): boolean;
+export declare function $isInternalImageNode(node: ImageNode): boolean;
 export declare function $isExternalImageNode(node: ImageNode): boolean;
