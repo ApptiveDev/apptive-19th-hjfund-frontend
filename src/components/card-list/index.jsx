@@ -1,9 +1,6 @@
-import Button from "@/components/button";
 import Card from "@/components/card";
-import Icon from "@/components/icon";
 
 import styles from "./styles.module.scss";
-import Link from "next/link";
 import { useUserAgent } from "@/tools/user-agent";
 import { classes } from "@/tools/classes";
 import { conditionalClass } from "@/tools/classes";
@@ -68,7 +65,7 @@ const examples = [
   },
 ];
 
-const CardList = () => {
+const CardList = ({ desktopMarginTop, mobileMarginTop }) => {
   const { isMobile } = useUserAgent();
 
   return (
@@ -78,6 +75,9 @@ const CardList = () => {
           styles["card-list"],
           conditionalClass(isMobile, styles.mobile)
         )}
+        style={{
+          marginTop: isMobile ? mobileMarginTop : desktopMarginTop,
+        }}
       >
         {examples.map((example, index) => (
           <Card

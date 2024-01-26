@@ -1,4 +1,4 @@
-@import "../../../../../../styles/variables";
+@import "../../styles/variables.scss";
 
 .container {
   margin-bottom: 120px;
@@ -10,11 +10,9 @@
 .card-list {
   @include max-width-container;
   @include card-grid;
-  margin-top: 40px;
 
   &.mobile {
     grid-template-columns: 1fr;
-    margin-top: 20px;
     @include mobile-padding;
   }
 }
